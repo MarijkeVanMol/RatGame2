@@ -9,9 +9,9 @@ document.body.appendChild(app.view);
 
 // load the texture we need
 app.loader
-  .add("star", "assets/star.png")
-  .add("player", "assets/player.png")
-  .add("cheese", "assets/cheese.png")
+  .add("star", "./assets/star.png")
+  .add("player", "./assets/player.png")
+  .add("cheese", "./assets/cheese.png")
   .load(start);
 
 // which elements are going to be part of the game
