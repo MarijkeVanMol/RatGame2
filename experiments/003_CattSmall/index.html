@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rat Race</title>
+    <!-- link from tutorial -->
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <!-- links from CattSmall tutorial -->
+    <script src="./scripts/GamePlay.js"></script>
+    <script src="./scripts/GlobalVariables.js"></script>
+    <script src="./scripts/MainMenu.js"></script>
+    <script src="./scripts/preload.js"></script>
+    <!-- CSS -->
+    <style type="text/css">
+        body {
+            background-color: hotpink;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            height: 50%;
+        }
+    </style>
+</head>
+<body>
+    <script>
+/*--- CONFIG + RUNNING THE GAME ---*/
+
+//Define the game config once everything else is defined
+var config = {
+  type: Phaser.AUTO,
+  width: 640,
+  height: 480,
+  pixelArt: true,
+  physics: {
+    default: "arcade",
+    arcade: {
+      gravity: { y: 0 },
+      debug: false
+    }
+  },
+  scene: gamePlay
+};
+    
+      //Instantiate the game with the config
+      var game = new Phaser.Game(config);
+    </script>
+</body>
+</html>
