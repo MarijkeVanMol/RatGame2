@@ -1,8 +1,8 @@
 import Phaser from './lib/phaser.js'
 
-import Game from './scenes/Game.js'
+import GameBoring from './scenes/GameBoring.js'
 
-import Game2 from './scenes/Game2.js'
+import GameBusy from './scenes/GameBusy.js'
 
 import GameOver from './scenes/GameOver.js'
 
@@ -11,7 +11,7 @@ export default new Phaser.Game({
 	width: 480,
 	height: 640,
     pixelArt: true,
-    scene: [Game,Game2,GameOver], 
+    scene: [GameBusy, GameBoring ,GameOver], 
     physics: {
         default: 'arcade',
         arcade: {

@@ -1,3 +1,6 @@
+// goals: make platforms invariable
+
+
 import Phaser from '../lib/phaser.js'
 
 import Carrot from '../game/Carrot.js'
@@ -33,22 +36,16 @@ export default class Game extends Phaser.Scene
 
 
     preload(){
-        this.load.image('background', 'assets/bg_layer1.png');
+        this.load.image('background', 'assets/bg_boring.png');
 
-        this.load.image('platform', 'assets/ground_grass.png');
+        this.load.image('platform', 'assets/platform_boring.png');
 
-        this.load.image('bunny-stand', 'assets/bunny1_stand.png');
-        this.load.image('bunny-jump', 'assets/bunny1_jump.png');
+        this.load.image('bunny-stand', 'assets/rat_boring.png');
+        this.load.image('bunny-jump', 'assets/rat_boring.png');
 
-        this.load.image('carrot', 'assets/carrot.png');
+        this.load.image('carrot', 'assets/cheese_boring.png');
 
         this.cursors = this.input.keyboard.createCursorKeys();
-
-        this.load.audio('jump', 'assets/sfx/phaseJump1.mp3')
-
-        this.load.audio('tttwo', 'assets/sfx/threeTone2.mp3')
-
-        this.load.audio('power', 'assets/sfx/powerUp3.mp3')
     }
 
 
@@ -106,7 +103,7 @@ export default class Game extends Phaser.Scene
         this.cameras.main.setDeadzone(this.scale.width*1.5); // makes sure it doesn't go 'off-screen, move to the sides'
 
 //  FONT
-        const style = {color: 'ffff00', fontSize: 24}
+        const style = {color: 'ffff00', fontSize: 24} // color doesn't work
         this.carrotsCollectedText = this.add.text(240,10,'0', style)
             .setScrollFactor(0)
             .setOrigin(0.5,0)
@@ -122,7 +119,6 @@ export default class Game extends Phaser.Scene
         if(touchingDown){
             this.player.setVelocityY(-300);
             this.player.setTexture('bunny-jump');
-            this.sound.play('jump');
         }
 //      UNBOUNCE
         const vy = this.player.body.velocity.y  // naar beneden gaan
@@ -163,8 +159,7 @@ export default class Game extends Phaser.Scene
 //  bottomPLATFORM
        const bottomPlatform = this.findBottomMostPlatform()
        if (this.player.y > bottomPlatform.y + 200){
-           this.scene.start('game2')
-           this.sound.play('power');
+           this.scene.start('game-over');
        }
     }
 
@@ -219,7 +214,6 @@ export default class Game extends Phaser.Scene
         this.carrotsCollected++
         const value = `${this.carrotsCollected}`
         this.carrotsCollectedText.text = value
-        this.sound.play('tttwo')
     }
 
 //  PLATFORMS

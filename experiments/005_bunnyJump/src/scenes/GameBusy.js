@@ -2,6 +2,28 @@ import Phaser from '../lib/phaser.js'
 
 import Carrot from '../game/Carrot.js'
 
+/**
+ * 
+ * @param {Phaser.Scene} scene 
+ * @param {number} count 
+ * @param {string} texture 
+ * @param {number} scrollFactor 
+ */
+
+// if 'bg_busy.png' has reached its end, go to next GameBoring.js
+const createNextScene = (scene, count, texture, scrollFactor) => {
+let x = 0
+for (let i = 0; i < count; ++i)
+{ // if this scene 'Game2' is over, let's go to 'Game'
+    const newScene = scene.add.image(0, scene.scale.height, texture, scrollFactor)
+        this.add.image(gameWidth, 0, 'bg')
+        .setOrigin(1,0)
+        .setScrollFactor(scrollFactor)
+
+        x += newScene.height
+    }
+}
+
 export default class Game2 extends Phaser.Scene 
 {
     /** @type {Phaser.Physics.Arcade.StaticGroup} */
@@ -22,7 +44,7 @@ export default class Game2 extends Phaser.Scene
 	carrotsCollectedText
 
     constructor(){
-        super('game2')
+        super('gameBusy')
     }
 
     init()
@@ -33,14 +55,18 @@ export default class Game2 extends Phaser.Scene
 
 
     preload(){
-        this.load.image('background', 'assets/bg_layer1.png');
+        this.load.image('bg', 'assets/bg_busy.png');
 
-        this.load.image('platform', 'assets/ground_grass.png');
+        this.load.image('plat0', 'assets/platform0_busy.png');
+        this.load.image('plat1', 'assets/platform1_busy.png');
+        this.load.image('plat2', 'assets/platform2_busy.png');
+        this.load.image('plat3', 'assets/platform3_busy.png');
+        this.load.image('plat4', 'assets/platform4_busy.png');
 
-        this.load.image('bunny-stand', 'assets/bunny1_stand.png');
-        this.load.image('bunny-jump', 'assets/bunny1_jump.png');
+        this.load.image('rat', 'assets/rat_busy.png');
+        this.load.image('rat-jump', 'assets/rat_jump_busy.png');
 
-        this.load.image('carrot', 'assets/carrot.png');
+        this.load.image('cheese', 'assets/cheese_busy.png');
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -55,22 +81,40 @@ export default class Game2 extends Phaser.Scene
 
     create(){
 //  BACKGROUND
-        this.add.image(240,320, 'background').setScrollFactor(1,0);
+        const gameWidth = this.scale.width
+        const gameHeight = this.scale.height
+
+        this.add.image(gameWidth, 0, 'bg')
+            .setOrigin(1,0)
+            .setScrollFactor(0.25)
+        
+        
 
 
         // this.add.image(240,320, 'platform').setScale(0.5);
         // this.physics.add.image(240,320,'platform').setScale(0.5);
 
 //  PLATFORMS
+
+
+
+    // this.platforms = this.physics.add.group();
+
+    //     this.platforms.create(250, 300, 'plat0');
+    //     this.platforms.create(350, 300, 'plat1').setGravity(0, 300);
+    //     this.platforms.create(450, 300, 'plat2').setGravity(0, -300);
+    //     this.platforms.create(550, 300, 'plat3').setGravity(0, -300);
+    //     this.platforms.create(550, 300, 'plat4').setGravity(0, -300);
+        
         this.platforms = this.physics.add.staticGroup();
 
-        for (let i = 0; i <50; ++i){
+        for (let i = 0; i <5; ++i){
             const x = Phaser.Math.Between(80,400)
             const y = 150*i
 
             /** @type {Phaser.Physics.Arcade.Sprite} */
-            const platform = this.platforms.create(x,y, 'platform');
-            platform.scale = 0.3;
+            const platform = this.platforms.create(x,y, 'plat0');
+            platform.scale = 0.7;
             // platform.flipY= true; doesn't work
 
             /** @type {Phaser.Physics.Arcade.StaticBody} */
@@ -78,8 +122,23 @@ export default class Game2 extends Phaser.Scene
             body.updateFromGameObject();
         }
 
+        this.platforms = this.physics.add.staticGroup();
+
+        for (let i = 0; i <5; ++i){
+            const x = Phaser.Math.Between(80,400)
+            const y = 150*i
+
+            /** @type {Phaser.Physics.Arcade.Sprite} */
+            const platform = this.platforms.create(x,y, 'plat1');
+            platform.scale = 0.7;
+            // platform.flipY= true; doesn't work
+
+            /** @type {Phaser.Physics.Arcade.StaticBody} */
+            const body = platform.body;
+            body.updateFromGameObject();
+        }
 //  PLAYER 
-        this.player = this.physics.add.sprite(240,320, 'bunny-stand').setScale(0.5);
+        this.player = this.physics.add.sprite(240,320, 'rat').setScale(2).setGravityY(-600);
     
 //  CARROTS
         this.carrots = this.physics.add.group({classTYpe: Carrot});
@@ -106,6 +165,7 @@ export default class Game2 extends Phaser.Scene
 //  CAMERAS
         this.cameras.main.startFollow(this.player); // follows player, also to the side
         this.cameras.main.setDeadzone(this.scale.width*1.5); // makes sure it doesn't go 'off-screen, move to the sides'
+        // paralax1: this.cameras.main.setBounds(0,0,480 , 640* 3); // for parallax??
 
 //  FONT
         const style = {color: 'ffff00', fontSize: 24}
@@ -122,14 +182,15 @@ export default class Game2 extends Phaser.Scene
 //      BOUNCE
         const touchingDown = this.player.body.touching.down;
         if(touchingDown){
-            this.player.setVelocityY(-300);
-            this.player.setTexture('bunny-jump');
+            this.player.setVelocityY(-500);
+            this.player.setTexture('rat-jump');
         }
 //      UNBOUNCE
         const vy = this.player.body.velocity.y  // naar beneden gaan
-        if (vy > 0 && this.player.texture.key != 'bunny-stand'){ // als player nr beneden ga en..
-            this.player.setTexture('bunny-stand')
+        if (vy > 0 && this.player.texture.key != 'rat'){ // als player nr beneden ga en..
+            this.player.setTexture('rat')
             this.sound.play('jump');
+            this.cameras.main.shake(500);
         }
 
 //  PLATFORMS
@@ -161,11 +222,12 @@ export default class Game2 extends Phaser.Scene
 //  CAMERAS
 //      SCREEN WRAP OF PLAYER
        this.horizontalWrap(this.player);
+       //parallax 1: this.bg.tilePositionY = this.cameras.main.scrollY *.3;
 
 //  bottomPLATFORM
        const bottomPlatform = this.findBottomMostPlatform()
        if (this.player.y > bottomPlatform.y + 200){
-           this.scene.start('game-over')
+           this.scene.start('gameBoring')
            this.sound.play('tttwo')
        }
     }
@@ -187,6 +249,7 @@ export default class Game2 extends Phaser.Scene
             sprite.x = -halfWidth
         }
     }
+    
 //  CARROT
 //      MAKE SURE CARROTS APPEARS BEFORE THE REST ??
     /**
@@ -196,7 +259,7 @@ export default class Game2 extends Phaser.Scene
         const y = sprite.y - sprite.displayHeight;
 
         /** @type {Phaser.Physics.Arcade.Sprite} */
-        const carrot = this.carrots.get(sprite.x, y, 'carrot');
+        const carrot = this.carrots.get(sprite.x, y, 'cheese');
 
         carrot.setActive(true); // set active
         carrot.setVisible(true); // set visible
@@ -207,7 +270,7 @@ export default class Game2 extends Phaser.Scene
         this.physics.world.enable(carrot); //enables body in physics world
 
         return carrot;
-    }
+    };
 
 //  CARROT
 //      COLLECT
@@ -222,7 +285,7 @@ export default class Game2 extends Phaser.Scene
         const value = `${this.carrotsCollected}`
         this.carrotsCollectedText.text = value
         this.sound.play('power')
-    }
+    };
 
 //  PLATFORMS
     findBottomMostPlatform(){
@@ -238,4 +301,4 @@ export default class Game2 extends Phaser.Scene
         }
         return bottomPlatform
     }
-}
+};
