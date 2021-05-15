@@ -152,6 +152,11 @@ export default class Game extends Phaser.Scene
        else {
            this.player.setVelocityX(0)
        }
+
+//      CHEAT CODE       
+       this.input.keyboard.once('keydown-L', () => {
+        this.scene.start('game-over')
+      })
 //  CAMERAS
 //      SCREEN WRAP OF PLAYER
        this.horizontalWrap(this.player);

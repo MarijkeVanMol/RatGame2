@@ -11,16 +11,16 @@ import Carrot from '../game/Carrot.js'
  */
 
 // if 'bg_busy.png' has reached its end, go to next GameBoring.js
-const createNextScene = (scene, count, texture, scrollFactor) => {
-let x = 0
-for (let i = 0; i < count; ++i)
+const createAligned = (scene, count, texture, scrollFactor) => {
+let a = 0
+for (let j = 0; j < count; ++j)
 { // if this scene 'Game2' is over, let's go to 'Game'
-    const newScene = scene.add.image(0, scene.scale.height, texture, scrollFactor)
+    const bp = scene.add.image(scene.scale.width, a, texture, scrollFactor)
         this.add.image(gameWidth, 0, 'bg')
         .setOrigin(1,0)
         .setScrollFactor(scrollFactor)
 
-        x += newScene.height
+        a += bp.height
     }
 }
 
@@ -84,7 +84,7 @@ export default class Game2 extends Phaser.Scene
         const gameWidth = this.scale.width
         const gameHeight = this.scale.height
 
-        this.add.image(gameWidth, 0, 'bg')
+        this.add.image(gameWidth, -6509, 'bg')
             .setOrigin(1,0)
             .setScrollFactor(0.25)
         
@@ -105,7 +105,7 @@ export default class Game2 extends Phaser.Scene
     //     this.platforms.create(450, 300, 'plat2').setGravity(0, -300);
     //     this.platforms.create(550, 300, 'plat3').setGravity(0, -300);
     //     this.platforms.create(550, 300, 'plat4').setGravity(0, -300);
-        
+//      PLAT0   PLATFORM STANDARD
         this.platforms = this.physics.add.staticGroup();
 
         for (let i = 0; i <5; ++i){
@@ -121,28 +121,35 @@ export default class Game2 extends Phaser.Scene
             const body = platform.body;
             body.updateFromGameObject();
         }
+//      PLAT1
+        // this.plats1 = this.physics.add.staticGroup();
 
-        this.platforms = this.physics.add.staticGroup();
+        // for (let b = 0; b <5; ++b){
+        //     const x = Phaser.Math.Between(80,)
+        //     const y = 150*b
 
-        for (let i = 0; i <5; ++i){
-            const x = Phaser.Math.Between(80,400)
-            const y = 150*i
+        //     /** @type {Phaser.Physics.Arcade.Sprite} */
+        //     const plat1 = this.plats1.create(x,y, 'plat1');
+        //     plat1.scale = 1;
+        //     // platform.flipY= true; doesn't work
 
-            /** @type {Phaser.Physics.Arcade.Sprite} */
-            const platform = this.platforms.create(x,y, 'plat1');
-            platform.scale = 0.7;
-            // platform.flipY= true; doesn't work
-
-            /** @type {Phaser.Physics.Arcade.StaticBody} */
-            const body = platform.body;
-            body.updateFromGameObject();
-        }
+        //     /** @type {Phaser.Physics.Arcade.StaticBody} */
+        //     const bodyp1 = plat1.body;
+        //     bodyp1.updateFromGameObject();
+        // }
 //  PLAYER 
         this.player = this.physics.add.sprite(240,320, 'rat').setScale(2).setGravityY(-600);
     
 //  CARROTS
         this.carrots = this.physics.add.group({classTYpe: Carrot});
         //this.carrots.get(240,320, 'carrot'); 
+
+
+        // cheeses = this.physics.add.group({
+        //     key: "cheese",
+        //     repeat: 11,
+        //     setXY: { x: 12, y: 0, stepX: 70 },
+        //   });
 
 //  COLLISIONS
 //      PLAYER & PLATFORMs
@@ -165,7 +172,7 @@ export default class Game2 extends Phaser.Scene
 //  CAMERAS
         this.cameras.main.startFollow(this.player); // follows player, also to the side
         this.cameras.main.setDeadzone(this.scale.width*1.5); // makes sure it doesn't go 'off-screen, move to the sides'
-        // paralax1: this.cameras.main.setBounds(0,0,480 , 640* 3); // for parallax??
+        //this.cameras.main.setBounds(0,0,gameWidth , gameHeight* 3); // for parallax??
 
 //  FONT
         const style = {color: 'ffff00', fontSize: 24}
@@ -184,6 +191,7 @@ export default class Game2 extends Phaser.Scene
         if(touchingDown){
             this.player.setVelocityY(-500);
             this.player.setTexture('rat-jump');
+            this.cameras.main.shake(500);
         }
 //      UNBOUNCE
         const vy = this.player.body.velocity.y  // naar beneden gaan
@@ -208,6 +216,21 @@ export default class Game2 extends Phaser.Scene
                 this.addCarrotAbove(platform);
             }
         })
+//      NEW PLATS1
+        // this.plats1.children.iterate(child => {
+        //     /** @type {Phaser.Physics.Arcade.Sprite} */
+        //     const plat1 = child;
+
+        //     const scrollY = this.cameras.main.scrollY;
+        //     if (plat1.y >= scrollY + 700){
+        //         plat1.y = scrollY - Phaser.Math.Between(50,100);
+        //         plat1.bodyp1.updateFromGameObject();
+
+        //         // create a carrot above the platform being
+        //         this.addCarrotAbove(plat1);
+        //     }
+        // })
+
 //  PLAYER
 //      CURSORS MOVEMENT
        if (this.cursors.left.isDown && !touchingDown){
@@ -219,6 +242,12 @@ export default class Game2 extends Phaser.Scene
        else {
            this.player.setVelocityX(0)
        }
+
+//  CHEAT CODE       
+        this.input.keyboard.once('keydown-L', () => {
+        this.scene.start('game-over')
+      })
+
 //  CAMERAS
 //      SCREEN WRAP OF PLAYER
        this.horizontalWrap(this.player);
@@ -230,6 +259,12 @@ export default class Game2 extends Phaser.Scene
            this.scene.start('gameBoring')
            this.sound.play('tttwo')
        }
+//  CARROT/CHEESE
+        const cheeseScene = `${this.carrotsCollected}`;
+        if (this.cheeseScene >= 10){
+            this.scene.start('gameBoring')
+            this.sound.play('tttwo')
+        }
     }
 
 
@@ -285,8 +320,12 @@ export default class Game2 extends Phaser.Scene
         const value = `${this.carrotsCollected}`
         this.carrotsCollectedText.text = value
         this.sound.play('power')
+        this.cameras.main.shake(500);
+       
     };
-
+//      COLLECTED 1000
+   
+    
 //  PLATFORMS
     findBottomMostPlatform(){
         const platforms = this.platforms.getChildren()
@@ -302,3 +341,6 @@ export default class Game2 extends Phaser.Scene
         return bottomPlatform
     }
 };
+
+
+//if (this.cheeses >= 3)

@@ -11,6 +11,8 @@ export default class GameStart extends Phaser.Scene
 
     preload(){
         this.load.image('start', 'assets/coverOfGame.png');
+
+        this.cursors = this.input.keyboard.createCursorKeys();
     }
     
 
@@ -19,8 +21,12 @@ export default class GameStart extends Phaser.Scene
     {
         this.add.image(240,320, 'start');
 
-      this.input.keyboard.once('keydown-SPACE', () => {
-          this.scene.start('gameBusy')
-        })
+        this.input.keyboard.once('keydown', () => {
+            this.scene.start('gameBusy')
+          })
+      }
     }
-}
+
+
+
+ 
