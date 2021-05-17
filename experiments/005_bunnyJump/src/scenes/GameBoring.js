@@ -19,18 +19,18 @@ export default class Game extends Phaser.Scene
     /** @type {Phaser.Physics.Arcade.Group} */
 	carrots
 
-    carrotsCollected = 0
+    carrotsCollected = 100
 
     /** @type {Phaser.GameObjects.Text} */
 	carrotsCollectedText
 
     constructor(){
-        super('game')
+        super('gameBoring')
     }
 
     init()
 	{
-		this.carrotsCollected = 0
+		this.carrotsCollected = 100
 	}
 
 
@@ -61,7 +61,7 @@ export default class Game extends Phaser.Scene
 
 //  PLATFORMS
         for (let i = 0; i <5; ++i){
-            const x = Phaser.Math.Between(80,400)
+            const x = 240
             const y = 150*i
 
             /** @type {Phaser.Physics.Arcade.Sprite} */
@@ -74,7 +74,7 @@ export default class Game extends Phaser.Scene
         }
 
 //  PLAYER 
-        this.player = this.physics.add.sprite(240,320, 'bunny-stand').setScale(0.5);
+        this.player = this.physics.add.sprite(240,320, 'bunny-stand').setScale(0.1);
     
 //  CARROTS
         this.carrots = this.physics.add.group({classTYpe: Carrot});
@@ -104,7 +104,7 @@ export default class Game extends Phaser.Scene
 
 //  FONT
         const style = {color: 'ffff00', fontSize: 24} // color doesn't work
-        this.carrotsCollectedText = this.add.text(240,10,'0', style)
+        this.carrotsCollectedText = this.add.text(240,10,'100', style)
             .setScrollFactor(0)
             .setOrigin(0.5,0)
     }
@@ -161,12 +161,26 @@ export default class Game extends Phaser.Scene
 //      SCREEN WRAP OF PLAYER
        this.horizontalWrap(this.player);
 
-//  bottomPLATFORM
+
+
+//  TO NEXT SCENE: BUSY GAME 
+//  bottomPLATFORM: normal loser route
        const bottomPlatform = this.findBottomMostPlatform()
        if (this.player.y > bottomPlatform.y + 200){
-           this.scene.start('game-over');
+           this.scene.start('gameBusy');
        }
+
+//  'reward' 
+       if (this.carrotsCollected == 400)
+       {
+           this.scene.start('gameBoring')
+           this.sound.play('tttwo')
+       }
+
+//  END OF UPDATE: beware of the accolade below!!
     }
+
+    
 
 
 

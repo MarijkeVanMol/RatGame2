@@ -14,10 +14,17 @@ export default new Phaser.Game({
 	height: 640,
     pixelArt: true,
     scene: [GameStart, GameBusy, GameBoring ,GameOver], 
-    physics: {
+    audio: 
+    {
+        disableWebAudio: true
+    },
+    physics: 
+    {
         default: 'arcade',
-        arcade: {
-            gravity: {
+        arcade: 
+        {
+            gravity: 
+            {
                 y:200
             },
             debug: false
