@@ -28,10 +28,17 @@ export default class GameStart extends Phaser.Scene
         var music = this.sound.add('theme');
         music.play();
 
-        this.input.keyboard.once('keydown', () => {
+      
+      
+        this.input.on('pointerdown', () => {
             this.scene.start('gameBusy')
-            music.stop()
-          })
+            music.stop()        
+        })
+        
+        // this.input.keyboard.once('keydown', () => {
+        //     this.scene.start('gameBusy')
+        //     music.stop()
+        //   })
       }
 
 

@@ -118,6 +118,7 @@ export default class GameBusy extends Phaser.Scene
         //     .setScrollFactor(0.5)
 
 //          exCode: for when we worked on the 480x7149 / bg_busy.png
+
          this.add.image(gameWidth, gameHeight+40, 'bg') // zoda ge geen zwarte balk krijgt v onder
              .setOrigin(1)   //origin is linksonder van afbeelding
              .setScrollFactor(0.5)
@@ -291,6 +292,13 @@ export default class GameBusy extends Phaser.Scene
 //  CAMERAS
 //      SCREEN WRAP OF PLAYER
        this.horizontalWrap(this.player)
+    //    if (this.player.y > )
+    //    this.verticalWrap(this.player)
+    // PLAYER LOOP
+    // console.log(this.player.y);
+    // if (this.player.y < -2000) {
+    //     this.player.y = 1000;
+    // }
        //parallax 1: this.bg.tilePositionY = this.cameras.main.scrollY *.3;
 
 
