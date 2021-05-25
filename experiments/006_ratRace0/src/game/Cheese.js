@@ -1,6 +1,6 @@
 import Phaser from "../lib/phaser.js";
 
-export default class Carrot extends Phaser.Physics.Arcade.Sprite {
+export default class Cheese extends Phaser.Physics.Arcade.Sprite {
   /**
    * @param {Phaser.Scene} scene
    * @param {number} x

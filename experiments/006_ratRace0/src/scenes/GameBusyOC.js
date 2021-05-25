@@ -2,7 +2,7 @@
 
 import Phaser from "../lib/phaser.js";
 
-import Carrot from "../game/Carrot.js";
+import Carrot from "../game/Cheese.js";
 
 // /**
 //  *

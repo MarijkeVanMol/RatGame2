@@ -2,7 +2,7 @@
 
 import Phaser from "../lib/phaser.js";
 
-import Carrot from "../game/Carrot.js";
+import Cheese from "../game/Cheese.js";
 import Platform from "../game/Platform.js";
 
 export default class LevelThree extends Phaser.Scene {
@@ -11,7 +11,7 @@ export default class LevelThree extends Phaser.Scene {
   }
 
   init() {
-    this.carrotsCollected = 10;
+    this.cheesesCollected = 10;
   }
 
   preload() {
@@ -22,7 +22,7 @@ export default class LevelThree extends Phaser.Scene {
     this.load.image("bunny-stand", "assets/rat_busy.png");
     this.load.image("bunny-jump", "assets/rat_jump_busy.png");
 
-    this.load.image("carrot", "assets/cheese_busy.png");
+    this.load.image("cheese", "assets/cheese_busy.png");
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -71,8 +71,8 @@ export default class LevelThree extends Phaser.Scene {
       .setGravityY(100);
 
     // //  CARROTS
-    this.carrots = this.physics.add.group({
-      classType: Carrot,
+    this.cheeses = this.physics.add.group({
+      classType: Cheese,
     });
     //this.carrots.get(240,320, 'carrot');
 
@@ -89,13 +89,13 @@ export default class LevelThree extends Phaser.Scene {
     this.player.body.checkCollision.left = false;
     this.player.body.checkCollision.right = false;
     //      CARROT & PLATFORMS
-    this.physics.add.collider(this.platforms, this.carrots);
+    this.physics.add.collider(this.platforms, this.cheeses);
     //  OVERLAPS
     //      CARROT & PLATFORMS
     this.physics.add.overlap(
       this.player,
-      this.carrots,
-      this.handleCollectCarrot, // called on overload
+      this.cheeses,
+      this.handleCollectCheese, // called on overload
       undefined,
       this
     );
@@ -109,7 +109,7 @@ export default class LevelThree extends Phaser.Scene {
       color: "yellow",
       fontSize: 24,
     };
-    this.carrotsCollectedText = this.add
+    this.cheesesCollectedText = this.add
       .text(240, 10, "10 Cheeses", style)
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
@@ -147,7 +147,7 @@ export default class LevelThree extends Phaser.Scene {
         platform.body.updateFromGameObject();
 
         // create a carrot above the platform being
-        this.addCarrotAbove(platform);
+        this.addCheeseAbove(platform);
       }
     });
     //  PLAYER
@@ -164,6 +164,9 @@ export default class LevelThree extends Phaser.Scene {
     this.input.keyboard.once("keydown-L", () => {
       this.scene.start("game-over");
     });
+    this.input.keyboard.once("keydown-N", () => {
+      this.scene.start("gameBoring");
+    });
 
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
@@ -177,7 +180,7 @@ export default class LevelThree extends Phaser.Scene {
     }
 
     //    'reward'
-    if (this.carrotsCollected == 20) {
+    if (this.cheesesCollected == 2000) {
       this.scene.start("gameThree");
       this.sound.play("tttwo");
     }
@@ -205,35 +208,35 @@ export default class LevelThree extends Phaser.Scene {
   /**
    * @param {Phaser.GameObjects.Sprite} sprite
    */
-  addCarrotAbove(sprite) {
+  addCheeseAbove(sprite) {
     const y = sprite.y - sprite.displayHeight;
 
     /** @type {Phaser.Physics.Arcade.Sprite} */
-    const carrot = this.carrots.get(sprite.x, y, "carrot");
+    const cheese = this.cheeses.get(sprite.x, y, "cheese");
 
-    carrot.setActive(true); // set active
-    carrot.setVisible(true); // set visible
+    cheese.setActive(true); // set active
+    cheese.setVisible(true); // set visible
 
-    this.add.existing(carrot);
-    carrot.body.setSize(carrot.width, carrot.height); // update the physiscs body size
+    this.add.existing(cheese);
+    cheese.body.setSize(cheese.width, cheese.height); // update the physiscs body size
 
-    this.physics.world.enable(carrot); //enables body in physics world
+    this.physics.world.enable(cheese); //enables body in physics world
 
-    return carrot;
+    return cheese;
   }
 
   //  CARROT
   //      COLLECT
   /**
    * @param {Phaser.Physics.Arcade.Sprite} player
-   * @param {Carrot} carrot
+   * @param {Cheese} cheese
    */
-  handleCollectCarrot(player, carrot) {
-    this.carrots.killAndHide(carrot); // hide from display
-    this.physics.world.disableBody(carrot.body); // disable from physics world
-    this.carrotsCollected++;
-    const value = `${this.carrotsCollected} Cheeses`;
-    this.carrotsCollectedText.text = value;
+  handleCollectCheese(player, cheese) {
+    this.cheeses.killAndHide(cheese); // hide from display
+    this.physics.world.disableBody(cheese.body); // disable from physics world
+    this.cheesesCollected++;
+    const value = `${this.cheesesCollected} Cheeses`;
+    this.cheesesCollectedText.text = value;
   }
 
   //  PLATFORMS

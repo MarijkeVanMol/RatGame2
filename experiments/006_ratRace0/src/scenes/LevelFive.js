@@ -2,7 +2,7 @@
 
 import Phaser from "../lib/phaser.js";
 
-import Carrot from "../game/Carrot.js";
+import Cheese from "../game/Cheese.js";
 
 // /**
 //  *
@@ -43,19 +43,19 @@ export default class LevelFive extends Phaser.Scene {
   cursors;
 
   /** @type {Phaser.Physics.Arcade.Group} */
-  carrots;
+  cheeses;
 
-  carrotsCollected = 0;
+  cheesesCollected = 0;
 
   /** @type {Phaser.GameObjects.Text} */
-  carrotsCollectedText;
+  cheesesCollectedText;
 
   constructor() {
     super("levelFive");
   }
 
   init() {
-    this.carrotsCollected = 0;
+    this.cheesesCollected = 0;
   }
 
   preload() {
@@ -171,8 +171,8 @@ export default class LevelFive extends Phaser.Scene {
       .setGravityY(300); //300 = sweet jump, -300 tp make it go faster
 
     //  CARROTS
-    this.carrots = this.physics.add.group({
-      classTYpe: Carrot,
+    this.cheeses = this.physics.add.group({
+      classTYpe: Cheese,
     });
     //this.carrots.get(240,320, 'carrot');
 
@@ -193,8 +193,8 @@ export default class LevelFive extends Phaser.Scene {
     //      CARROT & PLAYER (handles overlap between carrot and player)
     this.physics.add.overlap(
       this.player,
-      this.carrots,
-      this.handleCollectCarrot, // called on overload
+      this.cheeses,
+      this.handleCollectCheese, // called on overload
       undefined,
       this
     );
@@ -209,7 +209,7 @@ export default class LevelFive extends Phaser.Scene {
       color: "yellow",
       fontSize: 24,
     };
-    this.carrotsCollectedText = this.add
+    this.cheesesCollectedText = this.add
       .text(240, 10, "0 Cheeses", style)
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
@@ -248,7 +248,7 @@ export default class LevelFive extends Phaser.Scene {
         platform.body.updateFromGameObject();
 
         //      create a carrot above the platform being
-        this.addCarrotAbove(platform);
+        this.addCheeseAbove(platform);
         var music = this.sound.add("songBusy");
         music.play();
 
@@ -301,7 +301,7 @@ export default class LevelFive extends Phaser.Scene {
     }
 
     //  'reward'
-    if (this.carrotsCollected == 200) {
+    if (this.cheesesCollected == 200) {
       this.scene.start("gameBoring");
       this.sound.play("tttwo");
     }
@@ -327,35 +327,35 @@ export default class LevelFive extends Phaser.Scene {
   /**
    * @param {Phaser.GameObjects.Sprite} sprite
    */
-  addCarrotAbove(sprite) {
+  addCheeseAbove(sprite) {
     const y = sprite.y - sprite.displayHeight;
 
     /** @type {Phaser.Physics.Arcade.Sprite} */
-    const carrot = this.carrots.get(sprite.x, y, "cheese");
+    const cheese = this.cheeses.get(sprite.x, y, "cheese");
 
-    carrot.setActive(true); // set active
-    carrot.setVisible(true); // set visible
+    cheese.setActive(true); // set active
+    cheese.setVisible(true); // set visible
 
-    this.add.existing(carrot);
-    carrot.body.setSize(carrot.width, carrot.height); // update the physiscs body size
+    this.add.existing(cheese);
+    cheese.body.setSize(cheese.width, cheese.height); // update the physiscs body size
 
-    this.physics.world.enable(carrot); //enables body in physics world
+    this.physics.world.enable(cheese); //enables body in physics world
 
-    return carrot;
+    return cheese;
   }
 
   //  CARROT
   //      COLLECT
   /**
    * @param {Phaser.Physics.Arcade.Sprite} player
-   * @param {Carrot} carrot
+   * @param {Cheese} cheese
    */
-  handleCollectCarrot(player, carrot) {
-    this.carrots.killAndHide(carrot); // hide from display
-    this.physics.world.disableBody(carrot.body); // disable from physics world
-    this.carrotsCollected++;
-    const value = `${this.carrotsCollected} Cheeses`;
-    this.carrotsCollectedText.text = value;
+  handleCollectCheese(player, cheese) {
+    this.cheeses.killAndHide(cheese); // hide from display
+    this.physics.world.disableBody(cheese.body); // disable from physics world
+    this.cheesesCollected++;
+    const value = `${this.cheesesCollected} Cheeses`;
+    this.cheesesCollectedText.text = value;
     this.sound.play("power");
     this.cameras.main.shake(500);
     this.player.setTexture("rat-jump");

@@ -20,9 +20,9 @@ export default new Phaser.Game({
   scene: [
     GameBusy,
     GameBoring,
+    LevelSeven,
     GameOver,
     LevelFour,
-    LevelSeven,
     LevelFive,
     LevelThree,
     GameIntro,

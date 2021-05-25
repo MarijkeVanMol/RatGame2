@@ -1,8 +1,9 @@
 // goal: parallax on everything but player
+//
 
 import Phaser from "../lib/phaser.js";
 
-import Carrot from "../game/Carrot.js";
+import Cheese from "../game/Cheese.js";
 
 // /**
 //  *
@@ -43,19 +44,19 @@ export default class GameBusy extends Phaser.Scene {
   cursors;
 
   /** @type {Phaser.Physics.Arcade.Group} */
-  carrots;
+  cheeses;
 
-  carrotsCollected = 0;
+  cheesesCollected = 0;
 
   /** @type {Phaser.GameObjects.Text} */
-  carrotsCollectedText;
+  cheesesCollectedText;
 
   constructor() {
     super("gameBusy");
   }
 
   init() {
-    this.carrotsCollected = 0;
+    this.cheesesCollected = 0;
   }
 
   preload() {
@@ -84,10 +85,6 @@ export default class GameBusy extends Phaser.Scene {
   }
 
   create() {
-    //  MUSIC
-    // var music = this.sound.add('songBusy');
-    //music.play();
-
     //  BACKGROUND
     const gameWidth = this.scale.width;
     const gameHeight = this.scale.height;
@@ -109,8 +106,8 @@ export default class GameBusy extends Phaser.Scene {
 
     //          exCode: for when we worked on the 480x7149 / bg_busy.png
 
-    this.add
-      .image(gameWidth, gameHeight + 40, "bg") // zoda ge geen zwarte balk krijgt v onder
+    this.background = this.add
+      .image(gameWidth, gameHeight + 45, "bg") // zoda ge geen zwarte balk krijgt v onder
       .setOrigin(1) //origin is linksonder van afbeelding
       .setScrollFactor(0.5);
 
@@ -169,8 +166,8 @@ export default class GameBusy extends Phaser.Scene {
       .setGravityY(300); //300 = sweet jump, -300 tp make it go faster
 
     //  CARROTS
-    this.carrots = this.physics.add.group({
-      classTYpe: Carrot,
+    this.cheeses = this.physics.add.group({
+      classType: Cheese,
     });
     //this.carrots.get(240,320, 'carrot');
 
@@ -191,8 +188,8 @@ export default class GameBusy extends Phaser.Scene {
     //      CARROT & PLAYER (handles overlap between carrot and player)
     this.physics.add.overlap(
       this.player,
-      this.carrots,
-      this.handleCollectCarrot, // called on overload
+      this.cheeses,
+      this.handleCollectCheese, // called on overload
       undefined,
       this
     );
@@ -207,7 +204,7 @@ export default class GameBusy extends Phaser.Scene {
       color: "yellow",
       fontSize: 24,
     };
-    this.carrotsCollectedText = this.add
+    this.cheesesCollectedText = this.add
       .text(240, 10, "0 Cheeses", style)
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
@@ -247,7 +244,7 @@ export default class GameBusy extends Phaser.Scene {
         platform.body.updateFromGameObject();
 
         //      create a carrot above the platform being
-        this.addCarrotAbove(platform);
+        this.addCheeseAbove(platform);
 
         //      i thought that maybe the parallax could work if i placed it here, but it didn't
         // const gameWidth = this.scale.width
@@ -276,17 +273,39 @@ export default class GameBusy extends Phaser.Scene {
     this.input.keyboard.once("keydown-L", () => {
       this.scene.start("game-over");
     });
+    this.input.keyboard.once("keydown-N", () => {
+      this.scene.start("gameBoring");
+    });
 
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
     this.horizontalWrap(this.player);
     //    if (this.player.y > )
     //    this.verticalWrap(this.player)
+
     // PLAYER LOOP
-    // console.log(this.player.y);
-    // if (this.player.y < -2000) {
-    //      this.player.y = 1000;
-    //  }
+    console.log(this.player.y);
+    if (this.player.y < -12000) {
+      this.background.setY(-5500);
+      this.background.setX(480); // dit loopt vast, te zwaar voor server schat ik
+      //   this.scene.restart("gameBusy"); // easiest but what about the cheese?
+      //   this.cheesesCollected = 50;
+      //   this.cheesesCollectedText.text = 50;
+      // player.y pos reset = nothing else's reset
+      // just some experiments
+      // this.player.y = 700;
+      // this.platform.y = 200;
+      // this.background.setScrollFactor(-0.5);
+    }
+    if (this.player.y < -20000) {
+      this.background.setY(-5500);
+      this.background.setX(480);
+    }
+    if (this.player.y < -22000) {
+      this.background.setY(-5500);
+      this.background.setX(480);
+    }
+
     //parallax 1: this.bg.tilePositionY = this.cameras.main.scrollY *.3;
 
     //  TO NEXT SCENE: BORING GAME
@@ -298,7 +317,7 @@ export default class GameBusy extends Phaser.Scene {
     }
 
     //  'reward'
-    if (this.carrotsCollected == 100) {
+    if (this.cheesesCollected == 10000) {
       this.scene.start("gameBoring");
       this.sound.play("tttwo");
     }
@@ -324,35 +343,35 @@ export default class GameBusy extends Phaser.Scene {
   /**
    * @param {Phaser.GameObjects.Sprite} sprite
    */
-  addCarrotAbove(sprite) {
+  addCheeseAbove(sprite) {
     const y = sprite.y - sprite.displayHeight;
 
     /** @type {Phaser.Physics.Arcade.Sprite} */
-    const carrot = this.carrots.get(sprite.x, y, "cheese");
+    const cheese = this.cheeses.get(sprite.x, y, "cheese");
 
-    carrot.setActive(true); // set active
-    carrot.setVisible(true); // set visible
+    cheese.setActive(true); // set active
+    cheese.setVisible(true); // set visible
 
-    this.add.existing(carrot);
-    carrot.body.setSize(carrot.width, carrot.height); // update the physiscs body size
+    this.add.existing(cheese);
+    cheese.body.setSize(cheese.width, cheese.height); // update the physiscs body size
 
-    this.physics.world.enable(carrot); //enables body in physics world
+    this.physics.world.enable(cheese); //enables body in physics world
 
-    return carrot;
+    return cheese;
   }
 
   //  CARROT
   //      COLLECT
   /**
    * @param {Phaser.Physics.Arcade.Sprite} player
-   * @param {Carrot} carrot
+   * @param {Cheese} cheese
    */
-  handleCollectCarrot(player, carrot) {
-    this.carrots.killAndHide(carrot); // hide from display
-    this.physics.world.disableBody(carrot.body); // disable from physics world
-    this.carrotsCollected++;
-    const value = `${this.carrotsCollected} Cheeses`;
-    this.carrotsCollectedText.text = value;
+  handleCollectCheese(player, cheese) {
+    this.cheeses.killAndHide(cheese); // hide from display
+    this.physics.world.disableBody(cheese.body); // disable from physics world
+    this.cheesesCollected++;
+    const value = `${this.cheesesCollected} Cheeses`;
+    this.cheesesCollectedText.text = value;
     this.sound.play("power");
     this.cameras.main.shake(500);
     this.player.setTexture("rat-jump");
