@@ -167,6 +167,9 @@ export default class GameBoring extends Phaser.Scene {
     this.input.keyboard.once("keydown-L", () => {
       this.scene.start("game-over");
     });
+    this.input.keyboard.once("keydown-N", () => {
+      this.scene.start("levelThree");
+    });
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
     this.horizontalWrap(this.player);

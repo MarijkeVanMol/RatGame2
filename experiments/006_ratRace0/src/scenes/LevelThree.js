@@ -164,6 +164,9 @@ export default class LevelThree extends Phaser.Scene {
     this.input.keyboard.once("keydown-L", () => {
       this.scene.start("game-over");
     });
+    this.input.keyboard.once("keydown-N", () => {
+      this.scene.start("gameBoring");
+    });
 
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
@@ -177,7 +180,7 @@ export default class LevelThree extends Phaser.Scene {
     }
 
     //    'reward'
-    if (this.cheesesCollected == 20) {
+    if (this.cheesesCollected == 2000) {
       this.scene.start("gameThree");
       this.sound.play("tttwo");
     }

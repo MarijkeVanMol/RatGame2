@@ -1,5 +1,5 @@
 // goal: parallax on everything but player
-// 
+//
 
 import Phaser from "../lib/phaser.js";
 
@@ -85,10 +85,6 @@ export default class GameBusy extends Phaser.Scene {
   }
 
   create() {
-    //  MUSIC
-    // var music = this.sound.add('songBusy');
-    //music.play();
-
     //  BACKGROUND
     const gameWidth = this.scale.width;
     const gameHeight = this.scale.height;
@@ -110,8 +106,8 @@ export default class GameBusy extends Phaser.Scene {
 
     //          exCode: for when we worked on the 480x7149 / bg_busy.png
 
-    this.add
-      .image(gameWidth, gameHeight + 40, "bg") // zoda ge geen zwarte balk krijgt v onder
+    this.background = this.add
+      .image(gameWidth, gameHeight + 45, "bg") // zoda ge geen zwarte balk krijgt v onder
       .setOrigin(1) //origin is linksonder van afbeelding
       .setScrollFactor(0.5);
 
@@ -171,7 +167,7 @@ export default class GameBusy extends Phaser.Scene {
 
     //  CARROTS
     this.cheeses = this.physics.add.group({
-      classTYpe: Cheese,
+      classType: Cheese,
     });
     //this.carrots.get(240,320, 'carrot');
 
@@ -276,17 +272,39 @@ export default class GameBusy extends Phaser.Scene {
     this.input.keyboard.once("keydown-L", () => {
       this.scene.start("game-over");
     });
+    this.input.keyboard.once("keydown-N", () => {
+      this.scene.start("gameBoring");
+    });
 
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
     this.horizontalWrap(this.player);
     //    if (this.player.y > )
     //    this.verticalWrap(this.player)
+
     // PLAYER LOOP
-    // console.log(this.player.y);
-    // if (this.player.y < -2000) {
-    //      this.player.y = 1000;
-    //  }
+    console.log(this.player.y);
+    if (this.player.y < -12000) {
+      this.background.setY(-5500);
+      this.background.setX(480); // dit loopt vast, te zwaar voor server schat ik
+      //   this.scene.restart("gameBusy"); // easiest but what about the cheese?
+      //   this.cheesesCollected = 50;
+      //   this.cheesesCollectedText.text = 50;
+      // player.y pos reset = nothing else's reset
+      // just some experiments
+      // this.player.y = 700;
+      // this.platform.y = 200;
+      // this.background.setScrollFactor(-0.5);
+    }
+    if (this.player.y < -20000) {
+      this.background.setY(-5500);
+      this.background.setX(480);
+    }
+    if (this.player.y < -22000) {
+      this.background.setY(-5500);
+      this.background.setX(480);
+    }
+
     //parallax 1: this.bg.tilePositionY = this.cameras.main.scrollY *.3;
 
     //  TO NEXT SCENE: BORING GAME
@@ -298,7 +316,7 @@ export default class GameBusy extends Phaser.Scene {
     }
 
     //  'reward'
-    if (this.cheesesCollected == 100) {
+    if (this.cheesesCollected == 10000) {
       this.scene.start("gameBoring");
       this.sound.play("tttwo");
     }
