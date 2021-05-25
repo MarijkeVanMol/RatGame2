@@ -18,17 +18,19 @@ export default new Phaser.Game({
   height: 640,
   pixelArt: true,
   scene: [
-    GameBusy,
     GameBoring,
+    LevelSeven,
+    GameBusy,
     GameOver,
     LevelFour,
-    LevelSeven,
     LevelFive,
     LevelThree,
     GameIntro,
     GameStart,
   ],
-  audio: {},
+  audio: {
+
+  },
   physics: {
     default: "arcade",
     arcade: {
