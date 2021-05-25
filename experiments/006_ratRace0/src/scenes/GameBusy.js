@@ -214,6 +214,7 @@ export default class GameBusy extends Phaser.Scene {
   }
 
   update() {
+    document.body.className = "busy";
     // find out from Arcade physics if the player's physics body is touching something below it
     //  PLAYER
     //      BOUNCE

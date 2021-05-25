@@ -1,24 +1,32 @@
 <html>
-
-<head>
+  <head>
     <title>Welcome to the Rat Race Loser!</title>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.50.1/dist/phaser.js">
-    </script>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.50.1/dist/phaser.js"></script>
 
     <style type="text/css">
-        body {
-            background-color: yellow;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;          
-        }
-        canvas {height: 100%;};
+      body {
+        background-color: yellow;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+      canvas {
+        height: 100%;
+      }
+
+      .busy-ad {
+        visibility: hidden;
+      }
+
+      .busy .busy-ad {
+        visibility: visible;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <img class="busy-ad" img="busy-ad.gif" />
     <script type="module" src="src/main.js"></script>
-</body>
-
+  </body>
 </html>
