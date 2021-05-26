@@ -33,7 +33,7 @@ import Cheese from "../game/Cheese.js";
 //     }
 // }
 
-export default class GameBusy extends Phaser.Scene {
+export default class LevelOne extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.StaticGroup} */
   platforms;
 
@@ -52,7 +52,7 @@ export default class GameBusy extends Phaser.Scene {
   cheesesCollectedText;
 
   constructor() {
-    super("gameBusy");
+    super("levelOne");
   }
 
   init() {
@@ -274,7 +274,7 @@ export default class GameBusy extends Phaser.Scene {
       this.scene.start("game-over");
     });
     this.input.keyboard.once("keydown-N", () => {
-      this.scene.start("gameBoring");
+      this.scene.start("levelTwo");
     });
 
     //  CAMERAS
@@ -284,7 +284,7 @@ export default class GameBusy extends Phaser.Scene {
     //    this.verticalWrap(this.player)
 
     // PLAYER LOOP
-    console.log(this.player.y);
+    //console.log(this.player.y);
     if (this.player.y < -12000) {
       this.background.setY(-5500);
       this.background.setX(480); // dit loopt vast, te zwaar voor server schat ik
@@ -317,7 +317,7 @@ export default class GameBusy extends Phaser.Scene {
     }
 
     //  'reward'
-    if (this.cheesesCollected == 10000) {
+    if (this.cheesesCollected == 1000) {
       this.scene.start("gameBoring");
       this.sound.play("tttwo");
     }

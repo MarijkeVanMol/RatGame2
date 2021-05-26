@@ -3,7 +3,6 @@
 import Phaser from "../lib/phaser.js";
 
 import Cheese from "../game/Cheese.js";
-import Platform from "../game/Platform.js";
 
 export default class LevelThree extends Phaser.Scene {
   constructor() {

@@ -3,10 +3,9 @@ import Phaser from "./lib/phaser.js";
 import GameIntro from "./scenes/GameIntro.js";
 import GameStart from "./scenes/GameStart.js";
 
-import GameBusy from "./scenes/GameBusy.js";
-import GameBoring from "./scenes/GameBoring.js";
-import LevelThree from "./scenes/LevelThree.js"; //doesnt work
-import LevelFour from "./scenes/LevelFour.js"; // !work: gravity?? isParent?? bla bla
+import LevelOne from "./scenes/LevelOne.js";
+import LevelTwo from "./scenes/LevelTwo.js";
+import LevelThree from "./scenes/LevelThree.js"; //doesnt wor
 import LevelFive from "./scenes/LevelFive.js";
 import LevelSeven from "./scenes/LevelSeven.js";
 
@@ -18,11 +17,10 @@ export default new Phaser.Game({
   height: 640,
   pixelArt: true,
   scene: [
-    GameBusy,
-    GameBoring,
+    LevelOne,
+    LevelTwo,
     LevelSeven,
     GameOver,
-    LevelFour,
     LevelFive,
     LevelThree,
     GameIntro,
@@ -35,7 +33,7 @@ export default new Phaser.Game({
       gravity: {
         y: 200,
       },
-      debug: false,
+      debug: true,
     },
   },
 });

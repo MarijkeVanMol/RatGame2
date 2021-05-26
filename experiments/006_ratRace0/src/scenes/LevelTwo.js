@@ -3,7 +3,7 @@ import Phaser from "../lib/phaser.js";
 import Cheese from "../game/Cheese.js";
 //import Platform from "../game/Platform.js";
 
-export default class GameBoring extends Phaser.Scene {
+export default class LevelTwo extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.StaticGroup} */
   platforms;
 
@@ -22,7 +22,7 @@ export default class GameBoring extends Phaser.Scene {
   cheesesCollectedText;
 
   constructor() {
-    super("gameBoring");
+    super("levelTwo");
   }
 
   init() {
@@ -35,10 +35,9 @@ export default class GameBoring extends Phaser.Scene {
 
     this.load.image("platform", "assets/platform_boring.png");
 
-    this.load.image("bunny-stand", "assets/rat_boring.png");
-    this.load.image("bunny-jump", "assets/rat_boring.png");
+    this.load.image("rat", "assets/rbo_2.png");
 
-    this.load.image("cheese", "assets/cheese_boring.png");
+    this.load.image("c_boring", "assets/cbo_2.png");
 
     this.cursors = this.input.keyboard.createCursorKeys();
   }
@@ -70,9 +69,7 @@ export default class GameBoring extends Phaser.Scene {
     // }
 
     //  PLAYER
-    this.player = this.physics.add
-      .sprite(240, 320, "bunny-stand")
-      .setScale(0.1);
+    this.player = this.physics.add.sprite(240, 320, "rat").setScale(0.3);
 
     //  CHEESES
     this.cheeses = this.physics.add.group({ classTYpe: Cheese });
@@ -111,6 +108,7 @@ export default class GameBoring extends Phaser.Scene {
   }
 
   update() {
+    document.body.className = "boring";
     //visibility: .body}
     //========== Bounce and unbounce disabled to make game more boring ==========
     // find out from Arcade physics if the player's physics body is touching something below it
@@ -148,9 +146,9 @@ export default class GameBoring extends Phaser.Scene {
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-20);
+      this.player.setVelocityX(-10);
     } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(20);
+      this.player.setVelocityX(10);
     } else {
       this.player.setVelocityX(0);
     }
@@ -211,20 +209,39 @@ export default class GameBoring extends Phaser.Scene {
    * @param {Phaser.GameObjects.Sprite} sprite
    */
   addCheeseAbove(sprite) {
-    const y = sprite.y - sprite.displayHeight;
-
+    // ======================= ORIGINAL CODE =====================
+    // const y = sprite.y - sprite.displayHeight;
     /** @type {Phaser.Physics.Arcade.Sprite} */
-    const cheese = this.cheeses.get(sprite.x, y - 200, "cheese");
+    // ======================== ATTEMPT ==========================
+    const gameWidth = this.scale.width;
+    for (let i = 75; i < gameWidth; i++) {
+      const y = sprite.y - sprite.displayHeight;
 
-    cheese.setActive(true); // set active
-    cheese.setVisible(true); // set visible
+      // const x = sprite.x + i;
+      // if (i > 480) {
+      //   i = 0
 
-    this.add.existing(cheese);
-    cheese.body.setSize(cheese.width, cheese.height); // update the physiscs body size
+      const cheese = this.cheeses.get(sprite.x + i, y - 600, "c_boring");
 
-    this.physics.world.enable(cheese); //enables body in physics world
+      if (sprite.x + i > gameWidth) {
+        sprite.x - i;
+      }
 
-    return cheese;
+      // =================== ORIGINAL CODE ====================================
+      // const cheese = this.cheeses.get(sprite.x, y - 600, "c_boring");
+      // const cheese = this.cheeses.get(sprite.x - 100, y - 600, "c_boring");
+
+      cheese.setActive(true); // set active
+      cheese.setVisible(true); // set visible
+
+      this.add.existing(cheese);
+      cheese.body.setSize(cheese.width, cheese.height); // update the physiscs body size
+      // .setGravityY(10);
+
+      this.physics.world.enable(cheese); //enables body in physics world
+      // console.log(this.sprite.x);
+      return cheese;
+    }
   }
 
   //  CARROT
