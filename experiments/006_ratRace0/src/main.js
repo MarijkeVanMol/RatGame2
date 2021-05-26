@@ -1,5 +1,7 @@
 import Phaser from "./lib/phaser.js";
 
+import Loading from "./scenes/Loading.js";
+
 import GameIntro from "./scenes/GameIntro.js";
 import GameStart from "./scenes/GameStart.js";
 
@@ -17,6 +19,7 @@ export default new Phaser.Game({
   height: 640,
   pixelArt: true,
   scene: [
+    Loading,
     LevelOne,
     LevelTwo,
     LevelSeven,

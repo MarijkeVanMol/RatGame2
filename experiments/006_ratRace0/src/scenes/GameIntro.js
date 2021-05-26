@@ -6,8 +6,8 @@ export default class GameIntro extends Phaser.Scene {
   }
 
   preload() {
+    console.log("preload game intro");
     this.load.image("intro", "assets/gameintro.jpg");
-    this.cursors = this.input.keyboard.createCursorKeys();
   }
 
   create() {

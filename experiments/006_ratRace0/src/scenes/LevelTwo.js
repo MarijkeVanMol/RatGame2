@@ -30,21 +30,13 @@ export default class LevelTwo extends Phaser.Scene {
     this.CheeseCount = 0;
   }
 
-  preload() {
-    this.load.image("background", "assets/bg_boring.png");
-
-    this.load.image("platform", "assets/platform_boring.png");
-
-    this.load.image("rat", "assets/rbo_2.png");
-
-    this.load.image("c_boring", "assets/cbo_2.png");
+  create() {
+    console.log("create level 2");
 
     this.cursors = this.input.keyboard.createCursorKeys();
-  }
 
-  create() {
     //  BACKGROUND
-    this.add.image(240, 320, "background").setScrollFactor(1, 0);
+    this.add.image(240, 320, "lvl2-background").setScrollFactor(1, 0);
 
     // this.add.image(240,320, 'platform').setScale(0.5);
     // this.physics.add.image(240,320,'platform').setScale(0.5);
@@ -58,7 +50,7 @@ export default class LevelTwo extends Phaser.Scene {
     //   const y = 500;
 
     /** @type {Phaser.Physics.Arcade.Sprite} */
-    const platform = this.platforms.create(x, y, "platform");
+    const platform = this.platforms.create(x, y, "lvl2-platform");
     // platform.scale = 0.5;
     platform.scaleX = 1.5;
     platform.scaleY = 2;
@@ -72,7 +64,7 @@ export default class LevelTwo extends Phaser.Scene {
     this.player = this.physics.add.sprite(240, 320, "rat").setScale(0.3);
 
     //  CHEESES
-    this.cheeses = this.physics.add.group({ classTYpe: Cheese });
+    this.cheeses = this.physics.add.group({ classType: Cheese });
 
     //this.cheeses.get(240,320, 'cheese');
 
@@ -105,6 +97,14 @@ export default class LevelTwo extends Phaser.Scene {
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
     //.setFont("Arial"); //sets font -> WERKT NOG NIET, NICE TO HAVE
+
+    //      CHEAT CODE
+    this.input.keyboard.once("keydown-L", () => {
+      this.scene.start("game-over");
+    });
+    this.input.keyboard.once("keydown-N", () => {
+      this.scene.start("levelThree");
+    });
   }
 
   update() {
@@ -146,9 +146,9 @@ export default class LevelTwo extends Phaser.Scene {
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-10);
+      this.player.setVelocityX(-50);
     } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(10);
+      this.player.setVelocityX(50);
     } else {
       this.player.setVelocityX(0);
     }
@@ -161,13 +161,6 @@ export default class LevelTwo extends Phaser.Scene {
       this.CheeseCount++;
     }
 
-    //      CHEAT CODE
-    this.input.keyboard.once("keydown-L", () => {
-      this.scene.start("game-over");
-    });
-    this.input.keyboard.once("keydown-N", () => {
-      this.scene.start("levelThree");
-    });
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
     this.horizontalWrap(this.player);
@@ -208,40 +201,10 @@ export default class LevelTwo extends Phaser.Scene {
   /**
    * @param {Phaser.GameObjects.Sprite} sprite
    */
-  addCheeseAbove(sprite) {
-    // ======================= ORIGINAL CODE =====================
-    // const y = sprite.y - sprite.displayHeight;
-    /** @type {Phaser.Physics.Arcade.Sprite} */
-    // ======================== ATTEMPT ==========================
-    const gameWidth = this.scale.width;
-    for (let i = 75; i < gameWidth; i++) {
-      const y = sprite.y - sprite.displayHeight;
-
-      // const x = sprite.x + i;
-      // if (i > 480) {
-      //   i = 0
-
-      const cheese = this.cheeses.get(sprite.x + i, y - 600, "c_boring");
-
-      if (sprite.x + i > gameWidth) {
-        sprite.x - i;
-      }
-
-      // =================== ORIGINAL CODE ====================================
-      // const cheese = this.cheeses.get(sprite.x, y - 600, "c_boring");
-      // const cheese = this.cheeses.get(sprite.x - 100, y - 600, "c_boring");
-
-      cheese.setActive(true); // set active
-      cheese.setVisible(true); // set visible
-
-      this.add.existing(cheese);
-      cheese.body.setSize(cheese.width, cheese.height); // update the physiscs body size
-      // .setGravityY(10);
-
-      this.physics.world.enable(cheese); //enables body in physics world
-      // console.log(this.sprite.x);
-      return cheese;
-    }
+  addCheeseAbove(player) {
+    const cheeseX = Phaser.Math.Between(0, this.scale.width);
+    const cheeseY = player.y - 300;
+    this.cheeses.create(cheeseX, cheeseY, "c_boring");
   }
 
   //  CARROT

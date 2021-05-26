@@ -13,28 +13,9 @@ export default class LevelThree extends Phaser.Scene {
     this.cheesesCollected = 10;
   }
 
-  preload() {
-    this.load.image("platform", "assets/platform0_busy.png");
-    this.load.image("platformTwo", "assets/platform1_busy.png");
-    // this.load.image('background', 'assets/bg_boring.png');
-
-    this.load.image("bunny-stand", "assets/rat_busy.png");
-    this.load.image("bunny-jump", "assets/rat_jump_busy.png");
-
-    this.load.image("cheese", "assets/cheese_busy.png");
-
+  create() {
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.load.audio("songBusy", "assets/sfx/busy.mp3");
-
-    this.load.audio("jump", "assets/sfx/phaseJump1.mp3");
-
-    this.load.audio("tttwo", "assets/sfx/threeTone2.mp3");
-
-    this.load.audio("power", "assets/sfx/powerUp3.mp3");
-  }
-
-  create() {
     //  MUSIC
     var music = this.sound.add("songBusy");
     music.play();
@@ -46,9 +27,7 @@ export default class LevelThree extends Phaser.Scene {
 
     //  PLATFORMS
     //this.add.image(240,320,'platform').setScale(1)
-    this.platforms = this.physics.add.staticGroup({
-      classType: Platform,
-    });
+    this.platforms = this.physics.add.staticGroup({});
 
     for (let i = 0; i < 8; ++i) {
       const x = Phaser.Math.Between(80, 600);
@@ -112,6 +91,14 @@ export default class LevelThree extends Phaser.Scene {
       .text(240, 10, "10 Cheeses", style)
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
+
+    //      CHEAT CODE
+    this.input.keyboard.once("keydown-L", () => {
+      this.scene.start("game-over");
+    });
+    this.input.keyboard.once("keydown-N", () => {
+      this.scene.start("gameBoring");
+    });
   }
 
   update() {
@@ -140,13 +127,16 @@ export default class LevelThree extends Phaser.Scene {
       /** @type {Phaser.Physics.Arcade.Sprite} */
       const platform = child;
 
+      // HERE IS THE BUG
       const scrollY = this.cameras.main.scrollY;
       if (platform.y >= scrollY + 700) {
         platform.y = scrollY - Phaser.Math.Between(50, 100);
         platform.body.updateFromGameObject();
 
         // create a carrot above the platform being
-        this.addCheeseAbove(platform);
+        console.log("add cheese");
+        // DONT ADD INFINITE CHEESES
+        // this.addCheeseAbove(platform);
       }
     });
     //  PLAYER
@@ -159,14 +149,6 @@ export default class LevelThree extends Phaser.Scene {
       this.player.setVelocityX(0);
     }
 
-    //      CHEAT CODE
-    this.input.keyboard.once("keydown-L", () => {
-      this.scene.start("game-over");
-    });
-    this.input.keyboard.once("keydown-N", () => {
-      this.scene.start("gameBoring");
-    });
-
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
     this.horizontalWrap(this.player);
@@ -175,12 +157,12 @@ export default class LevelThree extends Phaser.Scene {
     //    normal loser route
     const bottomPlatform = this.findBottomMostPlatform();
     if (this.player.y > bottomPlatform.y + 200) {
-      this.scene.start("gameThree");
+      this.scene.start("levelThree");
     }
 
     //    'reward'
     if (this.cheesesCollected == 2000) {
-      this.scene.start("gameThree");
+      this.scene.start("levelThree");
       this.sound.play("tttwo");
     }
 

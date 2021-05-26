@@ -60,31 +60,12 @@ export default class LevelOne extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("bg", "assets/lone.png"); // set back to BG_busy
-
-    this.load.image("plat0", "assets/platform0_busy.png");
-    // this.load.image("plat1", "assets/platform1_busy.png");
-    // this.load.image("plat2", "assets/platform2_busy.png");
-    // this.load.image("plat3", "assets/platform3_busy.png");
-    // this.load.image("plat4", "assets/platform4_busy.png");
-
-    this.load.image("rat", "assets/rat_busy.png");
-    this.load.image("rat-jump", "assets/rat_jump_busy.png");
-
-    this.load.image("cheese", "assets/cheese_busy.png");
-
+    console.log("preload game level 1");
     this.cursors = this.input.keyboard.createCursorKeys();
-
-    this.load.audio("songBusy", "assets/sfx/busy.mp3");
-
-    this.load.audio("jump", "assets/sfx/phaseJump1.mp3");
-
-    this.load.audio("tttwo", "assets/sfx/threeTone2.mp3");
-
-    this.load.audio("power", "assets/sfx/powerUp3.mp3");
   }
 
   create() {
+    console.log("create level 1");
     //  BACKGROUND
     const gameWidth = this.scale.width;
     const gameHeight = this.scale.height;
@@ -208,6 +189,15 @@ export default class LevelOne extends Phaser.Scene {
       .text(240, 10, "0 Cheeses", style)
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
+
+    //  CHEAT CODE
+    this.input.keyboard.once("keydown-L", () => {
+      this.scene.start("game-over");
+    });
+    this.input.keyboard.once("keydown-N", () => {
+      console.log("start level 2");
+      this.scene.start("levelTwo");
+    });
   }
 
   update() {
@@ -268,14 +258,6 @@ export default class LevelOne extends Phaser.Scene {
     } else {
       this.player.setVelocityX(0);
     }
-
-    //  CHEAT CODE
-    this.input.keyboard.once("keydown-L", () => {
-      this.scene.start("game-over");
-    });
-    this.input.keyboard.once("keydown-N", () => {
-      this.scene.start("levelTwo");
-    });
 
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
