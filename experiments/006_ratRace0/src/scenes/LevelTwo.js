@@ -16,7 +16,7 @@ export default class LevelTwo extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.Group} */
   cheeses;
 
-  cheesesCollected = 0;
+  cheesesCollected = 50;
 
   /** @type {Phaser.GameObjects.Text} */
   cheesesCollectedText;
@@ -26,20 +26,17 @@ export default class LevelTwo extends Phaser.Scene {
   }
 
   init() {
-    this.cheesesCollected = 0;
-    this.CheeseCount = 0;
+    this.cheesesCollected = 50;
+    this.CheeseCount = 50;
   }
 
   create() {
     console.log("create level 2");
-
     this.cursors = this.input.keyboard.createCursorKeys();
+    // SOUND
 
     //  BACKGROUND
-    this.add.image(240, 320, "lvl2-background").setScrollFactor(1, 0);
-
-    // this.add.image(240,320, 'platform').setScale(0.5);
-    // this.physics.add.image(240,320,'platform').setScale(0.5);
+    this.add.image(240, 320, "boring-bg").setScrollFactor(1, 0);
 
     this.platforms = this.physics.add.staticGroup();
     //  PLATFORMS
@@ -50,7 +47,7 @@ export default class LevelTwo extends Phaser.Scene {
     //   const y = 500;
 
     /** @type {Phaser.Physics.Arcade.Sprite} */
-    const platform = this.platforms.create(x, y, "lvl2-platform");
+    const platform = this.platforms.create(x, y, "boring-ground");
     // platform.scale = 0.5;
     platform.scaleX = 1.5;
     platform.scaleY = 2;
@@ -61,7 +58,7 @@ export default class LevelTwo extends Phaser.Scene {
     // }
 
     //  PLAYER
-    this.player = this.physics.add.sprite(240, 320, "rat").setScale(0.3);
+    this.player = this.physics.add.sprite(240, 320, "boring-rat").setScale(0.3);
 
     //  CHEESES
     this.cheeses = this.physics.add.group({ classType: Cheese });
@@ -91,9 +88,9 @@ export default class LevelTwo extends Phaser.Scene {
     this.cameras.main.setDeadzone(this.scale.width * 1.5); // makes sure it doesn't go 'off-screen, move to the sides'
 
     //  FONT
-    const style = { color: "black", fontSize: 24 }; // color doesn't work
+    const style = { color: "black", font: "24px sans-serif" }; // color doesn't work
     this.cheesesCollectedText = this.add
-      .text(240, 10, "0 Cheeses", style)
+      .text(240, 10, "50 Cheeses", style)
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
     //.setFont("Arial"); //sets font -> WERKT NOG NIET, NICE TO HAVE
@@ -143,12 +140,13 @@ export default class LevelTwo extends Phaser.Scene {
     //   }
     // });
     //=================================================================================
+
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-50);
+      this.player.setVelocityX(-10);
     } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(50);
+      this.player.setVelocityX(10);
     } else {
       this.player.setVelocityX(0);
     }
@@ -173,7 +171,7 @@ export default class LevelTwo extends Phaser.Scene {
     // }
 
     //  'reward'
-    if (this.cheesesCollected >= 10000) {
+    if (this.cheesesCollected >= 100) {
       this.scene.start("gameThree");
       //this.sound.play("tttwo"); geen muziek want BORING
     }
@@ -204,7 +202,7 @@ export default class LevelTwo extends Phaser.Scene {
   addCheeseAbove(player) {
     const cheeseX = Phaser.Math.Between(0, this.scale.width);
     const cheeseY = player.y - 300;
-    this.cheeses.create(cheeseX, cheeseY, "c_boring");
+    this.cheeses.create(cheeseX, cheeseY, "boring-cheese");
   }
 
   //  CARROT

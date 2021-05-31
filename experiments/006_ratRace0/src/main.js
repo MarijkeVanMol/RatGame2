@@ -7,9 +7,12 @@ import GameStart from "./scenes/GameStart.js";
 
 import LevelOne from "./scenes/LevelOne.js";
 import LevelTwo from "./scenes/LevelTwo.js";
-import LevelThree from "./scenes/LevelThree.js"; //doesnt wor
+import LevelThree from "./scenes/LevelThree.js";
+import LevelFour from "./scenes/LevelFour.js";
 import LevelFive from "./scenes/LevelFive.js";
+import LevelSix from "./scenes/LevelSix.js";
 import LevelSeven from "./scenes/LevelSeven.js";
+import LevelEight from "./scenes/LevelEight.js";
 
 import GameOver from "./scenes/GameOver.js";
 
@@ -20,14 +23,17 @@ export default new Phaser.Game({
   pixelArt: true,
   scene: [
     Loading,
-    LevelOne,
-    LevelTwo,
-    LevelSeven,
-    GameOver,
-    LevelFive,
-    LevelThree,
     GameIntro,
     GameStart,
+    LevelOne,
+    LevelTwo,
+    LevelThree,
+    LevelFour,
+    LevelFive,
+    LevelSix,
+    LevelSeven,
+    LevelEight,
+    GameOver,
   ],
   audio: {},
   physics: {
@@ -36,7 +42,7 @@ export default new Phaser.Game({
       gravity: {
         y: 200,
       },
-      debug: true,
+      debug: false,
     },
   },
 });

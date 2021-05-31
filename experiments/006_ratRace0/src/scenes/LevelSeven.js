@@ -1,36 +1,6 @@
-// goal: parallax on everything but player
-
 import Phaser from "../lib/phaser.js";
 
 import Cheese from "../game/Cheese.js";
-
-// /**
-//  *
-//  * @param {Phaser.Scene} scene
-//  * @param {number} totalHeight
-//  * @param {string} texture
-//  * @param {number} scrollFactor
-//  */
-
-// const createAligned = (scene, totalHeight, texture, scrollFactor) =>
-// {   // so we don't need to give in a count
-//     const h = scene.textures.get(texture).getSourceImage().height
-//     // const totalHeight = scene.scale.height * 10
-//     const count = Math.ceil(totalHeight / h) * scrollFactor
-
-//     // get width of last created image to get it to loop
-//     let y = 0
-//     // creates bg for as long as the screen: COUNT
-//     for(let i = 0; i < count; ++i)
-//     {
-//         // create the bg in scene: SCENE
-//     const bbg = scene.add.image(scene.scale.width, y, texture)
-//                             .setOrigin(1,0)
-//                             .setScrollFactor(scrollFactor)
-
-//     y += bbg.width
-//     }
-// }
 
 export default class LevelSeven extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.StaticGroup} */
@@ -45,7 +15,7 @@ export default class LevelSeven extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.Group} */
   cheeses;
 
-  cheesesCollected = 0;
+  cheesesCollected = 401;
 
   /** @type {Phaser.GameObjects.Text} */
   cheesesCollectedText;
@@ -55,140 +25,62 @@ export default class LevelSeven extends Phaser.Scene {
   }
 
   init() {
-    this.cheesesCollected = 0;
-  }
-
-  preload() {
-    this.load.image("bg", "assets/bg_busy.png"); // set back to BG_busy
-
-    this.load.image("plat3", "assets/platform3_busy.png");
-    // this.load.image("plat1", "assets/platform1_busy.png");
-    // this.load.image("plat2", "assets/platform2_busy.png");
-    // this.load.image("plat3", "assets/platform3_busy.png");
-    // this.load.image("plat4", "assets/platform4_busy.png");
-
-    this.load.image("rat", "assets/rat_busy.png");
-    this.load.image("rat-rjump", "assets/rat_r_jump.png");
-    this.load.image("ratr", "assets/rat_r.png");
-
-    this.load.image("cheese", "assets/cheese_busy.png");
-
-    this.cursors = this.input.keyboard.createCursorKeys();
-
-    this.load.audio("songBusy", "assets/sfx/busy.mp3");
-
-    this.load.audio("jump", "assets/sfx/phaseJump1.mp3");
-
-    this.load.audio("tttwo", "assets/sfx/threeTone2.mp3");
-
-    this.load.audio("power", "assets/sfx/powerUp3.mp3");
-
-    this.load.audio("beep", "assets/sfx/irritating.mp3");
+    this.cheesesCollected = 401;
   }
 
   create() {
+    //  CURSORS
+    console.log("create level 7");
+    this.cursors = this.input.keyboard.createCursorKeys();
     //  MUSIC
-    var music = this.sound.add("songBusy");
-    music.play();
+    this.music = this.sound.add("songBusy");
+    this.music.loop = true;
+    this.music.play();
+    this.beep = this.sound.add("lvl7-songBeep");
+    this.beep.loop = true;
+    this.beep.play();
 
     //  BACKGROUND
     const gameWidth = this.scale.width;
     const gameHeight = this.scale.height;
-    // const totalHeight = gameHeight * gameHeight
-    //      Parallax
-
-    // const bgCount = totalHeight / this.textures.get('bg').getSourceImage().gameHeight // to keep bg coming
-    // console.log(bgCount*0.5)
-
-    //createAligned(this, totalHeight, 'bg', 0.5) // count, number is the amount you want it to appear, if this works, do it for everything
-
-    //          newCode: bg_bbusy.png / 480x640 size
-    // const bgpar = this.add.image(gameWidth, 0, 'bg')
-    //     .setOrigin(1,0)   //origin is linksonder van afbeelding
-    //     .setScrollFactor(0.5)
-    // this.add.image(gameWidth, bgpar.gameHeight, 'bg') // zoda ge geen zwarte balk krijgt v onder
-    //     .setOrigin(1,0)   //origin is linksonder van afbeelding
-    //     .setScrollFactor(0.5)
-
-    //          exCode: for when we worked on the 480x7149 / bg_busy.png
-
-    this.add
-      .image(gameWidth, gameHeight + 40, "bg") // zoda ge geen zwarte balk krijgt v onder
+    this.background = this.add
+      .image(gameWidth, gameHeight + 40, "lvl7-bg") // zoda ge geen zwarte balk krijgt v onder
       .setOrigin(1) //origin is linksonder van afbeelding
-      .setScrollFactor(0.5);
+      .setScrollFactor(2);
 
-    //          oldestCode: just getting image on screen
-    // this.add.image(gameWidth, -6509, 'bg')
-    //     .setOrigin(1,0)
-    //     .setScrollFactor(0.25)
-
-    //  PLATFORMS
-    // this.platforms = this.physics.add.group();
-
-    // this.add.image(240,320, 'platform').setScale(0.5);
-    // this.physics.add.image(240,320,'platform').setScale(0.5);
-
-    //     this.platforms.create(250, 300, 'plat0');
-    //     this.platforms.create(350, 300, 'plat1').setGravity(0, 300);
-    //     this.platforms.create(450, 300, 'plat2').setGravity(0, -300);
-    //     this.platforms.create(550, 300, 'plat3').setGravity(0, -300);
-    //     this.platforms.create(550, 300, 'plat4').setGravity(0, -300);
-    //      PLAT0   PLATFORM STANDARD
+    // PLATFORMS
     this.platforms = this.physics.add.staticGroup();
-
     for (let i = 0; i < 50; ++i) {
       const x = Phaser.Math.Between(0, 430);
-      const y = 20 * i;
+      const y = 10 * i;
 
       /** @type {Phaser.Physics.Arcade.Sprite} */
-      const platform = this.platforms.create(x, y, "plat3");
-      platform.scale = 1;
-      // platform.flipY= true; doesn't work
+      const platform = this.platforms.create(x, y, "lvl7-plat");
+      platform.scaleX = 0.2;
+      platform.scaleY = 0.5;
 
       /** @type {Phaser.Physics.Arcade.StaticBody} */
       const body = platform.body;
       body.updateFromGameObject();
     }
-    //      PLAT1
-    // this.plats1 = this.physics.add.staticGroup();
 
-    // for (let b = 0; b <5; ++b){
-    //     const x = Phaser.Math.Between(80,)
-    //     const y = 150*b
-
-    //     /** @type {Phaser.Physics.Arcade.Sprite} */
-    //     const plat1 = this.plats1.create(x,y, 'plat1');
-    //     plat1.scale = 1;
-    //     // platform.flipY= true; doesn't work
-
-    //     /** @type {Phaser.Physics.Arcade.StaticBody} */
-    //     const bodyp1 = plat1.body;
-    //     bodyp1.updateFromGameObject();
-    // }
     //  PLAYER
     this.player = this.physics.add
-      .sprite(240, 320, "rat")
-      .setScale(2)
-      .setGravityY(-100); //300 = sweet jump, -300 tp make it go faster
+      .sprite(240, 320, "lvl7-cheese")
+      .setScale(0.2)
+      .setGravityY(500); //300 = sweet jump, -300 tp make it go faster
 
-    //  CARROTS
+    //  CHEESE
     this.cheeses = this.physics.add.group({
       classType: Cheese,
     });
-    //this.carrots.get(240,320, 'carrot');
-
-    // cheeses = this.physics.add.group({
-    //     key: "cheese",
-    //     repeat: 11,
-    //     setXY: { x: 12, y: 0, stepX: 70 },
-    //   });
 
     //  COLLISIONS
     //      PLAYER & PLATFORMS
     this.physics.add.collider(this.platforms, this.player);
     this.player.body.checkCollision.up = false;
-    this.player.body.checkCollision.left = false;
-    this.player.body.checkCollision.right = false;
+    this.player.body.checkCollision.left = true;
+    this.player.body.checkCollision.right = true;
 
     //  OVERLAPS
     //      CARROT & PLAYER (handles overlap between carrot and player)
@@ -201,40 +93,51 @@ export default class LevelSeven extends Phaser.Scene {
     );
 
     //  CAMERAS
-    //this.cameras.main.setBounds(0,0, gameWidth , gameHeight* 3); // for parallax?? zoda die ni verder ga dan gameWidth
     this.cameras.main.startFollow(this.player); // follows player, also to the side
     this.cameras.main.setDeadzone(this.scale.width * 1.5); // makes sure it doesn't go 'off-screen, move to the sides'
 
     //  FONT
     const style = {
       color: "yellow",
-      fontSize: 24,
+      font: "50px sans-serif",
     };
     this.cheesesCollectedText = this.add
-      .text(240, 10, "0 Cheeses", style)
+      .text(240, 10, "401 Cheeses", style)
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
+
+    //  CHEAT CODE
+    this.input.keyboard.once("keydown-L", () => {
+      this.scene.start("game-over");
+      this.music.stop("songBusy");
+    });
+    this.input.keyboard.once("keydown-N", () => {
+      this.scene.start("levelEight");
+      this.music.stop("songBusy");
+    });
   }
 
   update() {
-    // find out from Arcade physics if the player's physics body is touching something below it
+    // CSS
+    document.body.className = "busy";
+
     //  PLAYER
     //      BOUNCE
     const touchingDown = this.player.body.touching.down;
     if (touchingDown) {
-      this.player.setVelocityY(-500);
-      this.player.setTexture("rat");
-
+      this.player.setVelocityY(-800);
+      this.player.setTexture("lvl7-cheeses");
+      this.sound.play("lvl7-jump");
+      this.player.setScale(0.2);
       //this.cameras.main.shake(500);
     }
     //      UNBOUNCE
     const vy = this.player.body.velocity.y; // naar beneden gaan
-    if (vy > 0 && this.player.texture.key != "rat-rjump") {
+    if (vy > 0 && this.player.texture.key != "lvl7-cheeses") {
       // als player nr beneden ga en..
-      this.player.setTexture("rat-rjump");
-      this.sound.play("jump");
-      this.sound.play("beep");
-      //this.cameras.main.shake(500);
+      this.sound.play("gs2");
+      this.cameras.main.shake(700);
+      this.player.setScale(0.2);
     }
 
     //  PLATFORMS
@@ -246,72 +149,51 @@ export default class LevelSeven extends Phaser.Scene {
       //  CAMERAS
       const scrollY = this.cameras.main.scrollY;
       if (platform.y >= scrollY + 700) {
-        platform.y = scrollY - Phaser.Math.Between(50, 100);
+        platform.y = scrollY - Phaser.Math.Between(0, 100);
         platform.body.updateFromGameObject();
-
         //      create a carrot above the platform being
         this.addCheeseAbove(platform);
-        var music = this.sound.add("songBusy");
-        music.play();
-        this.player.setTexture("ratr");
-
-        //      i thought that maybe the parallax could work if i placed it here, but it didn't
-        // const gameWidth = this.scale.width
-        // const gameHeight = this.scale.height
-        // const bgpar = this.add.image(gameWidth, 0, 'bg')
-        //     .setOrigin(1,0)   //origin is linksonder van afbeelding
-        //     .setScrollFactor(0.5)
-        // this.add.image(gameWidth, bgpar.gameHeight, 'bg') // zoda ge geen zwarte balk krijgt v onder
-        //     .setOrigin(1,0)   //origin is linksonder van afbeelding
-        //     .setScrollFactor(0.5)
       }
     });
-    //      NEW PLATS1; try parallax: https://phaser.io/examples/v3/view/game-objects/particle-emitter/parallax
 
-    //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown && !touchingDown) {
-      this.player.setVelocityX(-500);
+      this.player.setVelocityX(800);
+      this.sound.play("lvl7-left");
     } else if (this.cursors.right.isDown && !touchingDown) {
-      this.player.setVelocityX(500);
+      this.player.setVelocityX(-800);
+      this.sound.play("lvl7-right");
     } else {
       this.player.setVelocityX(0);
     }
 
-    //  CHEAT CODE
-    this.input.keyboard.once("keydown-L", () => {
-      this.scene.start("game-over");
-    });
-
     //  CAMERAS
-    //      SCREEN WRAP OF PLAYER
     this.horizontalWrap(this.player);
-    //    if (this.player.y > )
-    //    this.verticalWrap(this.player)
-    // PLAYER LOOP
-    // console.log(this.player.y);
-    // if (this.player.y < -2000) {
-    //      this.player.y = 1000;
-    //  }
-    //parallax 1: this.bg.tilePositionY = this.cameras.main.scrollY *.3;
 
-    //  TO NEXT SCENE: BORING GAME
-    //  bottomPLATFORM: normal loser route
+    // MUSIC
+    if (this.cheesesCollected == 350) {
+      this.beep.play();
+    }
+    // if (this.cheesesCollected == 300) {
+
+    // }
+
+    //  RESTART 1
     const bottomPlatform = this.findBottomMostPlatform();
     if (this.player.y > bottomPlatform.y + 100) {
       this.scene.restart("levelSeven"); //scene.scene.restart(data);
-      this.sound.play("tttwo");
+      this.sound.play("lvl7-restart");
     }
-
-    //  'reward'
-    if (this.cheesesCollected == -100) {
+    //  RESTART 2
+    if (this.cheesesCollected == 0) {
       this.scene.restart("levelSeven");
-      this.sound.play("tttwo");
+      this.sound.play("lvl7-restart");
+      // this.sound.play("tttwo");
     }
   }
   //      END OF UPDATE (============== hier starten alle aparte functies ==============)
+
   //  CAMERAS
-  //      HORIZONTAL WRAP; if outside left side of screen, appears on right of screen
   /**
    * @param {Phaser.GameObjects.Sprite} sprite
    */
@@ -320,13 +202,14 @@ export default class LevelSeven extends Phaser.Scene {
     const gameWidth = this.scale.width;
     if (sprite.x < -halfWidth) {
       sprite.x = gameWidth + halfWidth;
+      this.cameras.main.shake(1500);
     } else if (sprite.x > gameWidth + halfWidth) {
       sprite.x = -halfWidth;
+      this.cameras.main.shake(300);
     }
   }
 
-  //  CARROT
-  //      MAKE SURE CARROTS APPEARS BEFORE THE REST ??
+  // CHEESE
   /**
    * @param {Phaser.GameObjects.Sprite} sprite
    */
@@ -334,7 +217,8 @@ export default class LevelSeven extends Phaser.Scene {
     const y = sprite.y - sprite.displayHeight;
 
     /** @type {Phaser.Physics.Arcade.Sprite} */
-    const cheese = this.cheeses.get(sprite.x, y, "cheese");
+    const cheese = this.cheeses.get(sprite.x, y, "lvl7-rat");
+    cheese.setScale(2);
 
     cheese.setActive(true); // set active
     cheese.setVisible(true); // set visible
@@ -346,9 +230,6 @@ export default class LevelSeven extends Phaser.Scene {
 
     return cheese;
   }
-
-  //  CARROT
-  //      COLLECT
   /**
    * @param {Phaser.Physics.Arcade.Sprite} player
    * @param {Cheese} cheese
@@ -359,9 +240,12 @@ export default class LevelSeven extends Phaser.Scene {
     this.cheesesCollected--;
     const value = `${this.cheesesCollected} Cheeses`;
     this.cheesesCollectedText.text = value;
-    this.sound.play("power");
+    this.sound.play("caughtCheese");
     this.cameras.main.shake(700);
-    this.player.setTexture("rat-rjump");
+    this.music.play();
+    this.player.setTexture("lvl7-cheeseb");
+    this.player.setScale(4);
+    cheese.setScale(4);
   }
 
   //  PLATFORMS

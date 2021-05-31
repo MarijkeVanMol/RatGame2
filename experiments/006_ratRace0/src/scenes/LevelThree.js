@@ -10,32 +10,38 @@ export default class LevelThree extends Phaser.Scene {
   }
 
   init() {
-    this.cheesesCollected = 10;
+    this.cheesesCollected = 100;
   }
 
   create() {
+    console.log("create level 3");
     this.cursors = this.input.keyboard.createCursorKeys();
+    // STANDARD
+    const gameWidth = this.scale.width;
+    const gameHeight = this.scale.height;
 
     //  MUSIC
-    var music = this.sound.add("songBusy");
-    music.play();
-    // //  BACKGROUND
-    //         this.add.image(240,320, 'background').setScrollFactor(1,0);
+    this.music = this.sound.add("songBusy");
+    this.music.loop = true;
 
-    //         // this.add.image(240,320, 'platform').setScale(0.5);
-    //         // this.physics.add.image(240,320,'platform').setScale(0.5);
+    // BACKGROUND
+    this.background = this.add
+      .image(gameWidth, gameHeight + 45, "lvl3-bg") // zoda ge geen zwarte balk krijgt v onder
+      .setOrigin(1) //origin is linksonder van afbeelding
+      .setScrollFactor(2);
 
     //  PLATFORMS
     //this.add.image(240,320,'platform').setScale(1)
     this.platforms = this.physics.add.staticGroup({});
 
-    for (let i = 0; i < 8; ++i) {
-      const x = Phaser.Math.Between(80, 600);
+    for (let i = 0; i < 7; ++i) {
+      const x = Phaser.Math.Between(0, 500);
       const y = 100 * i;
 
       /** @type {Phaser.Physics.Arcade.Sprite} */
-      const platform = this.platforms.create(x, y, "platform");
-      // platform.flipY= true; doesn't work
+      const platform = this.platforms.create(x, y, "lvl3-plat");
+      platform.scaleX = 0.2;
+      platform.scaleY = 1; //doesn't work
 
       /** @type {Phaser.Physics.Arcade.StaticBody} */
       const body = platform.body;
@@ -44,8 +50,8 @@ export default class LevelThree extends Phaser.Scene {
 
     //  PLAYER
     this.player = this.physics.add
-      .sprite(240, 320, "bunny-stand")
-      .setScale(2)
+      .sprite(240, 320, "lvl3-rat")
+      .setScale(0.5)
       .setGravityY(100);
 
     // //  CARROTS
@@ -56,18 +62,10 @@ export default class LevelThree extends Phaser.Scene {
 
     //  COLLISIONS
     //      PLAYER & PLATFORMs
-    this.physics.add.collider(
-      this.platforms,
-      this.player,
-      this.changePlatforms,
-      undefined,
-      this
-    );
+    this.physics.add.collider(this.platforms, this.player);
     this.player.body.checkCollision.up = false;
     this.player.body.checkCollision.left = false;
     this.player.body.checkCollision.right = false;
-    //      CARROT & PLATFORMS
-    this.physics.add.collider(this.platforms, this.cheeses);
     //  OVERLAPS
     //      CARROT & PLATFORMS
     this.physics.add.overlap(
@@ -85,40 +83,44 @@ export default class LevelThree extends Phaser.Scene {
     //  FONT
     const style = {
       color: "yellow",
-      fontSize: 24,
+      font: "24px sans-serif",
     };
     this.cheesesCollectedText = this.add
-      .text(240, 10, "10 Cheeses", style)
+      .text(240, 10, "100 Cheeses", style)
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
 
     //      CHEAT CODE
     this.input.keyboard.once("keydown-L", () => {
       this.scene.start("game-over");
+      this.music.stop("songBusy");
     });
     this.input.keyboard.once("keydown-N", () => {
-      this.scene.start("gameBoring");
+      this.scene.start("levelFour");
+      this.music.stop("songBusy");
     });
   }
 
   update() {
+    document.body.className = "busy";
     //         // find out from Arcade physics if the player's physics body is touching something below it
     //  PLAYER
     //      BOUNCE
     const touchingDown = this.player.body.touching.down;
     if (touchingDown) {
-      this.player.setVelocityY(-300);
-      this.player.setTexture("bunny-jump");
-      this.cameras.main.shake(500);
-      const platform = this.platforms.create("platform");
-      // const platform = this.platforms;
-      platform.setTexture("platformTwo");
+      this.player.setVelocityY(-500);
+      this.player.setTexture("lvl3-ratj");
+      // ==== EXTRAs ====
+      // this.cameras.main.shake(500);
+      this.sound.play("global-down");
     }
     //      UNBOUNCE
     const vy = this.player.body.velocity.y; // naar beneden gaan
-    if (vy > 0 && this.player.texture.key != "bunny-stand") {
+    if (vy > 0 && this.player.texture.key != "lvl3-rat") {
       // als player nr beneden ga en..
-      this.player.setTexture("bunny-stand");
+      this.player.setTexture("lvl3-rat");
+      // ==== EXTRAs ====
+      this.sound.play("global-jump");
     }
 
     //  PLATFORMS
@@ -130,21 +132,21 @@ export default class LevelThree extends Phaser.Scene {
       // HERE IS THE BUG
       const scrollY = this.cameras.main.scrollY;
       if (platform.y >= scrollY + 700) {
-        platform.y = scrollY - Phaser.Math.Between(50, 100);
+        platform.y = scrollY - Phaser.Math.Between(0, 50);
         platform.body.updateFromGameObject();
 
         // create a carrot above the platform being
-        console.log("add cheese");
+        // console.log("add cheese");
         // DONT ADD INFINITE CHEESES
-        // this.addCheeseAbove(platform);
+        this.addCheeseAbove(platform);
       }
     });
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown && !touchingDown) {
-      this.player.setVelocityX(-200);
+      this.player.setVelocityX(-700);
     } else if (this.cursors.right.isDown && !touchingDown) {
-      this.player.setVelocityX(200);
+      this.player.setVelocityX(700);
     } else {
       this.player.setVelocityX(0);
     }
@@ -152,18 +154,42 @@ export default class LevelThree extends Phaser.Scene {
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
     this.horizontalWrap(this.player);
+    //      PLAYER LOOP
+    console.log(this.player.y);
+    if (this.player.y < -3000) {
+      this.background.setY(-4000);
+      this.background.setX(480);
+    }
+    if (this.player.y < -4000) {
+      this.background.setY(-7000);
+      this.background.setX(480);
+    }
+    if (this.player.y < -5000) {
+      this.background.setY(-11000);
+      this.background.setX(480);
+    }
+
+    if (this.cheesesCollected == 102) {
+      this.music.play();
+      // this.sound.play("tttwo");
+    }
 
     //  TO NEXT SCENE
     //    normal loser route
     const bottomPlatform = this.findBottomMostPlatform();
     if (this.player.y > bottomPlatform.y + 200) {
-      this.scene.start("levelThree");
+      this.scene.restart("levelThree");
+      this.sound.play("lvl3-restart");
+      this.sound.play("global-down");
+      this.cameras.main.shake(1000);
     }
 
     //    'reward'
-    if (this.cheesesCollected == 2000) {
-      this.scene.start("levelThree");
-      this.sound.play("tttwo");
+    if (this.cheesesCollected == 200) {
+      this.scene.start("levelFour");
+      this.sound.play("caughtCheese");
+      this.music.stop("songBusy");
+      // this.sound.play("tttwo");
     }
 
     //  END OF UPDATE: beware of the accolade below!!
@@ -180,8 +206,10 @@ export default class LevelThree extends Phaser.Scene {
     const gameWidth = this.scale.width;
     if (sprite.x < -halfWidth) {
       sprite.x = gameWidth + halfWidth;
+      this.cameras.main.shake(500);
     } else if (sprite.x > gameWidth + halfWidth) {
       sprite.x = -halfWidth;
+      this.cameras.main.shake(500);
     }
   }
   //  CARROT
@@ -193,7 +221,7 @@ export default class LevelThree extends Phaser.Scene {
     const y = sprite.y - sprite.displayHeight;
 
     /** @type {Phaser.Physics.Arcade.Sprite} */
-    const cheese = this.cheeses.get(sprite.x, y, "cheese");
+    const cheese = this.cheeses.get(sprite.x, y, "lvl3-cheese");
 
     cheese.setActive(true); // set active
     cheese.setVisible(true); // set visible
@@ -218,6 +246,8 @@ export default class LevelThree extends Phaser.Scene {
     this.cheesesCollected++;
     const value = `${this.cheesesCollected} Cheeses`;
     this.cheesesCollectedText.text = value;
+    this.sound.play("caughtCheese");
+    this.player.setTexture("lvl3-hitCheese");
   }
 
   //  PLATFORMS
@@ -226,11 +256,11 @@ export default class LevelThree extends Phaser.Scene {
    * @param {Phaser.Physics.Arcade.Sprite} platforms
    * @param {Phaser.Physics.Arcade.Sprite} player
    */
-  changePlatforms(platforms, player) {
-    const platform = this.platforms.create("platform");
-    this.platforms.killAndHide(platform);
-    this.physics.world.disableBody(platform.body);
-  }
+  // changePlatforms(platforms, player) {
+  //   const platform = this.platforms.create("platform");
+  //   this.platforms.killAndHide(platform);
+  //   this.physics.world.disableBody(platform.body);
+  // }
   /*
     const platTwo = this.player s colliding with platform
     if (platTwo && this.platforms.texture.key != "platformTwo")
