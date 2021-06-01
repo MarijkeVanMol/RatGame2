@@ -153,18 +153,21 @@ export default class LevelThree extends Phaser.Scene {
 
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
+    if (Math.random() > 0.8) { console.log(this.player.y) }
+    
     this.horizontalWrap(this.player);
     //      PLAYER LOOP
-    console.log(this.player.y);
-    if (this.player.y < -3000) {
+    //console.log(this.player.y);
+    if (this.player.y < -150) {
+     // console.log('resetbackground');
       this.background.setY(-4000);
       this.background.setX(480);
     }
-    if (this.player.y < -4000) {
+    else if (this.player.y < -4000) {
       this.background.setY(-7000);
       this.background.setX(480);
     }
-    if (this.player.y < -5000) {
+    else if (this.player.y < -5000) {
       this.background.setY(-11000);
       this.background.setX(480);
     }
