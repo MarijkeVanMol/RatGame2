@@ -13,4 +13,7 @@ export default class GameIntro extends Phaser.Scene {
       this.scene.start("gameStart");
     });
   }
+  update() {
+    document.body.className = "busy";
+  }
 }

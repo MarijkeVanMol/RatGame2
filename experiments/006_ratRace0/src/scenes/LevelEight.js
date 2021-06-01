@@ -35,7 +35,7 @@ export default class LevelEight extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     //  BACKGROUND
-    this.add.image(240, 320, "boring-bg").setScrollFactor(1, 0);
+    this.add.image(240, 320, "lvl8-b-bg").setScrollFactor(1, 0);
 
     //    GROUND
     this.platforms = this.physics.add.staticGroup();
@@ -77,58 +77,25 @@ export default class LevelEight extends Phaser.Scene {
     this.cameras.main.setDeadzone(this.scale.width * 1.5);
 
     //  FONT
-    const style = { color: "black", font: "24px sans-serif" }; // color doesn't work
-    this.cheesesCollectedText = this.add
-      .text(240, 10, "0 Cheeses", style)
-      .setScrollFactor(0)
-      .setOrigin(0.5, 0);
+    // const style = { color: "black", font: "24px sans-serif" }; // color doesn't work
+    // this.cheesesCollectedText = this.add
+    //   .text(240, 10, "0 Cheeses", style)
+    //   .setScrollFactor(0)
+    //   .setOrigin(0.5, 0);
     //.setFont("Arial"); //sets font -> WERKT NOG NIET, NICE TO HAVE
 
     //      CHEAT CODE
-    this.input.keyboard.once("keydown-L", () => {
-      this.scene.start("game-over");
-    });
+    // this.input.keyboard.once("keydown-L", () => {
+    //   this.scene.start("game-over");
+    // });
     this.input.keyboard.once("keydown-N", () => {
       this.scene.start("levelOne");
     });
   }
 
   update() {
-    document.body.className = "boring";
+    document.body.className = "busy";
 
-    //========== Bounce and unbounce disabled to make game more boring ==========
-    // find out from Arcade physics if the player's physics body is touching something below it
-    //  PLAYER
-    //      BOUNCE
-    // const touchingDown = this.player.body.touching.down;
-    // if (touchingDown) {
-    //   this.player.setVelocityY(-300);
-    //   this.player.setTexture("bunny-jump");
-    // }
-    //      UNBOUNCE
-    // const vy = this.player.body.velocity.y; // naar beneden gaan
-    // if (vy > 0 && this.player.texture.key != "bunny-stand") {
-    //   // als player nr beneden ga en..
-    //   this.player.setTexture("bunny-stand");
-    // }
-    //=============================================================================
-
-    //  PLATFORMS -> NIET NODIG,ER IS MAAR 1 PLATFORM
-    //      NEW PLATFORMS
-    // this.platforms.children.iterate((child) => {
-    //   /** @type {Phaser.Physics.Arcade.Sprite} */
-    //   const platform = child;
-
-    //   const scrollY = this.cameras.main.scrollY;
-    //   if (platform.y >= scrollY + 700) {
-    //     platform.y = scrollY - Phaser.Math.Between(50, 100);
-    //     platform.body.updateFromGameObject();
-
-    //     // create a carrot above the platform being
-    //     this.addCarrotAbove(platform);
-    //   }
-    // });
-    //=================================================================================
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown) {
@@ -159,8 +126,8 @@ export default class LevelEight extends Phaser.Scene {
     // }
 
     //  'reward'
-    if (this.cheesesCollected >= 967) {
-      this.scene.start("levelOne");
+    if (this.cheesesCollected >= 1) {
+      this.scene.start("gameIntro");
       //this.sound.play("tttwo"); geen muziek want BORING
     }
 
@@ -190,7 +157,7 @@ export default class LevelEight extends Phaser.Scene {
   addCheeseAbove(player) {
     const cheeseX = Phaser.Math.Between(0, this.scale.width);
     const cheeseY = player.y - 300;
-    this.cheeses.create(cheeseX, cheeseY, "boring-cheese");
+    this.cheeses.create(cheeseX, cheeseY, "lvl8-reward").setScale(0.2);
   }
 
   //  CARROT
@@ -203,8 +170,8 @@ export default class LevelEight extends Phaser.Scene {
     this.cheeses.killAndHide(cheese); // hide from display
     this.physics.world.disableBody(cheese.body); // disable from physics world
     this.cheesesCollected++;
-    const value = `${this.cheesesCollected}`;
-    this.cheesesCollectedText.text = value;
+    // const value = `${this.cheesesCollected}`;
+    // this.cheesesCollectedText.text = value;
   }
 
   //  PLATFORMS -> not used

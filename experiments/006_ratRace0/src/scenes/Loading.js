@@ -103,7 +103,9 @@ export default class Loading extends Phaser.Scene {
     this.load.audio("gs2", "assets/sfx/Gscream_2.mp3");
     this.load.audio("lvl7-restart", "assets/sfx/spielenFour.mp3");
 
-    // LEVEL 8 ==== see GLOBAL ====
+    // LEVEL 8 ==== GAMEOVER/WIN LEVEL (substitute) ====
+    this.load.image("lvl8-b-bg", "assets/bg_b_eight.png");
+    this.load.image("lvl8-reward", "assets/lvl8_reward.png");
 
     // LOADING SCREEN
     this.load.image("wrw", "assets/wait.png");

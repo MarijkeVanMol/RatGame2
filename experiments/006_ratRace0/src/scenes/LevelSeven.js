@@ -108,7 +108,7 @@ export default class LevelSeven extends Phaser.Scene {
 
     //  CHEAT CODE
     this.input.keyboard.once("keydown-L", () => {
-      this.scene.start("game-over");
+      this.scene.start("levelEight");
       this.music.stop("songBusy");
     });
     this.input.keyboard.once("keydown-N", () => {
