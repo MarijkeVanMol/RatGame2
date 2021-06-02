@@ -4,6 +4,7 @@
     <script src="//cdn.jsdelivr.net/npm/phaser@3.50.1/dist/phaser.js"></script>
 
     <style type="text/css">
+    
       body.busy {
         background-image:url(./assets/web_bg_3.png);
         display: block;
@@ -11,8 +12,17 @@
         margin-right: auto;
         width: 29%;
         height: 50%;
-        
       }
+
+      body.intro {
+        background-image:url(./assets/web_bg_3.png);
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 29%;
+        height: 50%;
+      }
+
       body.boring {
         background-color: black;
         display: block;
@@ -22,27 +32,39 @@
       }
       
       * {
-        margin: 0;
         padding: 0;
       }
+
+      
       /*  */
+      .boring-wrapper {
+        visibility: hidden;
+      }
+      body.boring .boring-wrapper {
+        visibility: visible;
+      }
 
       .busy-wrapper {
         visibility: hidden;
+
       }
       body.busy .busy-wrapper {
         visibility: visible;
       }
-      
-      .boring-wrapper {
+
+
+      .intro-wrapper {
         visibility: hidden;
       }
-
-      body.boring .boring-wrapper {
+      body.intro .intro-wrapper {
         visibility: visible;
+      }
 
-      /* extra opmaak (ex code)
-      /* canvas {height: 100%;}; 
+
+
+
+            /* extra opmaak (ex code)
+      
 
       .wrapper{
         display:grid;
@@ -58,37 +80,47 @@
           visibility: visible;
         } 
       */
-      }
     </style>
   </head>
+  <body class="boring">
+    <div class="boring-wrapper"></div>
+    <div><img src="./assets/web_bg_4.png" alt=""></div>
+    <div class="game-container"><script type="module" src="src/main.js"></script></div>
+  </div>
+</div>
+</body>
 
   <body class="busy">
-    <div class="busy-wrapper">
-      <div class="left">
-        LEVEL odd
-      </div>
-
-      <div class="middle">
+    <div class="busy-wrapper"></div>
+      <div><img src="./assets/web_bg_4.png" alt=""></div>
         <div class="game-container"><script type="module" src="src/main.js"></script></div>
-      </div>
+    </div>
+  </body>
 
+  <body class="intro">
+    <div class="intro-wrapper">
       
+      <div class="link"><a href="/index.html">back</a></div>
+        <div class="game-container"><script type="module" src="src/main.js"></script></div>
     </div>
+  </body>
+
+    <!-- <body class="start">
+      <div class="busy-wrapper">
+        <div class="left">
+          LEVEL odd
+        </div>
+  
+        <div class="middle">
+          <div class="game-container"><script type="module" src="src/main.js"></script></div>
+        </div>
+  
+        
+      </div> -->
+      
     
 
     
-  </body>
-  <body class="boring">
-    <div class="boring-wrapper">
-      <div class="left">
-        LEVEL non-odd lol
-      </div>
-
-      <div class="middle">
-        <div class="game-container"> </div>
-
-    </div>
-
-    <script type="module" src="src/main.js"></script>
-  </body>
+  
+  
 </html>

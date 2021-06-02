@@ -35,14 +35,14 @@ export default class LevelEight extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     //  BACKGROUND
-    this.add.image(240, 320, "lvl8-b-bg").setScrollFactor(1, 0);
+    this.add.image(240, 320, "lvl8-bg").setScrollFactor(1, 0);
 
     //    GROUND
     this.platforms = this.physics.add.staticGroup();
     const x = 240;
     const y = 630;
     /** @type {Phaser.Physics.Arcade.Sprite} */
-    const platform = this.platforms.create(x, y, "boring-ground");
+    const platform = this.platforms.create(x, y, "lvl8-ground");
     platform.scaleX = 1.5;
     platform.scaleY = 2;
     /** @type {Phaser.Physics.Arcade.StaticBody} */
@@ -50,7 +50,9 @@ export default class LevelEight extends Phaser.Scene {
     body.updateFromGameObject();
 
     //  PLAYER
-    this.player = this.physics.add.sprite(240, 320, "boring-rat").setScale(0.3);
+    this.player = this.physics.add
+      .sprite(240, 320, "lvl8-player")
+      .setScale(1.5);
 
     //  CHEESES
     this.cheeses = this.physics.add.group({ classType: Cheese });
@@ -157,7 +159,7 @@ export default class LevelEight extends Phaser.Scene {
   addCheeseAbove(player) {
     const cheeseX = Phaser.Math.Between(0, this.scale.width);
     const cheeseY = player.y - 300;
-    this.cheeses.create(cheeseX, cheeseY, "lvl8-reward").setScale(0.2);
+    this.cheeses.create(cheeseX, cheeseY, "lvl8-cheese").setScale(0.1);
   }
 
   //  CARROT

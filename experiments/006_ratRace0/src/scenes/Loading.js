@@ -57,10 +57,12 @@ export default class Loading extends Phaser.Scene {
     this.load.image("lvl3-hitCheese", "assets/rat_r_jump.png");
     // LEVEL 3 = SOUND
     // this.load.audio("songBusy", "assets/sfx/busy.mp3");
-    this.load.audio("lvl3-jump", "assets/sfx/phaseJump5.mp3");
+    // this.load.audio("lvl3-jump", "assets/sfx/phaseJump5.mp3");
     // this.load.audio("tttwo", "assets/sfx/threeTone2.mp3");
     // this.load.audio("power", "assets/sfx/powerUp3.mp3");
     this.load.audio("lvl3-restart", "assets/sfx/spielenTwo.mp3");
+    // PARALLAX
+    this.load.image("wrw", "assets/wait.png");
 
     // LEVEL 4 ==== see GLOBAL ====
 
@@ -74,9 +76,9 @@ export default class Loading extends Phaser.Scene {
     // LEVEL 5 = SOUND
     this.load.audio("songBusy", "assets/sfx/busy.mp3");
     this.load.audio("jump", "assets/sfx/phaseJump1.mp3");
-    this.load.audio("tttwo", "assets/sfx/threeTone2.mp3");
+    //this.load.audio("tttwo", "assets/sfx/threeTone2.mp3");
     this.load.audio("power", "assets/sfx/powerUp3.mp3");
-    this.load.audio("beep", "assets/sfx/irritating.mp3");
+    // this.load.audio("beep", "assets/sfx/irritating.mp3");
     this.load.audio("gs1", "assets/sfx/Gscream_1.mp3");
     this.load.audio("lvl5-restart", "assets/sfx/spielenThree.mp3");
 
@@ -104,15 +106,17 @@ export default class Loading extends Phaser.Scene {
     this.load.audio("lvl7-restart", "assets/sfx/spielenFour.mp3");
 
     // LEVEL 8 ==== GAMEOVER/WIN LEVEL (substitute) ====
-    this.load.image("lvl8-b-bg", "assets/bg_b_eight.png");
-    this.load.image("lvl8-reward", "assets/lvl8_reward.png");
+    this.load.image("lvl8-bg", "assets/lvl8-bg.png");
+    this.load.image("lvl8-cheese", "assets/lvl8-cheese.png");
+    this.load.image("lvl8-player", "assets/lvl8-player.png");
+    this.load.image("lvl8-ground", "assets/lvl8-ground.png");
 
     // LOADING SCREEN
-    this.load.image("wrw", "assets/wait.png");
+    // this.load.image("wrw", "assets/wait.png");
     const gameWidth = this.scale.width;
     const gameHeight = this.scale.height;
 
-    var ratW = this.add.image(240, 320, "wrw");
+    // var ratW = this.add.image(240, 320, "wrw");
     var progressBar = this.add.graphics();
     var progressBox = this.add.graphics();
 
@@ -156,7 +160,7 @@ export default class Loading extends Phaser.Scene {
       progressBox.destroy();
       loadingText.destroy();
       percentText.destroy();
-      ratW.destroy();
+      // ratW.destroy();
 
       // assetText.destroy();
     });

@@ -110,10 +110,12 @@ export default class LevelSeven extends Phaser.Scene {
     this.input.keyboard.once("keydown-L", () => {
       this.scene.start("levelEight");
       this.music.stop("songBusy");
+      this.beep.stop("lvl7-songBeep");
     });
     this.input.keyboard.once("keydown-N", () => {
       this.scene.start("levelEight");
       this.music.stop("songBusy");
+      this.beep.stop("lvl7-songBeep");
     });
   }
 
@@ -186,8 +188,10 @@ export default class LevelSeven extends Phaser.Scene {
     }
     //  RESTART 2
     if (this.cheesesCollected == 0) {
-      this.scene.restart("levelSeven");
+      this.scene.start("levelOne");
       this.sound.play("lvl7-restart");
+      this.music.stop("songBusy");
+      this.beep.stop("lvl7-songBeep");
       // this.sound.play("tttwo");
     }
   }

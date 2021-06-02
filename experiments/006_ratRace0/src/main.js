@@ -5,6 +5,7 @@ import Loading from "./scenes/Loading.js";
 import GameIntro from "./scenes/GameIntro.js";
 import GameStart from "./scenes/GameStart.js";
 
+import Parallax from "./scenes/LevelParallax.js";
 import LevelOne from "./scenes/LevelOne.js";
 import LevelTwo from "./scenes/LevelTwo.js";
 import LevelThree from "./scenes/LevelThree.js";
@@ -34,6 +35,7 @@ export default new Phaser.Game({
     LevelSeven,
     LevelEight,
     GameOver,
+    Parallax,
   ],
   audio: {},
   physics: {

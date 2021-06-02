@@ -165,6 +165,11 @@ export default class LevelOne extends Phaser.Scene {
     });
     this.input.keyboard.once("keydown-N", () => {
       this.scene.start("levelTwo");
+      this.music.stop("songBusy");
+    });
+    this.input.keyboard.once("keydown-P", () => {
+      this.scene.start("levelParallax");
+      this.music.stop("songBusy");
     });
   }
 

@@ -20,10 +20,9 @@ export default class GameStart extends Phaser.Scene {
       this.scene.start("levelOne");
       // music.stop();
     });
+  }
 
-    // this.input.keyboard.once('keydown', () => {
-    //     this.scene.start('gameBusy')
-    //     music.stop()
-    //   })
+  update() {
+    document.body.className = "busy";
   }
 }
