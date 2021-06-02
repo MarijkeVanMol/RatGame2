@@ -4,7 +4,26 @@
     <script src="//cdn.jsdelivr.net/npm/phaser@3.50.1/dist/phaser.js"></script>
 
     <style type="text/css">
-    
+* {
+        padding: 0;
+  }
+
+/* ============ BORING ============ */
+    body.boring {
+          background-color: black;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 29%;
+    }
+    .boring-wrapper {
+          visibility: hidden;
+    }
+    body.boring .boring-wrapper {
+          visibility: visible;
+    }
+
+/* ============ BUSY ============ */
       body.busy {
         background-image:url(./assets/web_bg_3.png);
         display: block;
@@ -13,37 +32,6 @@
         width: 29%;
         height: 50%;
       }
-
-      body.intro {
-        background-image:url(./assets/web_bg_3.png);
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 29%;
-        height: 50%;
-      }
-
-      body.boring {
-        background-color: black;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 29%;
-      }
-      
-      * {
-        padding: 0;
-      }
-
-      
-      /*  */
-      .boring-wrapper {
-        visibility: hidden;
-      }
-      body.boring .boring-wrapper {
-        visibility: visible;
-      }
-
       .busy-wrapper {
         visibility: hidden;
 
@@ -52,13 +40,34 @@
         visibility: visible;
       }
 
-
+/* ============ INTRO ============ */
+      body.intro {
+        background-image:url(./assets/web_bg_3.png);
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 29%;
+        height: 50%;
+      }
       .intro-wrapper {
         visibility: hidden;
       }
       body.intro .intro-wrapper {
         visibility: visible;
       }
+
+
+      
+
+
+      
+      /*  */
+
+
+
+
+
+
 
 
 

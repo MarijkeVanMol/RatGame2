@@ -173,7 +173,7 @@ export default class LevelFour extends Phaser.Scene {
 
     //  'reward'
     if (this.cheesesCollected >= 220) {
-      this.scene.start("gameFour");
+      this.scene.start("levelFive");
       //this.sound.play("tttwo"); geen muziek want BORING
     }
 

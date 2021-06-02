@@ -1,3 +1,50 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
 body {
-    background-color: aliceblue;
+    background-color: black;
+}
+main {
+    /* iMac - 1 */
+position: relative;
+width: 1280px;
+height: 5075px;
+background: #FFFF00;
+}
+
+h1 {
+    position: absolute;
+    width: 908px;
+    height: 528px;
+    left: 186px;
+    top: 199px;
+    
+    font-family: Roboto;
+    font-style: italic;
+    font-weight: 900;
+    font-size: 150px;
+    line-height: 176px;
+    text-align: center;
+    
+    color: #000000;
+}
+
+h2 {
+  
+position: absolute;
+width: 1189px;
+height: 117px;
+left: 40px;
+top: 874px;
+
+font-family: Roboto;
+font-style: italic;
+font-weight: 900;
+font-size: 100px;
+line-height: 117px;
+text-align: center;
+
+color: #000000;
 }
