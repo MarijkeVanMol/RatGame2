@@ -10,7 +10,7 @@ export default class LevelThree extends Phaser.Scene {
   }
 
   init() {
-    this.cheesesCollected = 100;
+    this.cheesesCollected = 75;
   }
 
   create() {
@@ -29,6 +29,10 @@ export default class LevelThree extends Phaser.Scene {
       .image(gameWidth, gameHeight + 45, "lvl3-bg") // zoda ge geen zwarte balk krijgt v onder
       .setOrigin(1) //origin is linksonder van afbeelding
       .setScrollFactor(2);
+    this.collage = this.add
+      .image(gameWidth, gameHeight + 45, "lvl3-col") // zoda ge geen zwarte balk krijgt v onder
+      .setOrigin(1) //origin is linksonder van afbeelding
+      .setScrollFactor(0.5);
 
     //  PLATFORMS
     //this.add.image(240,320,'platform').setScale(1)
@@ -40,8 +44,8 @@ export default class LevelThree extends Phaser.Scene {
 
       /** @type {Phaser.Physics.Arcade.Sprite} */
       const platform = this.platforms.create(x, y, "lvl3-plat");
-      platform.scaleX = 0.2;
-      platform.scaleY = 1; //doesn't work
+      platform.scaleX = 1;
+      platform.scaleY = 0.5; //doesn't work
 
       /** @type {Phaser.Physics.Arcade.StaticBody} */
       const body = platform.body;
@@ -52,7 +56,7 @@ export default class LevelThree extends Phaser.Scene {
     this.player = this.physics.add
       .sprite(240, 320, "lvl3-rat")
       .setScale(0.5)
-      .setGravityY(100);
+      .setGravityY(400);
 
     // //  CARROTS
     this.cheeses = this.physics.add.group({
@@ -64,8 +68,8 @@ export default class LevelThree extends Phaser.Scene {
     //      PLAYER & PLATFORMs
     this.physics.add.collider(this.platforms, this.player);
     this.player.body.checkCollision.up = false;
-    this.player.body.checkCollision.left = false;
-    this.player.body.checkCollision.right = false;
+    this.player.body.checkCollision.left = true;
+    this.player.body.checkCollision.right = true;
     //  OVERLAPS
     //      CARROT & PLATFORMS
     this.physics.add.overlap(
@@ -153,26 +157,26 @@ export default class LevelThree extends Phaser.Scene {
 
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
-    if (Math.random() > 0.8) { console.log(this.player.y) }
-    
+    if (Math.random() > 0.8) {
+      console.log(this.player.y);
+    }
+
     this.horizontalWrap(this.player);
     //      PLAYER LOOP
     //console.log(this.player.y);
     if (this.player.y < -150) {
-     // console.log('resetbackground');
+      // console.log('resetbackground');
       this.background.setY(-4000);
       this.background.setX(480);
-    }
-    else if (this.player.y < -4000) {
+    } else if (this.player.y < -4000) {
       this.background.setY(-7000);
       this.background.setX(480);
-    }
-    else if (this.player.y < -5000) {
+    } else if (this.player.y < -5000) {
       this.background.setY(-11000);
       this.background.setX(480);
     }
 
-    if (this.cheesesCollected == 102) {
+    if (this.cheesesCollected == 73) {
       this.music.play();
       // this.sound.play("tttwo");
     }
@@ -181,14 +185,15 @@ export default class LevelThree extends Phaser.Scene {
     //    normal loser route
     const bottomPlatform = this.findBottomMostPlatform();
     if (this.player.y > bottomPlatform.y + 200) {
-      this.scene.restart("levelThree");
+      this.scene.start("levelTwo");
       this.sound.play("lvl3-restart");
       this.sound.play("global-down");
+      this.music.stop("songBusy");
       this.cameras.main.shake(1000);
     }
 
     //    'reward'
-    if (this.cheesesCollected == 200) {
+    if (this.cheesesCollected == 206) {
       this.scene.start("levelFour");
       this.sound.play("caughtCheese");
       this.music.stop("songBusy");

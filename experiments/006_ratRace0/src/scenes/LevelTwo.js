@@ -171,7 +171,7 @@ export default class LevelTwo extends Phaser.Scene {
     // }
 
     //  'reward'
-    if (this.cheesesCollected >= 100) {
+    if (this.cheesesCollected >= 75) {
       this.scene.start("gameThree");
       //this.sound.play("tttwo"); geen muziek want BORING
     }

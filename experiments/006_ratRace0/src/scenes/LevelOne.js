@@ -91,6 +91,10 @@ export default class LevelOne extends Phaser.Scene {
       .image(gameWidth, gameHeight + 45, "lvl1-bg") // zoda ge geen zwarte balk krijgt v onder
       .setOrigin(1) //origin is linksonder van afbeelding
       .setScrollFactor(0.5);
+    this.collage = this.add
+      .image(gameWidth, gameHeight + 45, "lvl1-col") // zoda ge geen zwarte balk krijgt v onder
+      .setOrigin(1) //origin is linksonder van afbeelding
+      .setScrollFactor(2);
 
     //          oldestCode: just getting image on screen
     // this.add.image(gameWidth, -6509, 'bg')
@@ -106,8 +110,8 @@ export default class LevelOne extends Phaser.Scene {
 
       /** @type {Phaser.Physics.Arcade.Sprite} */
       const platform = this.platforms.create(x, y, "lvl1-plat");
-      platform.scaleX = 0.2;
-      platform.scaleY = 0.2;
+      platform.scaleX = 1.5;
+      platform.scaleY = 1.5;
 
       /** @type {Phaser.Physics.Arcade.StaticBody} */
       const body = platform.body;
@@ -242,10 +246,10 @@ export default class LevelOne extends Phaser.Scene {
     //    this.verticalWrap(this.player)
 
     // PLAYER LOOP
-    //console.log(this.player.y);
-    if (this.player.y < -12000) {
-      this.background.setY(-5500);
-      this.background.setX(480); // dit loopt vast, te zwaar voor server schat ik
+    console.log(this.player.y);
+    if (this.player.y < -2000) {
+      this.collage.setY(0);
+      this.collage.setX(480); // dit loopt vast, te zwaar voor server schat ik
       //   this.scene.restart("gameBusy"); // easiest but what about the cheese?
       //   this.cheesesCollected = 50;
       //   this.cheesesCollectedText.text = 50;
@@ -256,11 +260,11 @@ export default class LevelOne extends Phaser.Scene {
       // this.background.setScrollFactor(-0.5);
     }
     if (this.player.y < -20000) {
-      this.background.setY(-5500);
+      this.background.setY(1);
       this.background.setX(480);
     }
     if (this.player.y < -22000) {
-      this.background.setY(-5500);
+      this.background.setY(1);
       this.background.setX(480);
     }
 
@@ -274,8 +278,12 @@ export default class LevelOne extends Phaser.Scene {
       this.sound.play("global-down");
     }
 
-    if (this.cheesesCollected == 25) {
+    if (this.cheesesCollected == 15) {
       this.music.play();
+      // this.collage = this.add
+      //   .image(gameWidth, gameHeight + 45, "lvl1-col") // zoda ge geen zwarte balk krijgt v onder
+      //   .setOrigin(1) //origin is linksonder van afbeelding
+      //   .setScrollFactor(2);
     }
     //  'reward'
     if (this.cheesesCollected == 50) {

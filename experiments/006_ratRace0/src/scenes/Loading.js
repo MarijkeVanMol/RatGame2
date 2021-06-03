@@ -36,8 +36,9 @@ export default class Loading extends Phaser.Scene {
     // this.load.audio("theme", "assets/sfx/songStart.mp3");
 
     // LEVEL 1 ==== lvl1- ====
-    this.load.image("lvl1-bg", "assets/lone.png"); // set back to BG_busy
-    this.load.image("lvl1-plat", "assets/platform0_busy.png");
+    this.load.image("lvl1-bg", "assets/lvl1-bg.png");
+    this.load.image("lvl1-col", "assets/lvl1-collage.png"); // set back to BG_busy
+    this.load.image("lvl1-plat", "assets/lvl1-plat1.png");
     this.load.image("lvl1-rat", "assets/rat_busy.png");
     this.load.image("lvl1-ratj", "assets/rat_jump_busy.png");
     this.load.image("lvl1-cheese", "assets/cheese_busy.png");
@@ -49,8 +50,9 @@ export default class Loading extends Phaser.Scene {
     // =======
 
     // LEVEL 3 ==== lvl3- ====
-    this.load.image("lvl3-bg", "assets/lthree.png");
-    this.load.image("lvl3-plat", "assets/platform1_busy.png");
+    this.load.image("lvl3-bg", "assets/lvl3-bg.png");
+    this.load.image("lvl3-col", "assets/lvl3-collage.png");
+    this.load.image("lvl3-plat", "assets/lvl3-plat1.png");
     this.load.image("lvl3-rat", "assets/rat_busy.png");
     this.load.image("lvl3-ratj", "assets/rat_jump_busy.png");
     this.load.image("lvl3-cheese", "assets/cheese_busy.png");
@@ -67,8 +69,9 @@ export default class Loading extends Phaser.Scene {
     // LEVEL 4 ==== see GLOBAL ====
 
     // LEVEL 5 ==== lvl5- ====
-    this.load.image("lvl5-bg", "assets/lfive.png");
-    this.load.image("lvl5-plat", "assets/platform2_busy.png");
+    this.load.image("lvl5-bg", "assets/lvl5-bg.png");
+    this.load.image("lvl5-col", "assets/lvl5-collage.png");
+    this.load.image("lvl5-plat", "assets/lvl5-plat1.png");
     this.load.image("lvl5-rat", "assets/rat_busy.png");
     this.load.image("lvl5-ratj", "assets/rat_jump_busy.png");
     this.load.image("lvl5-cheese", "assets/cheese_busy.png");
@@ -85,8 +88,9 @@ export default class Loading extends Phaser.Scene {
     // LEVEL 6 ==== see GLOBAL ====
 
     // LEVEL 7 ==== lvl7- ====
-    this.load.image("lvl7-bg", "assets/lseven.png"); // set back to BG_busy
-    this.load.image("lvl7-plat", "assets/platform3_busy.png");
+    this.load.image("lvl7-bg", "assets/lvl7-bg.png"); // set back to BG_busy
+    this.load.image("lvl7-col", "assets/lvl7-collage.png");
+    this.load.image("lvl7-plat", "assets/lvl7-plat.png");
     this.load.image("lvl7-rat", "assets/rat_lvl7.png");
     this.load.image("lvl7-cheeses", "assets/c_l7s.png");
     this.load.image("lvl7-cheeseb", "assets/c_l7b.png");
@@ -110,6 +114,8 @@ export default class Loading extends Phaser.Scene {
     this.load.image("lvl8-cheese", "assets/lvl8-cheese.png");
     this.load.image("lvl8-player", "assets/lvl8-player.png");
     this.load.image("lvl8-ground", "assets/lvl8-ground.png");
+    // LEVEL 8 = SOUND
+    this.load.audio("lvl8-song", "assets/sfx/game-over.mp3");
 
     // LOADING SCREEN
     // this.load.image("wrw", "assets/wait.png");

@@ -37,6 +37,10 @@ export default class LevelEight extends Phaser.Scene {
     //  BACKGROUND
     this.add.image(240, 320, "lvl8-bg").setScrollFactor(1, 0);
 
+    //  SOUND
+    this.music = this.sound.add("lvl8-song");
+    this.music.play();
+
     //    GROUND
     this.platforms = this.physics.add.staticGroup();
     const x = 240;
@@ -98,6 +102,9 @@ export default class LevelEight extends Phaser.Scene {
   update() {
     document.body.className = "busy";
 
+    //  SOUND
+    this.music.loop = true;
+
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown) {
@@ -130,7 +137,7 @@ export default class LevelEight extends Phaser.Scene {
     //  'reward'
     if (this.cheesesCollected >= 1) {
       this.scene.start("gameIntro");
-      //this.sound.play("tttwo"); geen muziek want BORING
+      this.music.stop("lvl8-song");
     }
 
     //  END OF UPDATE: beware of the accolade below!!

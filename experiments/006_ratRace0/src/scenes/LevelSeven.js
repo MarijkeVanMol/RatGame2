@@ -15,7 +15,7 @@ export default class LevelSeven extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.Group} */
   cheeses;
 
-  cheesesCollected = 401;
+  cheesesCollected = 409;
 
   /** @type {Phaser.GameObjects.Text} */
   cheesesCollectedText;
@@ -25,7 +25,7 @@ export default class LevelSeven extends Phaser.Scene {
   }
 
   init() {
-    this.cheesesCollected = 401;
+    this.cheesesCollected = 409;
   }
 
   create() {
@@ -47,17 +47,21 @@ export default class LevelSeven extends Phaser.Scene {
       .image(gameWidth, gameHeight + 40, "lvl7-bg") // zoda ge geen zwarte balk krijgt v onder
       .setOrigin(1) //origin is linksonder van afbeelding
       .setScrollFactor(2);
+    this.collage = this.add
+      .image(gameWidth, gameHeight + 45, "lvl7-col") // zoda ge geen zwarte balk krijgt v onder
+      .setOrigin(1) //origin is linksonder van afbeelding
+      .setScrollFactor(1);
 
     // PLATFORMS
     this.platforms = this.physics.add.staticGroup();
-    for (let i = 0; i < 50; ++i) {
+    for (let i = 0; i < 60; ++i) {
       const x = Phaser.Math.Between(0, 430);
       const y = 10 * i;
 
       /** @type {Phaser.Physics.Arcade.Sprite} */
       const platform = this.platforms.create(x, y, "lvl7-plat");
-      platform.scaleX = 0.2;
-      platform.scaleY = 0.5;
+      platform.scaleX = 1;
+      platform.scaleY = 1;
 
       /** @type {Phaser.Physics.Arcade.StaticBody} */
       const body = platform.body;
@@ -183,7 +187,7 @@ export default class LevelSeven extends Phaser.Scene {
     //  RESTART 1
     const bottomPlatform = this.findBottomMostPlatform();
     if (this.player.y > bottomPlatform.y + 100) {
-      this.scene.restart("levelSeven"); //scene.scene.restart(data);
+      this.scene.start("levelSix"); //scene.scene.restart(data);
       this.sound.play("lvl7-restart");
     }
     //  RESTART 2

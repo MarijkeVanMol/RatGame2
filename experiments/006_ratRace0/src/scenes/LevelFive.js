@@ -15,7 +15,7 @@ export default class LevelFive extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.Group} */
   cheeses;
 
-  cheesesCollected = 220;
+  cheesesCollected = 229;
 
   /** @type {Phaser.GameObjects.Text} */
   cheesesCollectedText;
@@ -25,7 +25,7 @@ export default class LevelFive extends Phaser.Scene {
   }
 
   init() {
-    this.cheesesCollected = 220;
+    this.cheesesCollected = 229;
   }
 
   create() {
@@ -45,6 +45,10 @@ export default class LevelFive extends Phaser.Scene {
       .image(gameWidth, gameHeight + 40, "lvl5-bg") // zoda ge geen zwarte balk krijgt v onder
       .setOrigin(1) //origin is linksonder van afbeelding
       .setScrollFactor(2);
+    this.collage = this.add
+      .image(gameWidth, gameHeight + 45, "lvl5-col") // zoda ge geen zwarte balk krijgt v onder
+      .setOrigin(1) //origin is linksonder van afbeelding
+      .setScrollFactor(0.25);
 
     // PLATFORMS
     this.platforms = this.physics.add.staticGroup();
@@ -54,8 +58,8 @@ export default class LevelFive extends Phaser.Scene {
 
       /** @type {Phaser.Physics.Arcade.Sprite} */
       const platform = this.platforms.create(x, y, "lvl5-plat");
-      platform.scaleX = 0.3;
-      platform.scaleY = 0.2;
+      platform.scaleX = 1;
+      platform.scaleY = 2;
       // platform.flipY= true; doesn't work
 
       /** @type {Phaser.Physics.Arcade.StaticBody} */
@@ -66,7 +70,7 @@ export default class LevelFive extends Phaser.Scene {
     //  PLAYER
     this.player = this.physics.add
       .sprite(240, 320, "lvl5-rat")
-      .setScale(2)
+      .setScale(0.5, 3)
       .setGravityY(300); //300 = sweet jump, -300 tp make it go faster
 
     //  CHEESE
@@ -78,8 +82,8 @@ export default class LevelFive extends Phaser.Scene {
     //      PLAYER & PLATFORMS
     this.physics.add.collider(this.platforms, this.player);
     this.player.body.checkCollision.up = false;
-    this.player.body.checkCollision.left = false;
-    this.player.body.checkCollision.right = false;
+    this.player.body.checkCollision.left = true;
+    this.player.body.checkCollision.right = true;
 
     //  OVERLAPS
     //      CARROT & PLAYER (handles overlap between carrot and player)
@@ -189,11 +193,12 @@ export default class LevelFive extends Phaser.Scene {
     //  Restart
     const bottomPlatform = this.findBottomMostPlatform();
     if (this.player.y > bottomPlatform.y + 100) {
-      this.scene.restart("levelFive"); //scene.scene.restart(data);
+      this.scene.start("levelFour"); //scene.scene.restart(data);
       this.sound.play("lvl5-restart");
+      this.music.stop("songBusy");
     }
     //  Level Six
-    if (this.cheesesCollected == 350) {
+    if (this.cheesesCollected == 365) {
       this.scene.start("levelSix");
       this.sound.play("caughtCheese");
       this.music.stop("songBusy");
@@ -251,7 +256,7 @@ export default class LevelFive extends Phaser.Scene {
     this.sound.play("caughtCheese");
     this.cameras.main.shake(1000);
     this.player.setTexture("lvl5-cheese");
-    this.player.setScale(4);
+    this.player.setScale(0.1, 3);
   }
 
   //  PLATFORMS

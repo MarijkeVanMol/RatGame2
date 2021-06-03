@@ -16,7 +16,7 @@ export default class LevelSix extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.Group} */
   cheeses;
 
-  cheesesCollected = 350;
+  cheesesCollected = 365;
 
   /** @type {Phaser.GameObjects.Text} */
   cheesesCollectedText;
@@ -26,8 +26,8 @@ export default class LevelSix extends Phaser.Scene {
   }
 
   init() {
-    this.cheesesCollected = 350;
-    this.CheeseCount = 350;
+    this.cheesesCollected = 365;
+    this.CheeseCount = 365;
   }
 
   create() {
@@ -171,7 +171,7 @@ export default class LevelSix extends Phaser.Scene {
     // }
 
     //  'reward'
-    if (this.cheesesCollected >= 401) {
+    if (this.cheesesCollected >= 409) {
       this.scene.start("gameSeven");
       //this.sound.play("tttwo"); geen muziek want BORING
     }
