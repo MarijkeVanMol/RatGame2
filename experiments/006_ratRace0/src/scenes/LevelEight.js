@@ -16,7 +16,7 @@ export default class LevelEight extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.Group} */
   cheeses;
 
-  cheesesCollected = 0;
+  cheesesCollected = 370;
 
   /** @type {Phaser.GameObjects.Text} */
   cheesesCollectedText;
@@ -26,8 +26,8 @@ export default class LevelEight extends Phaser.Scene {
   }
 
   init() {
-    this.cheesesCollected = 0;
-    this.CheeseCount = 0;
+    this.cheesesCollected = 370;
+    this.CheeseCount = 370;
   }
 
   create() {
@@ -35,28 +35,25 @@ export default class LevelEight extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     //  BACKGROUND
-    this.add.image(240, 320, "lvl8-bg").setScrollFactor(1, 0);
+    this.add.image(240, 320, "boring-bg").setScrollFactor(1, 0);
 
-    //  SOUND
-    this.music = this.sound.add("lvl8-song");
-    this.music.play();
-
-    //    GROUND
     this.platforms = this.physics.add.staticGroup();
+    //  PLATFORMS
     const x = 240;
     const y = 630;
+
     /** @type {Phaser.Physics.Arcade.Sprite} */
-    const platform = this.platforms.create(x, y, "lvl8-ground");
+    const platform = this.platforms.create(x, y, "boring-ground");
     platform.scaleX = 1.5;
     platform.scaleY = 2;
+
     /** @type {Phaser.Physics.Arcade.StaticBody} */
     const body = platform.body;
     body.updateFromGameObject();
+    // }
 
     //  PLAYER
-    this.player = this.physics.add
-      .sprite(240, 320, "lvl8-player")
-      .setScale(1.5);
+    this.player = this.physics.add.sprite(240, 320, "lvl8-rat").setScale(0.3);
 
     //  CHEESES
     this.cheeses = this.physics.add.group({ classType: Cheese });
@@ -80,43 +77,37 @@ export default class LevelEight extends Phaser.Scene {
     );
 
     //  CAMERAS
-    this.cameras.main.setDeadzone(this.scale.width * 1.5);
+    this.cameras.main.setDeadzone(this.scale.width * 1.5); // makes sure it doesn't go 'off-screen, move to the sides'
 
     //  FONT
-    // const style = { color: "black", font: "24px sans-serif" }; // color doesn't work
-    // this.cheesesCollectedText = this.add
-    //   .text(240, 10, "0 Cheeses", style)
-    //   .setScrollFactor(0)
-    //   .setOrigin(0.5, 0);
-    //.setFont("Arial"); //sets font -> WERKT NOG NIET, NICE TO HAVE
+    const style = { color: "black", font: "24px sans-serif" }; // color doesn't work
+    this.cheesesCollectedText = this.add
+      .text(240, 10, "370 Cheeses", style)
+      .setScrollFactor(0)
+      .setOrigin(0.5, 0);
 
     //      CHEAT CODE
-    // this.input.keyboard.once("keydown-L", () => {
-    //   this.scene.start("game-over");
-    // });
+    this.input.keyboard.once("keydown-L", () => {
+      this.scene.start("levelLoser");
+    });
     this.input.keyboard.once("keydown-N", () => {
-      this.scene.start("levelOne");
+      this.scene.start("levelNine");
     });
   }
 
   update() {
-    document.body.className = "busy";
-
-    //  SOUND
-    this.music.loop = true;
+    document.body.className = "boring";
 
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-1);
+      this.player.setVelocityX(-8);
     } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(1);
+      this.player.setVelocityX(8);
     } else {
       this.player.setVelocityX(0);
     }
 
-    // console.log(this.CheeseCount);
-    // console.log(this.cheesesCollected);
     // DROP CARROT CODE
     if (this.CheeseCount == this.cheesesCollected) {
       this.addCheeseAbove(this.player);
@@ -124,20 +115,11 @@ export default class LevelEight extends Phaser.Scene {
     }
 
     //  CAMERAS
-    //      SCREEN WRAP OF PLAYER
     this.horizontalWrap(this.player);
 
-    //  TO NEXT SCENE: BUSY GAME
-    //  bottomPLATFORM: normal loser route
-    // const bottomPlatform = this.findBottomMostPlatform();
-    // if (this.player.y > bottomPlatform.y + 200) {
-    //   this.scene.restart("levelOne");
-    // }
-
     //  'reward'
-    if (this.cheesesCollected >= 1) {
-      this.scene.start("gameIntro");
-      this.music.stop("lvl8-song");
+    if (this.cheesesCollected >= 383) {
+      this.scene.start("levelNine");
     }
 
     //  END OF UPDATE: beware of the accolade below!!
@@ -166,7 +148,7 @@ export default class LevelEight extends Phaser.Scene {
   addCheeseAbove(player) {
     const cheeseX = Phaser.Math.Between(0, this.scale.width);
     const cheeseY = player.y - 300;
-    this.cheeses.create(cheeseX, cheeseY, "lvl8-cheese").setScale(0.1);
+    this.cheeses.create(cheeseX, cheeseY, "lvl8-cheese");
   }
 
   //  CARROT
@@ -179,22 +161,7 @@ export default class LevelEight extends Phaser.Scene {
     this.cheeses.killAndHide(cheese); // hide from display
     this.physics.world.disableBody(cheese.body); // disable from physics world
     this.cheesesCollected++;
-    // const value = `${this.cheesesCollected}`;
-    // this.cheesesCollectedText.text = value;
+    const value = `${this.cheesesCollected}`;
+    this.cheesesCollectedText.text = value;
   }
-
-  //  PLATFORMS -> not used
-  // findBottomMostPlatform() {
-  //   const platforms = this.platforms.getChildren();
-  //   let bottomPlatform = platforms[0];
-
-  //   for (let i = 1; i < platforms.length; i++) {
-  //     const platform = platforms[i];
-  //     if (platform.y < bottomPlatform.y) {
-  //       continue;
-  //     }
-  //     bottomPlatform = platform;
-  //   }
-  //   return bottomPlatform;
-  // }
 }

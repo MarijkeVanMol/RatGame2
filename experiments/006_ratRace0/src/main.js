@@ -5,7 +5,6 @@ import Loading from "./scenes/Loading.js";
 import GameIntro from "./scenes/GameIntro.js";
 import GameStart from "./scenes/GameStart.js";
 
-import Parallax from "./scenes/LevelParallax.js";
 import LevelOne from "./scenes/LevelOne.js";
 import LevelTwo from "./scenes/LevelTwo.js";
 import LevelThree from "./scenes/LevelThree.js";
@@ -14,8 +13,13 @@ import LevelFive from "./scenes/LevelFive.js";
 import LevelSix from "./scenes/LevelSix.js";
 import LevelSeven from "./scenes/LevelSeven.js";
 import LevelEight from "./scenes/LevelEight.js";
+import LevelNine from "./scenes/LevelNine.js";
+import LevelTen from "./scenes/LevelTen.js";
+import LevelEleven from "./scenes/LevelEleven.js";
+import LevelTwelve from "./scenes/LevelTwelve.js";
+import LevelThirteen from "./scenes/LevelThirteen.js";
 
-import GameOver from "./scenes/GameOver.js";
+import LevelLoser from "./scenes/LevelLoser.js";
 
 export default new Phaser.Game({
   type: Phaser.AUTO,
@@ -34,8 +38,12 @@ export default new Phaser.Game({
     LevelSix,
     LevelSeven,
     LevelEight,
-    GameOver,
-    Parallax,
+    LevelNine,
+    LevelTen,
+    LevelEleven,
+    LevelTwelve,
+    LevelThirteen,
+    LevelLoser,
   ],
   audio: {},
   physics: {

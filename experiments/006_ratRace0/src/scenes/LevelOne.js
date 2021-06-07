@@ -5,34 +5,6 @@ import Phaser from "../lib/phaser.js";
 
 import Cheese from "../game/Cheese.js";
 
-// /**
-//  *
-//  * @param {Phaser.Scene} scene
-//  * @param {number} totalHeight
-//  * @param {string} texture
-//  * @param {number} scrollFactor
-//  */
-
-// const createAligned = (scene, totalHeight, texture, scrollFactor) =>
-// {   // so we don't need to give in a count
-//     const h = scene.textures.get(texture).getSourceImage().height
-//     // const totalHeight = scene.scale.height * 10
-//     const count = Math.ceil(totalHeight / h) * scrollFactor
-
-//     // get width of last created image to get it to loop
-//     let y = 0
-//     // creates bg for as long as the screen: COUNT
-//     for(let i = 0; i < count; ++i)
-//     {
-//         // create the bg in scene: SCENE
-//     const bbg = scene.add.image(scene.scale.width, y, texture)
-//                             .setOrigin(1,0)
-//                             .setScrollFactor(scrollFactor)
-
-//     y += bbg.width
-//     }
-// }
-
 export default class LevelOne extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.StaticGroup} */
   platforms;
@@ -47,6 +19,7 @@ export default class LevelOne extends Phaser.Scene {
   cheeses;
 
   cheesesCollected = 0;
+  n = 1;
 
   /** @type {Phaser.GameObjects.Text} */
   cheesesCollectedText;
@@ -57,49 +30,34 @@ export default class LevelOne extends Phaser.Scene {
 
   init() {
     this.cheesesCollected = 0;
+    this.n = 1;
   }
 
   create() {
     console.log("create level 1");
+
+    // CURSORS
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    // GENERAL
+    const gameWidth = this.scale.width;
+    const gameHeight = this.scale.height;
+
     // MUSIC
-    this.music = this.sound.add("songBusy");
+    this.music = this.sound.add("lvl1-song");
     this.music.loop = true;
 
     //  BACKGROUND
-    const gameWidth = this.scale.width;
-    const gameHeight = this.scale.height;
-    // const totalHeight = gameHeight * gameHeight
-    //      Parallax
-
-    // const bgCount = totalHeight / this.textures.get('bg').getSourceImage().gameHeight // to keep bg coming
-    // console.log(bgCount*0.5)
-
-    //createAligned(this, totalH160eight, 'bg', 0.5) // count, number is the amount you want it to appear, if this works, do it for everything
-
-    //          newCode: bg_bbusy.png / 480x640 size
-    // const bgpar = this.add.image(gameWidth, 0, 'bg')
-    //     .setOrigin(1,0)   //origin is linksonder van afbeelding
-    //     .setScrollFactor(0.5)
-    // this.add.image(gameWidth, bgpar.gameHeight, 'bg') // zoda ge geen zwarte balk krijgt v onder
-    //     .setOrigin(1,0)   //origin is linksonder van afbeelding
-    //     .setScrollFactor(0.5)
-
-    //          exCode: for when we worked on the 480x7149 / bg_busy.png
-
     this.background = this.add
       .image(gameWidth, gameHeight + 45, "lvl1-bg") // zoda ge geen zwarte balk krijgt v onder
       .setOrigin(1) //origin is linksonder van afbeelding
       .setScrollFactor(0.5);
+
+    // COLLAGE
     this.collage = this.add
       .image(gameWidth, gameHeight + 45, "lvl1-col") // zoda ge geen zwarte balk krijgt v onder
       .setOrigin(1) //origin is linksonder van afbeelding
       .setScrollFactor(2);
-
-    //          oldestCode: just getting image on screen
-    // this.add.image(gameWidth, -6509, 'bg')
-    //     .setOrigin(1,0)
-    //     .setScrollFactor(0.25)
 
     //  PLATFORMS
     this.platforms = this.physics.add.staticGroup();
@@ -124,7 +82,7 @@ export default class LevelOne extends Phaser.Scene {
       .setScale(2)
       .setGravityY(300); //300 = sweet jump, -300 tp make it go faster
 
-    //  CARROTS
+    //  CHEESES
     this.cheeses = this.physics.add.group({
       classType: Cheese,
     });
@@ -148,7 +106,6 @@ export default class LevelOne extends Phaser.Scene {
     );
 
     //  CAMERAS
-    //this.cameras.main.setBounds(0,0, gameWidth , gameHeight* 3); // for parallax?? zoda die ni verder ga dan gameWidth
     this.cameras.main.startFollow(this.player); // follows player, also to the side
     this.cameras.main.setDeadzone(this.scale.width * 1.5); // makes sure it doesn't go 'off-screen, move to the sides'
 
@@ -162,18 +119,14 @@ export default class LevelOne extends Phaser.Scene {
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
 
-    //  CHEAT CODE
+    //  CHEAT CODES
     this.input.keyboard.once("keydown-L", () => {
-      this.scene.start("levelEight");
-      this.music.stop("songBusy");
+      this.scene.start("levelLoser");
+      this.music.stop("lvl1-song");
     });
     this.input.keyboard.once("keydown-N", () => {
       this.scene.start("levelTwo");
-      this.music.stop("songBusy");
-    });
-    this.input.keyboard.once("keydown-P", () => {
-      this.scene.start("levelParallax");
-      this.music.stop("songBusy");
+      this.music.stop("lvl1-song");
     });
   }
 
@@ -187,18 +140,13 @@ export default class LevelOne extends Phaser.Scene {
       this.player.setVelocityY(-500);
       this.player.setTexture("lvl1-ratj");
       this.sound.play("global-jump");
-
-      //this.cameras.main.shake(500);
     }
     //      UNBOUNCE
     const vy = this.player.body.velocity.y; // naar beneden gaan
     if (vy > 0 && this.player.texture.key != "lvl1-rat") {
       // als player nr beneden ga en..
-
       this.player.setTexture("lvl1-rat");
       this.sound.play("global-down");
-
-      //this.cameras.main.shake(500);
     }
 
     //  PLATFORMS
@@ -212,23 +160,9 @@ export default class LevelOne extends Phaser.Scene {
       if (platform.y >= scrollY + 700) {
         platform.y = scrollY - Phaser.Math.Between(0, 50);
         platform.body.updateFromGameObject();
-
-        //      create a carrot above the platform being
         this.addCheeseAbove(platform);
-
-        //      i thought that maybe the parallax could work if i placed it here, but it didn't
-        // const gameWidth = this.scale.width
-        // const gameHeight = this.scale.height
-        // const bgpar = this.add.image(gameWidth, 0, 'bg')
-        //     .setOrigin(1,0)   //origin is linksonder van afbeelding
-        //     .setScrollFactor(0.5)
-        // this.add.image(gameWidth, bgpar.gameHeight, 'bg') // zoda ge geen zwarte balk krijgt v onder
-        //     .setOrigin(1,0)   //origin is linksonder van afbeelding
-        //     .setScrollFactor(0.5)
       }
     });
-    //      NEW PLATS1; try parallax: https://phaser.io/examples/v3/view/game-objects/particle-emitter/parallax
-
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown && !touchingDown) {
@@ -242,33 +176,20 @@ export default class LevelOne extends Phaser.Scene {
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
     this.horizontalWrap(this.player);
-    //    if (this.player.y > )
-    //    this.verticalWrap(this.player)
 
-    // PLAYER LOOP
-    console.log(this.player.y);
-    if (this.player.y < -2000) {
-      this.collage.setY(0);
-      this.collage.setX(480); // dit loopt vast, te zwaar voor server schat ik
-      //   this.scene.restart("gameBusy"); // easiest but what about the cheese?
-      //   this.cheesesCollected = 50;
-      //   this.cheesesCollectedText.text = 50;
-      // player.y pos reset = nothing else's reset
-      // just some experiments
-      // this.player.y = 700;
-      // this.platform.y = 200;
-      // this.background.setScrollFactor(-0.5);
+    // COLLAGE LOOP
+    /*
+    als de speler boven Y = n*-3000 komt wordt de collage opnieuw gezet en n wordt veranderd naar n+1.
+    Bijvoorbeeld: n = 1: als de speler boven Y = -3000 komt wordt de collage op positie -6000 gezet (dit omdat de collage dubbel zo snel beweegt) en n wordt 2 
+    daarna: n = 2:  als de speler boven Y = -6000 komt wordt de collage op positie -12000 gezet (dit omdat de collage dubbel zo snel beweegt) en n wordt 3  
+    daarna: n = 3:  als de speler boven Y = -9000 komt wordt de collage op positie -18000 gezet (dit omdat de collage dubbel zo snel beweegt) en n wordt 4 etc.
+    */
+    //console.log(this.player.y); //print de Y positie van de speler in de console log
+    if (this.player.y < this.n * -3000) {
+      this.collage.setY(this.n * -6000);
+      this.n += 1;
+      this.collage.setX(480);
     }
-    if (this.player.y < -20000) {
-      this.background.setY(1);
-      this.background.setX(480);
-    }
-    if (this.player.y < -22000) {
-      this.background.setY(1);
-      this.background.setX(480);
-    }
-
-    //parallax 1: this.bg.tilePositionY = this.cameras.main.scrollY *.3;
 
     //  TO NEXT SCENE: BORING GAME
     //  bottomPLATFORM: normal loser route
@@ -280,10 +201,6 @@ export default class LevelOne extends Phaser.Scene {
 
     if (this.cheesesCollected == 15) {
       this.music.play();
-      // this.collage = this.add
-      //   .image(gameWidth, gameHeight + 45, "lvl1-col") // zoda ge geen zwarte balk krijgt v onder
-      //   .setOrigin(1) //origin is linksonder van afbeelding
-      //   .setScrollFactor(2);
     }
     //  'reward'
     if (this.cheesesCollected == 50) {

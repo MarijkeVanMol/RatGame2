@@ -16,7 +16,7 @@ export default class LevelFour extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.Group} */
   cheeses;
 
-  cheesesCollected = 206;
+  cheesesCollected = 176;
 
   /** @type {Phaser.GameObjects.Text} */
   cheesesCollectedText;
@@ -26,8 +26,8 @@ export default class LevelFour extends Phaser.Scene {
   }
 
   init() {
-    this.cheesesCollected = 206;
-    this.CheeseCount = 206;
+    this.cheesesCollected = 176;
+    this.CheeseCount = 176;
   }
 
   create() {
@@ -60,7 +60,7 @@ export default class LevelFour extends Phaser.Scene {
     // }
 
     //  PLAYER
-    this.player = this.physics.add.sprite(240, 320, "boring-rat").setScale(0.3);
+    this.player = this.physics.add.sprite(240, 320, "lvl4-rat").setScale(0.3);
 
     //  CHEESES
     this.cheeses = this.physics.add.group({ classType: Cheese });
@@ -92,14 +92,14 @@ export default class LevelFour extends Phaser.Scene {
     //  FONT
     const style = { color: "black", font: "24px sans-serif" }; // color doesn't work
     this.cheesesCollectedText = this.add
-      .text(240, 10, "200 Cheeses", style)
+      .text(240, 10, "176 Cheeses", style)
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
     //.setFont("Arial"); //sets font -> WERKT NOG NIET, NICE TO HAVE
 
     //      CHEAT CODE
     this.input.keyboard.once("keydown-L", () => {
-      this.scene.start("levelEight");
+      this.scene.start("levelLoser");
     });
     this.input.keyboard.once("keydown-N", () => {
       this.scene.start("levelFive");
@@ -172,7 +172,7 @@ export default class LevelFour extends Phaser.Scene {
     // }
 
     //  'reward'
-    if (this.cheesesCollected >= 229) {
+    if (this.cheesesCollected >= 187) {
       this.scene.start("levelFive");
       //this.sound.play("tttwo"); geen muziek want BORING
     }
@@ -203,7 +203,7 @@ export default class LevelFour extends Phaser.Scene {
   addCheeseAbove(player) {
     const cheeseX = Phaser.Math.Between(0, this.scale.width);
     const cheeseY = player.y - 300;
-    this.cheeses.create(cheeseX, cheeseY, "boring-cheese");
+    this.cheeses.create(cheeseX, cheeseY, "lvl4-cheese");
   }
 
   //  CARROT

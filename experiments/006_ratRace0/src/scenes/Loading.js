@@ -17,18 +17,17 @@ export default class Loading extends Phaser.Scene {
     // ======================= GLOBAL =======================
     // lvl1,3,5,7 BUSY ()
     // ==== Sound ====
+    // ========== Shorts
     this.load.audio("global-jump", "assets/sfx/phaseJump1.mp3");
-    this.load.audio("busySong", "assets/sfx/busy.mp3");
     this.load.audio("caughtCheese", "assets/sfx/powerDown.mp3");
     this.load.audio("global-down", "assets/sfx/powerUp3.mp3");
+
     // ==== Image ====
     this.load.image("ratCaughtCheese", "assets/");
 
     // lvl2,4,6,8 BORING (background, platform/ground, player, cheese)
     this.load.image("boring-bg", "assets/bg_boring.png");
     this.load.image("boring-ground", "assets/platform_boring.png");
-    this.load.image("boring-rat", "assets/rbo_2.png");
-    this.load.image("boring-cheese", "assets/cbo_2.png");
 
     // ======================= LOCAL =======================
 
@@ -44,10 +43,11 @@ export default class Loading extends Phaser.Scene {
     this.load.image("lvl1-cheese", "assets/cheese_busy.png");
     this.load.image("lvl1-hitCheese", "assets/hitCheese.png");
     // ============ Sound ====
-    // see global!
+    this.load.audio("lvl1-song", "assets/sfx/busy.mp3");
 
     // LEVEL 2 ==== lvl2- ====
-    // =======
+    this.load.image("lvl2-rat", "assets/rbo_1.png");
+    this.load.image("lvl2-cheese", "assets/cbo_1.png");
 
     // LEVEL 3 ==== lvl3- ====
     this.load.image("lvl3-bg", "assets/lvl3-bg.png");
@@ -58,15 +58,15 @@ export default class Loading extends Phaser.Scene {
     this.load.image("lvl3-cheese", "assets/cheese_busy.png");
     this.load.image("lvl3-hitCheese", "assets/rat_r_jump.png");
     // LEVEL 3 = SOUND
-    // this.load.audio("songBusy", "assets/sfx/busy.mp3");
-    // this.load.audio("lvl3-jump", "assets/sfx/phaseJump5.mp3");
-    // this.load.audio("tttwo", "assets/sfx/threeTone2.mp3");
-    // this.load.audio("power", "assets/sfx/powerUp3.mp3");
     this.load.audio("lvl3-restart", "assets/sfx/spielenTwo.mp3");
-    // PARALLAX
-    this.load.image("wrw", "assets/wait.png");
+    this.load.audio("lvl3-song", "assets/sfx/longBeep_.mp3");
 
-    // LEVEL 4 ==== see GLOBAL ====
+    // // PARALLAX DELETE/CHANGE LATER
+    // this.load.image("wrw", "assets/wait.png");
+
+    // LEVEL 4 ==== lvl4- ====
+    this.load.image("lvl4-rat", "assets/rbo_2.png");
+    this.load.image("lvl4-cheese", "assets/cbo_2.png");
 
     // LEVEL 5 ==== lvl5- ====
     this.load.image("lvl5-bg", "assets/lvl5-bg.png");
@@ -77,15 +77,15 @@ export default class Loading extends Phaser.Scene {
     this.load.image("lvl5-cheese", "assets/cheese_busy.png");
     this.load.image("lvl5-hitCheese", "assets/hitCheese.png");
     // LEVEL 5 = SOUND
-    this.load.audio("songBusy", "assets/sfx/busy.mp3");
-    this.load.audio("jump", "assets/sfx/phaseJump1.mp3");
-    //this.load.audio("tttwo", "assets/sfx/threeTone2.mp3");
-    this.load.audio("power", "assets/sfx/powerUp3.mp3");
-    // this.load.audio("beep", "assets/sfx/irritating.mp3");
-    this.load.audio("gs1", "assets/sfx/Gscream_1.mp3");
+    this.load.audio("global-down", "assets/sfx/powerUp3.mp3"); // GLOBAL DOWN!! global-down
+
+    this.load.audio("lvl5-song", "assets/sfx/lvl5-newSong.mp3");
     this.load.audio("lvl5-restart", "assets/sfx/spielenThree.mp3");
+    this.load.audio("gs1", "assets/sfx/Gscream_1_.mp3");
 
     // LEVEL 6 ==== see GLOBAL ====
+    this.load.image("lvl6-rat", "assets/rbo_3.png");
+    this.load.image("lvl6-cheese", "assets/cbo_3.png");
 
     // LEVEL 7 ==== lvl7- ====
     this.load.image("lvl7-bg", "assets/lvl7-bg.png"); // set back to BG_busy
@@ -95,34 +95,45 @@ export default class Loading extends Phaser.Scene {
     this.load.image("lvl7-cheeses", "assets/c_l7s.png");
     this.load.image("lvl7-cheeseb", "assets/c_l7b.png");
     // LEVEL 7 = SOUND
-    this.load.audio("songBusy", "assets/sfx/busy.mp3");
-    this.load.audio("lvl7-jump", "assets/sfx/lvl7-jump.mp3");
-    this.load.audio("lvl7-left", "assets/sfx/call2.mp3");
-    this.load.audio("lvl7-right", "assets/sfx/taserGun.mp3");
-    this.load.audio("lvl7-songBeep", "assets/sfx/longBeep.mp3");
-    this.load.audio("lvl7-call", "assets/sfx/call1.mp3");
-    // this.load.audio("jump", "assets/sfx/phaseJump1.mp3");
-    // this.load.audio("tttwo", "assets/sfx/threeTone2.mp3");
-    // this.load.audio("power", "assets/sfx/powerUp3.mp3");
-    // this.load.audio("beep", "assets/sfx/irritating.mp3");
-    this.load.audio("gs1", "assets/sfx/Gscream_1.mp3");
-    this.load.audio("gs2", "assets/sfx/Gscream_2.mp3");
-    this.load.audio("lvl7-restart", "assets/sfx/spielenFour.mp3");
+    this.load.audio("lvl1-song", "assets/sfx/busy.mp3");
+    this.load.audio("lvl3-song", "assets/sfx/longBeep_.mp3");
 
-    // LEVEL 8 ==== GAMEOVER/WIN LEVEL (substitute) ====
-    this.load.image("lvl8-bg", "assets/lvl8-bg.png");
-    this.load.image("lvl8-cheese", "assets/lvl8-cheese.png");
-    this.load.image("lvl8-player", "assets/lvl8-player.png");
-    this.load.image("lvl8-ground", "assets/lvl8-ground.png");
+    this.load.audio("lvl7-jump", "assets/sfx/lvl7-jump_.mp3");
+    this.load.audio("lvl7-left", "assets/sfx/call2_.mp3");
+    this.load.audio("lvl7-right", "assets/sfx/taserGun_.mp3");
+    this.load.audio("lvl7-call", "assets/sfx/call1_.mp3");
+    this.load.audio("gs1", "assets/sfx/Gscream_1_.mp3");
+    this.load.audio("gs2", "assets/sfx/Gscream_2_.mp3");
+    this.load.audio("lvl7-restart", "assets/sfx/spielenFour_.mp3");
+
+    // LEVEL 8 ==== lvl8-/lvl4- ====
+    this.load.image("lvl8-rat", "assets/rbo_2.png");
+    this.load.image("lvl8-cheese", "assets/cbo_2.png");
+
+    // LEVEL 9 ==== lvl8-/lvl4- ====
+    this.load.image("lvl9-bg", "assets/lvl3-bg.png");
+    this.load.image("lvl9-col", "assets/lvl3-collage.png");
+    this.load.image("lvl9-plat", "assets/lvl3-plat1.png");
+    this.load.image("lvl9-rat", "assets/rat_busy.png");
+    this.load.image("lvl9-ratj", "assets/rat_jump_busy.png");
+    this.load.image("lvl9-cheese", "assets/cheese_busy.png");
+    this.load.image("lvl9-hitCheese", "assets/rat_r_jump.png");
+    // LEVEL 9 = SOUND
+    this.load.audio("lvl9-restart", "assets/sfx/spielenTwo.mp3");
+    this.load.audio("lvl3-song", "assets/sfx/longBeep_.mp3");
+
+    // LEVEL L ==== GAMEOVER/WIN LEVEL (substitute) ====
+    this.load.image("lvll-bg", "assets/lvl8-bg.png");
+    this.load.image("lvll-cheese", "assets/lvl8-cheese.png");
+    this.load.image("lvll-player", "assets/lvl8-player.png");
+    this.load.image("lvll-ground", "assets/lvl8-ground.png");
     // LEVEL 8 = SOUND
-    this.load.audio("lvl8-song", "assets/sfx/game-over.mp3");
+    this.load.audio("lvll-song", "assets/sfx/game-over_.mp3");
 
     // LOADING SCREEN
-    // this.load.image("wrw", "assets/wait.png");
     const gameWidth = this.scale.width;
     const gameHeight = this.scale.height;
 
-    // var ratW = this.add.image(240, 320, "wrw");
     var progressBar = this.add.graphics();
     var progressBox = this.add.graphics();
 
@@ -166,9 +177,6 @@ export default class Loading extends Phaser.Scene {
       progressBox.destroy();
       loadingText.destroy();
       percentText.destroy();
-      // ratW.destroy();
-
-      // assetText.destroy();
     });
   }
 

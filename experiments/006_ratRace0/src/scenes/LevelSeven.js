@@ -15,7 +15,7 @@ export default class LevelSeven extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.Group} */
   cheeses;
 
-  cheesesCollected = 409;
+  cheesesCollected = 271;
 
   /** @type {Phaser.GameObjects.Text} */
   cheesesCollectedText;
@@ -25,38 +25,45 @@ export default class LevelSeven extends Phaser.Scene {
   }
 
   init() {
-    this.cheesesCollected = 409;
+    this.cheesesCollected = 271;
+    this.n = 1;
   }
 
   create() {
-    //  CURSORS
+    //  GENERAL
     console.log("create level 7");
-    this.cursors = this.input.keyboard.createCursorKeys();
-    //  MUSIC
-    this.music = this.sound.add("songBusy");
-    this.music.loop = true;
-    this.music.play();
-    this.beep = this.sound.add("lvl7-songBeep");
-    this.beep.loop = true;
-    this.beep.play();
-
-    //  BACKGROUND
     const gameWidth = this.scale.width;
     const gameHeight = this.scale.height;
-    this.background = this.add
-      .image(gameWidth, gameHeight + 40, "lvl7-bg") // zoda ge geen zwarte balk krijgt v onder
-      .setOrigin(1) //origin is linksonder van afbeelding
-      .setScrollFactor(2);
-    this.collage = this.add
-      .image(gameWidth, gameHeight + 45, "lvl7-col") // zoda ge geen zwarte balk krijgt v onder
-      .setOrigin(1) //origin is linksonder van afbeelding
-      .setScrollFactor(1);
 
-    // PLATFORMS
+    //  CURSORS
+    this.cursors = this.input.keyboard.createCursorKeys();
+
+    //  MUSIC
+    this.music = this.sound.add("lvl1-song");
+    this.music.loop = true;
+    this.music.play();
+    this.beep = this.sound.add("lvl3-song");
+    this.beep.loop = true;
+    this.beep.play();
+    this.jump = this.sound.add("lvl7-jump");
+
+    //  BACKGROUND
+    this.background = this.add
+      .image(gameWidth, gameHeight + 200, "lvl7-bg") // zoda ge geen zwarte balk krijgt v onder
+      .setOrigin(1) //origin is linksonder van afbeelding
+      .setScrollFactor(3);
+
+    //  COLLAGE
+    this.collage = this.add
+      .image(gameWidth, gameHeight, "lvl7-col") // zoda ge geen zwarte balk krijgt v onder
+      .setOrigin(1) //origin is linksonder van afbeelding
+      .setScrollFactor(5);
+
+    //  PLATFORMS
     this.platforms = this.physics.add.staticGroup();
-    for (let i = 0; i < 60; ++i) {
+    for (let i = 0; i < 10; ++i) {
       const x = Phaser.Math.Between(0, 430);
-      const y = 10 * i;
+      const y = 60 * i;
 
       /** @type {Phaser.Physics.Arcade.Sprite} */
       const platform = this.platforms.create(x, y, "lvl7-plat");
@@ -72,7 +79,7 @@ export default class LevelSeven extends Phaser.Scene {
     this.player = this.physics.add
       .sprite(240, 320, "lvl7-cheese")
       .setScale(0.2)
-      .setGravityY(500); //300 = sweet jump, -300 tp make it go faster
+      .setGravityY(200); //300 = sweet jump, -300 tp make it go faster
 
     //  CHEESE
     this.cheeses = this.physics.add.group({
@@ -106,20 +113,22 @@ export default class LevelSeven extends Phaser.Scene {
       font: "50px sans-serif",
     };
     this.cheesesCollectedText = this.add
-      .text(240, 10, "401 Cheeses", style)
+      .text(240, 10, "271 Cheeses", style)
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
 
     //  CHEAT CODE
     this.input.keyboard.once("keydown-L", () => {
-      this.scene.start("levelEight");
-      this.music.stop("songBusy");
-      this.beep.stop("lvl7-songBeep");
+      this.scene.start("levelLoser");
+      this.music.stop("lvl1-song");
+      this.beep.stop("lvl3-song");
+      this.jump.stop("lvl7-jump");
     });
     this.input.keyboard.once("keydown-N", () => {
       this.scene.start("levelEight");
-      this.music.stop("songBusy");
-      this.beep.stop("lvl7-songBeep");
+      this.music.stop("lvl1-song");
+      this.beep.stop("lvl3-song");
+      this.jump.stop("lvl7-jump");
     });
   }
 
@@ -133,7 +142,7 @@ export default class LevelSeven extends Phaser.Scene {
     if (touchingDown) {
       this.player.setVelocityY(-800);
       this.player.setTexture("lvl7-cheeses");
-      this.sound.play("lvl7-jump");
+      this.jump.play();
       this.player.setScale(0.2);
       //this.cameras.main.shake(500);
     }
@@ -141,6 +150,7 @@ export default class LevelSeven extends Phaser.Scene {
     const vy = this.player.body.velocity.y; // naar beneden gaan
     if (vy > 0 && this.player.texture.key != "lvl7-cheeses") {
       // als player nr beneden ga en..
+      this.player.setTexture("lvl7-cheeseb");
       this.sound.play("gs2");
       this.cameras.main.shake(700);
       this.player.setScale(0.2);
@@ -176,23 +186,36 @@ export default class LevelSeven extends Phaser.Scene {
     //  CAMERAS
     this.horizontalWrap(this.player);
 
+    // LOOP
+    // console.log(this.player.y);
+    if (this.player.y < this.n * -1000) {
+      this.collage.setY(this.n * -5000);
+      this.n += 1;
+      this.collage.setX(480);
+    }
+    if (this.player.y < this.n * -2000) {
+      this.background.setY(this.n * -4000);
+      this.n += 1;
+      this.background.setX(480);
+    }
+
     // MUSIC
-    if (this.cheesesCollected == 350) {
+    if (this.cheesesCollected <= 370) {
       this.beep.play();
     }
-    // if (this.cheesesCollected == 300) {
-
-    // }
 
     //  RESTART 1
     const bottomPlatform = this.findBottomMostPlatform();
-    if (this.player.y > bottomPlatform.y + 100) {
+    if (this.player.y > bottomPlatform.y + 600) {
       this.scene.start("levelSix"); //scene.scene.restart(data);
       this.sound.play("lvl7-restart");
+      this.music.stop("lvl1-song");
+      this.beep.stop("lvl3-song");
+      this.jump.stop("lvl7-jump");
     }
     //  RESTART 2
-    if (this.cheesesCollected == 0) {
-      this.scene.start("levelOne");
+    if (this.cheesesCollected >= 370) {
+      this.scene.start("levelEight");
       this.sound.play("lvl7-restart");
       this.music.stop("songBusy");
       this.beep.stop("lvl7-songBeep");

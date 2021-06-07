@@ -1,19 +1,88 @@
 *{
     padding:0;
     margin:0;
-    background-image:url(/experiments/006_ratRace0/assets/web_bg_3.png);;
+    background-image:url(/experiments/006_ratRace0/assets/web_bg_3.png);
 }
 
 body{
     display: block;
+    position: relative;
     margin-left: auto;
-    margin-right: auto;
-    width: 30%;  
+    margin-right: auto
 }
 
-.linksTo {
+li.game {
+position: absolute;
+width: 1280px;
+height: 102px;
+left: calc(50% - 1280px/2);
+top: 250px;
+
+font-family: Roboto;
+font-weight: 900;
+font-size: 100px;
+line-height: 117px;
+text-align: center;
+
+color: #FFFF00;
+}
+
+a{
+    text-decoration: none;
+}
+ ul {
+    list-style-type: none;
+ }
+
+li.processfolio {
+position: absolute;
+width: 1280px;
+height: 102px;
+left: calc(50% - 1280px/2);
+top: 500px;
+
+font-family: Roboto;
+font-weight: 900;
+font-size: 100px;
+line-height: 117px;
+text-align: center;
+
+color: #F46B17;
+}
+
+li.game a:hover {
+    text-decoration: none;
+    font-style: italic;
+    color: #ffff00;
+  } 
+  li.processfolio a:hover {
+    text-decoration: none;
+    font-style: italic;
+    color: #F46B17;
+  } 
+
+
+div.footer {
+position: absolute;
+width: 169px;
+height: 23px;
+left: 556px;
+top: 682px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 23px;
+text-align: center;
+
+color: #41B1F6;
+}
+
+
+/* Previous code */
+/* .linksTo {
     position: relative;
-    /* vertical-align: middle; */
 }
 
 .centeredLinks {
@@ -38,10 +107,10 @@ li {
 
 
 a{
-    text-decoration: none;
+    
 }
 li a:hover {
     text-decoration: none;
     font-style: italic;
     color: #ffff00;
-  }
+  } */

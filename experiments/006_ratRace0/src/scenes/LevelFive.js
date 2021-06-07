@@ -15,7 +15,7 @@ export default class LevelFive extends Phaser.Scene {
   /** @type {Phaser.Physics.Arcade.Group} */
   cheeses;
 
-  cheesesCollected = 229;
+  cheesesCollected = 187;
 
   /** @type {Phaser.GameObjects.Text} */
   cheesesCollectedText;
@@ -25,26 +25,31 @@ export default class LevelFive extends Phaser.Scene {
   }
 
   init() {
-    this.cheesesCollected = 229;
+    this.cheesesCollected = 187;
+    this.n = 1;
   }
 
   create() {
-    //  CURSORS
+    // GENERAL
     console.log("create level 5");
+    const gameWidth = this.scale.width;
+    const gameHeight = this.scale.height;
+
+    //  CURSORS
     this.cursors = this.input.keyboard.createCursorKeys();
 
     //  MUSIC
-    this.music = this.sound.add("songBusy");
+    this.music = this.sound.add("lvl5-song");
     this.music.loop = true;
     this.music.play();
 
     //  BACKGROUND
-    const gameWidth = this.scale.width;
-    const gameHeight = this.scale.height;
     this.background = this.add
       .image(gameWidth, gameHeight + 40, "lvl5-bg") // zoda ge geen zwarte balk krijgt v onder
       .setOrigin(1) //origin is linksonder van afbeelding
-      .setScrollFactor(2);
+      .setScrollFactor(10);
+
+    // COLLAGE
     this.collage = this.add
       .image(gameWidth, gameHeight + 45, "lvl5-col") // zoda ge geen zwarte balk krijgt v onder
       .setOrigin(1) //origin is linksonder van afbeelding
@@ -70,7 +75,7 @@ export default class LevelFive extends Phaser.Scene {
     //  PLAYER
     this.player = this.physics.add
       .sprite(240, 320, "lvl5-rat")
-      .setScale(0.5, 3)
+      .setScale(3)
       .setGravityY(300); //300 = sweet jump, -300 tp make it go faster
 
     //  CHEESE
@@ -105,18 +110,18 @@ export default class LevelFive extends Phaser.Scene {
       font: "24px sans-serif",
     };
     this.cheesesCollectedText = this.add
-      .text(240, 10, "220 Cheeses", style)
+      .text(240, 10, "187 Cheeses", style)
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
 
     //  CHEAT CODE
     this.input.keyboard.once("keydown-L", () => {
-      this.scene.start("levelEight");
-      this.music.stop("songBusy");
+      this.scene.start("levelLoser");
+      this.music.stop("lvl5-song");
     });
     this.input.keyboard.once("keydown-N", () => {
       this.scene.start("levelSix");
-      this.music.stop("songBusy");
+      this.music.stop("lvl5-song");
     });
   }
 
@@ -129,7 +134,7 @@ export default class LevelFive extends Phaser.Scene {
       this.player.setVelocityY(-500);
       this.player.setTexture("lvl5-rat");
 
-      //this.cameras.main.shake(500);
+      this.cameras.main.shake(500);
     }
     //      UNBOUNCE
     const vy = this.player.body.velocity.y; // naar beneden gaan
@@ -171,22 +176,16 @@ export default class LevelFive extends Phaser.Scene {
     this.horizontalWrap(this.player);
 
     // LOOP
-    // if (this.player.y < -12000) {
-    //   this.background.setY(-5500);
-    //   this.background.setX(480);
-    // }
-    // if (this.player.y < -20000) {
-    //   this.background.setY(-5500);
-    //   this.background.setX(480);
-    // }
-    // if (this.player.y < -22000) {
-    //   this.background.setY(-5500);
-    //   this.background.setX(480);
-    // }
-
-    // MUSIC
-    if (this.cheesesCollected == 300) {
-      this.music.play();
+    // console.log(this.player.y);
+    if (this.player.y < this.n * -500) {
+      this.background.setY(this.n * -6000);
+      this.n += 1;
+      this.background.setX(480);
+    }
+    if (this.player.y < this.n * -6000) {
+      this.collage.setY(this.n * -12000);
+      this.n += 1;
+      this.collage.setX(480);
     }
 
     //  TO NEXT SCENE:
@@ -195,13 +194,13 @@ export default class LevelFive extends Phaser.Scene {
     if (this.player.y > bottomPlatform.y + 100) {
       this.scene.start("levelFour"); //scene.scene.restart(data);
       this.sound.play("lvl5-restart");
-      this.music.stop("songBusy");
+      this.music.stop("lvl5-song");
     }
     //  Level Six
-    if (this.cheesesCollected == 365) {
+    if (this.cheesesCollected >= 253) {
       this.scene.start("levelSix");
       this.sound.play("caughtCheese");
-      this.music.stop("songBusy");
+      this.music.stop("lvl5-song");
     }
   }
   // ========= END OF UPDATE =========(hier starten alle aparte functies)
@@ -256,7 +255,7 @@ export default class LevelFive extends Phaser.Scene {
     this.sound.play("caughtCheese");
     this.cameras.main.shake(1000);
     this.player.setTexture("lvl5-cheese");
-    this.player.setScale(0.1, 3);
+    this.player.setScale(1, 3);
   }
 
   //  PLATFORMS

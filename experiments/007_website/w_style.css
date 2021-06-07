@@ -1,50 +1,364 @@
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
 }
-
 body {
-    background-color: black;
+  background-image: url(/experiments/006_ratRace0/assets/web_bg_5.png);
+  background-color: black;
 }
 main {
-    /* iMac - 1 */
-position: relative;
-width: 1280px;
-height: 5075px;
-background: #FFFF00;
+  /* iMac - 1 */
+  position: relative;
+  width: 1280px;
+  height: 13511px;
+  background: #000000;
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+h3 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 75px;
+  line-height: 88px;
+  /* identical to box height */
+  color: #f46b17;
+}
+h4 {
+  font-style: italic;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 59px;
+  /* identical to box height */
+
+  color: #25e90b;
+}
+h5 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 29px;
+
+  color: #e040f6;
+}
+p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 29px;
+
+  color: #41b1f6;
+}
+img {
+  width: 100%;
+  object-fit: cover;
 }
 
-h1 {
-    position: absolute;
-    width: 908px;
-    height: 528px;
-    left: 186px;
-    top: 199px;
-    
-    font-family: Roboto;
-    font-style: italic;
-    font-weight: 900;
-    font-size: 200px;
-    line-height: 176px;
-    text-align: center;
-    
-    color: #000000;
+/************* INTRO *************/
+.intro {
+  position: absolute;
+  width: 1211px;
+  height: 702px;
+  left: calc(50% - 1211px / 2 + 1.5px);
+  top: calc(50% - 702px / 2 - 6091.5px);
+
+  font-family: Roboto;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 200px;
+  line-height: 234px;
+  text-align: center;
+
+  color: #ffff00;
 }
 
-h2 {
-  
-position: absolute;
-width: 1189px;
-height: 117px;
-left: 40px;
-top: 874px;
+/************* START *************/
+.start {
+  position: absolute;
+  width: 1189px;
+  height: 117px;
+  left: calc(50% - 1189px / 2 - 0.5px);
+  top: calc(50% - 117px / 2 - 5320px);
 
-font-family: Roboto;
-font-style: italic;
-font-weight: 900;
-font-size: 100px;
-line-height: 117px;
-text-align: center;
+  font-family: Roboto;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 100px;
+  line-height: 117px;
+  text-align: center;
 
-color: #000000;
+  color: #f46b17;
+}
+
+/************************** CONCEPT **************************/
+.concept {
+  position: absolute;
+  width: 340px;
+  height: 88px;
+  left: calc(50% - 340px / 2);
+  top: 1494px;
+}
+/* .style {
+  position: absolute;
+  width: 1190px;
+  height: 88px;
+  left: calc(50% - 1190px / 2);
+  top: 1494px;
+
+  background-color: #25e90b;
+} */
+
+.ratRace {
+  position: absolute;
+  width: 181px;
+  height: 59px;
+  left: calc(50% - 181px / 2 - 0.5px);
+  top: 1582px;
+}
+
+.CCU {
+  position: absolute;
+  width: 238px;
+  height: 29px;
+  left: calc(50% - 238px / 2 - 283px);
+  top: 1686px;
+}
+.CW {
+  position: absolute;
+  width: 109px;
+  height: 29px;
+  left: calc(50% - 109px / 2 - 282.5px);
+  top: 1744px;
+}
+.CRR {
+  position: absolute;
+  width: 207px;
+  height: 29px;
+  left: calc(50% - 207px / 2 - 282.5px);
+  top: 1865px;
+}
+.h5-style {
+  position: absolute;
+  width: 535px;
+  height: 30px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 1686px;
+
+  background: #41b1f6;
+}
+
+.CU {
+  position: absolute;
+  width: 534px;
+  height: 58px;
+  left: calc(50% - 534px / 2 + 282px);
+  top: 1686px;
+  font-size: 25px;
+}
+.W {
+  position: absolute;
+  width: 534px;
+  height: 118px;
+  left: calc(50% - 534px / 2 + 282px);
+  top: 1745px;
+  font-size: 25px;
+}
+.RR {
+  position: absolute;
+  width: 534px;
+  height: 29px;
+  left: calc(50% - 534px / 2 + 282px);
+  top: 1865px;
+  font-size: 25px;
+}
+
+.Cvideo {
+  position: absolute;
+  width: 1100px;
+  height: 586px;
+  left: calc(50% - 1100px / 2);
+  top: 1939px;
+
+  background: #c4c4c4;
+}
+
+/************************** PROCESS **************************/
+
+.process {
+  position: absolute;
+  width: 332px;
+  height: 88px;
+  left: calc(50% - 332px / 2);
+  top: 2795px;
+}
+.externalStimuli {
+  position: absolute;
+  width: 341px;
+  height: 59px;
+  left: calc(50% - 341px / 2 - 0.5px);
+  top: 3508px;
+}
+.imgeS {
+  position: absolute;
+  width: 1190px;
+  height: 625px;
+  left: calc(50% - 1190px / 2);
+  top: 2883px;
+}
+.eRS {
+  position: absolute;
+  width: 207px;
+  height: 29px;
+  left: calc(50% - 207px / 2 - 282.5px);
+  top: 3612px;
+}
+.eW {
+  position: absolute;
+  width: 48px;
+  height: 29px;
+  left: calc(50% - 48px / 2 - 283px);
+  top: 3673px;
+}
+.eE {
+  position: absolute;
+  width: 139px;
+  height: 29px;
+  left: calc(50% - 139px / 2 - 282.5px);
+  top: 3701px;
+}
+.aeRS {
+  position: absolute;
+  width: 535px;
+  height: 30px;
+  left: calc(50% - 535px / 2 + 282.5px);
+  top: 3612px;
+  font-size: 25px;
+}
+.aeW {
+  position: absolute;
+  width: 535px;
+  height: 30px;
+  left: calc(50% - 535px / 2 + 282.5px);
+  top: 3673px;
+  font-size: 25px;
+}
+.aeE {
+  position: absolute;
+  width: 535px;
+  height: 30px;
+  left: calc(50% - 535px / 2 + 282.5px);
+  top: 3701px;
+  font-size: 25px;
+}
+/**************************************** PHOTOSHOP ****************************************/
+.pePhotoVideo {
+  position: absolute;
+  left: calc(50% - 1100px / 2);
+  top: 3775px;
+  background: black;
+}
+.nPhotoVideo {
+  position: absolute;
+  width: 1100px;
+  height: 23px;
+  left: calc(50% - 1100px / 2);
+  top: 4361px;
+}
+/**************************************** BLENDER ****************************************/
+.imgExBlendOne {
+  position: absolute;
+  width: 535px;
+  height: 578px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 4429px;
+}
+.exText {
+  position: absolute;
+  width: 535px;
+  height: 578px;
+  left: calc(50% - 535px / 2 + 282.5px);
+  top: 4429px;
+  font-size: 25px;
+}
+.nBlendOne {
+  position: absolute;
+  width: 1100px;
+  height: 23px;
+  left: calc(50% - 1100px / 2);
+  top: 5007px;
+}
+.imgExBlendTwo {
+  position: absolute;
+  width: 1100px;
+  height: 857px;
+  left: calc(50% - 1100px / 2);
+  top: 5075px;
+}
+.nBlendTwo {
+  position: absolute;
+  width: 1100px;
+  height: 23px;
+  left: calc(50% - 1100px / 2);
+  top: 5932px;
+}
+.BlendVideoOne {
+  position: absolute;
+  width: 1100px;
+  height: 619px;
+  left: calc(50% - 1100px / 2);
+  top: 6000px;
+}
+.nBlendVideoOne {
+  position: absolute;
+  width: 535px;
+  height: 23px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 6619px;
+}
+.BlendVideoTwo {
+  position: absolute;
+  width: 1100px;
+  height: 619px;
+  left: calc(50% - 1100px / 2);
+  top: 6687px;
+}
+.nBlendVideoTwo {
+  position: absolute;
+  width: 535px;
+  height: 23px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 7306px;
+}
+.BlendVideoThree {
+  position: absolute;
+  width: 535px;
+  height: 301px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 7374px;
+  background: black;
+}
+.nBlendVideoThree {
+  position: absolute;
+  width: 535px;
+  height: 23px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 7675px;
+}
+.BlendVideoFour {
+  position: absolute;
+  width: 535px;
+  height: 301px;
+  left: calc(50% - 535px / 2 + 282.5px);
+  top: 7374px;
+
+  background: black;
+}
+.nBlendVideoFour {
+  position: absolute;
+  width: 535px;
+  height: 23px;
+  left: calc(50% - 535px / 2 + 282.5px);
+  top: 7675px;
 }
