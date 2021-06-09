@@ -16,6 +16,7 @@ export default class LevelFive extends Phaser.Scene {
   cheeses;
 
   cheesesCollected = 187;
+  n = 1;
 
   /** @type {Phaser.GameObjects.Text} */
   cheesesCollectedText;
@@ -90,6 +91,7 @@ export default class LevelFive extends Phaser.Scene {
     this.player.body.checkCollision.left = true;
     this.player.body.checkCollision.right = true;
 
+    this.physics.add.collider(this.platforms, this.cheeses);
     //  OVERLAPS
     //      CARROT & PLAYER (handles overlap between carrot and player)
     this.physics.add.overlap(
@@ -164,9 +166,9 @@ export default class LevelFive extends Phaser.Scene {
     });
 
     //  CURSORS MOVEMENT
-    if (this.cursors.left.isDown && !touchingDown) {
+    if (this.cursors.right.isDown && !touchingDown) {
       this.player.setVelocityX(-600);
-    } else if (this.cursors.right.isDown && !touchingDown) {
+    } else if (this.cursors.left.isDown && !touchingDown) {
       this.player.setVelocityX(600);
     } else {
       this.player.setVelocityX(0);

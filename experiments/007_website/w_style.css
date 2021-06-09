@@ -23,7 +23,8 @@ h3 {
   font-weight: bold;
   font-size: 75px;
   line-height: 88px;
-  /* identical to box height */
+  text-align: center;
+
   color: #f46b17;
 }
 h4 {
@@ -31,8 +32,8 @@ h4 {
   font-weight: 500;
   font-size: 50px;
   line-height: 59px;
-  /* identical to box height */
 
+  text-align: center;
   color: #25e90b;
 }
 h5 {
@@ -41,6 +42,7 @@ h5 {
   font-size: 25px;
   line-height: 29px;
 
+  text-align: center;
   color: #e040f6;
 }
 p {
@@ -59,12 +61,11 @@ img {
 /************* INTRO *************/
 .intro {
   position: absolute;
-  width: 1211px;
+  width: 1190px;
   height: 702px;
-  left: calc(50% - 1211px / 2 + 1.5px);
-  top: calc(50% - 702px / 2 - 6091.5px);
+  left: calc(50% - 1190px / 2);
+  top: 322px;
 
-  font-family: Roboto;
   font-style: italic;
   font-weight: 900;
   font-size: 200px;
@@ -80,9 +81,8 @@ img {
   width: 1189px;
   height: 117px;
   left: calc(50% - 1189px / 2 - 0.5px);
-  top: calc(50% - 117px / 2 - 5320px);
+  top: 1354px;
 
-  font-family: Roboto;
   font-style: italic;
   font-weight: 900;
   font-size: 100px;
@@ -95,58 +95,60 @@ img {
 /************************** CONCEPT **************************/
 .concept {
   position: absolute;
-  width: 340px;
-  height: 88px;
-  left: calc(50% - 340px / 2);
-  top: 1494px;
-}
-/* .style {
-  position: absolute;
   width: 1190px;
   height: 88px;
   left: calc(50% - 1190px / 2);
-  top: 1494px;
+  top: 1471px;
 
   background-color: #25e90b;
+}
+
+/* .img-concept {
+  position: absolute;
+  width: 1190px;
+  height: 770px;
+  left: calc(50% - 1190px / 2);
+  top: 1559px;
+
+  background: #c4c4c4;
 } */
 
 .ratRace {
   position: absolute;
-  width: 181px;
+  width: 1190px;
   height: 59px;
-  left: calc(50% - 181px / 2 - 0.5px);
-  top: 1582px;
+  left: calc(50% - 1190px / 2);
+  top: 2329px;
+
+  background-color: #e040f6;
 }
 
 .CCU {
   position: absolute;
-  width: 238px;
+  width: 535px;
   height: 29px;
-  left: calc(50% - 238px / 2 - 283px);
-  top: 1686px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 2433px;
+
+  background-color: #41b1f6;
 }
 .CW {
   position: absolute;
-  width: 109px;
+  width: 535px;
   height: 29px;
-  left: calc(50% - 109px / 2 - 282.5px);
-  top: 1744px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 2491px;
+
+  background-color: #41b1f6;
 }
 .CRR {
   position: absolute;
-  width: 207px;
-  height: 29px;
-  left: calc(50% - 207px / 2 - 282.5px);
-  top: 1865px;
-}
-.h5-style {
-  position: absolute;
   width: 535px;
-  height: 30px;
+  height: 29px;
   left: calc(50% - 535px / 2 - 282.5px);
-  top: 1686px;
+  top: 2610px;
 
-  background: #41b1f6;
+  background-color: #41b1f6;
 }
 
 .CU {
@@ -154,7 +156,7 @@ img {
   width: 534px;
   height: 58px;
   left: calc(50% - 534px / 2 + 282px);
-  top: 1686px;
+  top: 2433px;
   font-size: 25px;
 }
 .W {
@@ -162,7 +164,7 @@ img {
   width: 534px;
   height: 118px;
   left: calc(50% - 534px / 2 + 282px);
-  top: 1745px;
+  top: 2492px;
   font-size: 25px;
 }
 .RR {
@@ -170,70 +172,75 @@ img {
   width: 534px;
   height: 29px;
   left: calc(50% - 534px / 2 + 282px);
-  top: 1865px;
+  top: 2612px;
+
   font-size: 25px;
 }
 
-.Cvideo {
-  position: absolute;
-  width: 1100px;
-  height: 586px;
-  left: calc(50% - 1100px / 2);
-  top: 1939px;
-
-  background: #c4c4c4;
-}
-
 /************************** PROCESS **************************/
-
+/************** EXTERNAL STIMULI ************/
 .process {
   position: absolute;
-  width: 332px;
+  width: 1190px;
   height: 88px;
-  left: calc(50% - 332px / 2);
-  top: 2795px;
+  left: calc(50% - 1190px / 2);
+  top: 2821px;
+
+  background-color: #25e90b;
 }
-.externalStimuli {
-  position: absolute;
-  width: 341px;
-  height: 59px;
-  left: calc(50% - 341px / 2 - 0.5px);
-  top: 3508px;
-}
+
 .imgeS {
   position: absolute;
   width: 1190px;
-  height: 625px;
+  height: 975px;
   left: calc(50% - 1190px / 2);
-  top: 2883px;
+  top: 2909px;
 }
+
+.externalStimuli {
+  position: absolute;
+  width: 1190px;
+  height: 59px;
+  left: calc(50% - 1190px / 2);
+  top: 3884px;
+
+  background-color: #e040f6;
+}
+
 .eRS {
   position: absolute;
-  width: 207px;
+  width: 535px;
   height: 29px;
-  left: calc(50% - 207px / 2 - 282.5px);
-  top: 3612px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 3989px;
+
+  background-color: #41b1f6;
 }
 .eW {
   position: absolute;
-  width: 48px;
-  height: 29px;
-  left: calc(50% - 48px / 2 - 283px);
-  top: 3673px;
+  width: 535px;
+  height: 30px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 4049px;
+
+  background-color: #41b1f6;
 }
 .eE {
   position: absolute;
-  width: 139px;
+  width: 535px;
   height: 29px;
-  left: calc(50% - 139px / 2 - 282.5px);
-  top: 3701px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 4078px;
+
+  background-color: #41b1f6;
 }
 .aeRS {
   position: absolute;
   width: 535px;
   height: 30px;
   left: calc(50% - 535px / 2 + 282.5px);
-  top: 3612px;
+  top: 3989px;
+
   font-size: 25px;
 }
 .aeW {
@@ -241,7 +248,8 @@ img {
   width: 535px;
   height: 30px;
   left: calc(50% - 535px / 2 + 282.5px);
-  top: 3673px;
+  top: 4050px;
+
   font-size: 25px;
 }
 .aeE {
@@ -249,14 +257,17 @@ img {
   width: 535px;
   height: 30px;
   left: calc(50% - 535px / 2 + 282.5px);
-  top: 3701px;
+  top: 4078px;
+
   font-size: 25px;
 }
 /**************************************** PHOTOSHOP ****************************************/
 .pePhotoVideo {
   position: absolute;
+  width: 1100px;
+  height: 586px;
   left: calc(50% - 1100px / 2);
-  top: 3775px;
+  top: 4153px;
   background: black;
 }
 .nPhotoVideo {
@@ -264,7 +275,7 @@ img {
   width: 1100px;
   height: 23px;
   left: calc(50% - 1100px / 2);
-  top: 4361px;
+  top: 4739px;
 }
 /**************************************** BLENDER ****************************************/
 .imgExBlendOne {
@@ -272,71 +283,64 @@ img {
   width: 535px;
   height: 578px;
   left: calc(50% - 535px / 2 - 282.5px);
-  top: 4429px;
+  top: 4807px;
 }
 .exText {
   position: absolute;
   width: 535px;
   height: 578px;
   left: calc(50% - 535px / 2 + 282.5px);
-  top: 4429px;
-  font-size: 25px;
+  top: 4807px;
 }
 .nBlendOne {
   position: absolute;
   width: 1100px;
   height: 23px;
   left: calc(50% - 1100px / 2);
-  top: 5007px;
+  top: 5385px;
 }
 .imgExBlendTwo {
   position: absolute;
   width: 1100px;
   height: 857px;
   left: calc(50% - 1100px / 2);
-  top: 5075px;
+  top: 5453px;
 }
 .nBlendTwo {
   position: absolute;
   width: 1100px;
   height: 23px;
   left: calc(50% - 1100px / 2);
-  top: 5932px;
+  top: 6310px;
 }
 .BlendVideoOne {
   position: absolute;
-  width: 1100px;
-  height: 619px;
   left: calc(50% - 1100px / 2);
-  top: 6000px;
+  top: 6378px;
 }
 .nBlendVideoOne {
   position: absolute;
   width: 535px;
   height: 23px;
   left: calc(50% - 535px / 2 - 282.5px);
-  top: 6619px;
+  top: 6997px;
 }
 .BlendVideoTwo {
   position: absolute;
-  width: 1100px;
-  height: 619px;
   left: calc(50% - 1100px / 2);
-  top: 6687px;
+  top: 7065px;
 }
 .nBlendVideoTwo {
   position: absolute;
   width: 535px;
   height: 23px;
   left: calc(50% - 535px / 2 - 282.5px);
-  top: 7306px;
+  top: 7684px;
 }
 .BlendVideoThree {
   position: absolute;
-  width: 535px;
-  height: 301px;
   left: calc(50% - 535px / 2 - 282.5px);
-  top: 7374px;
+  top: 7752px;
   background: black;
 }
 .nBlendVideoThree {
@@ -344,14 +348,12 @@ img {
   width: 535px;
   height: 23px;
   left: calc(50% - 535px / 2 - 282.5px);
-  top: 7675px;
+  top: 8053px;
 }
 .BlendVideoFour {
   position: absolute;
-  width: 535px;
-  height: 301px;
   left: calc(50% - 535px / 2 + 282.5px);
-  top: 7374px;
+  top: 7752px;
 
   background: black;
 }
@@ -360,5 +362,116 @@ img {
   width: 535px;
   height: 23px;
   left: calc(50% - 535px / 2 + 282.5px);
-  top: 7675px;
+  top: 8053px;
+}
+
+/************** INTERNAL STIMULI ************/
+
+.img-in-one {
+  position: absolute;
+  width: 1190px;
+  height: 1062px;
+  left: calc(50% - 1190px / 2 - 1px);
+  top: 8257px;
+}
+.internalStimuli {
+  position: absolute;
+  width: 1190px;
+  height: 59px;
+  left: calc(50% - 1190px / 2 - 1px);
+  top: 9319px;
+
+  background-color: #e040f6;
+}
+.in-rs {
+  position: absolute;
+  width: 535px;
+  height: 29px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 9423px;
+
+  background-color: #41b1f6;
+}
+.in-why {
+  position: absolute;
+  width: 535px;
+  height: 29px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 9483px;
+
+  background-color: #41b1f6;
+}
+.in-exp {
+  position: absolute;
+  width: 535px;
+  height: 29px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 9512px;
+
+  background-color: #41b1f6;
+}
+.in-rs-ans {
+  position: absolute;
+  width: 535px;
+  height: 54px;
+  left: calc(50% - 535px / 2 + 281.5px);
+  top: 9422px;
+
+  font-size: 25px;
+}
+.in-why-ans {
+  position: absolute;
+  width: 535px;
+  height: 30px;
+  left: calc(50% - 535px / 2 + 281.5px);
+  top: 9482px;
+
+  font-size: 25px;
+}
+.in-exp-ans {
+  position: absolute;
+  width: 535px;
+  height: 30px;
+  left: calc(50% - 535px / 2 + 281.5px);
+  top: 9512px;
+
+  font-size: 25px;
+}
+/**************************************** BODY ****************************************/
+.img-in-two {
+  position: absolute;
+  width: 1100px;
+  height: 578px;
+  left: calc(50% - 1100px / 2);
+  top: 9589px;
+}
+.n-in-two {
+  position: absolute;
+  width: 1100px;
+  height: 23px;
+  left: calc(50% - 1100px / 2);
+  top: 10167px;
+}
+.in-text {
+  position: absolute;
+  width: 535px;
+  height: 478px;
+  left: calc(50% - 535px / 2 - 282.5px);
+  top: 10235px;
+
+  font-size: 20px;
+}
+.img-in-three {
+  position: absolute;
+  width: 535px;
+  height: 455px;
+  left: calc(50% - 535px / 2 + 282.5px);
+  top: 10235px;
+}
+.n-in-three {
+  position: absolute;
+  width: 535px;
+  height: 23px;
+  left: calc(50% - 535px / 2 + 282.5px);
+  top: 10690px;
 }
