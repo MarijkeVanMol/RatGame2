@@ -11,43 +11,40 @@
 /* ============ BORING ============ */
     body.boring {
           background-color: black;
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-          width: 29%;
+      
     }
     .boring-wrapper {
-          visibility: hidden;
+          display: none;
     }
     body.boring .boring-wrapper {
-          visibility: visible;
+          display: block;
     }
 
 /* ============ BUSY ============ */
       body.busy {
         background-image:url(./assets/web_bg_3.png);
         display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 29%;
-        height: 50%;
+  
       }
       .busy-wrapper {
-        visibility: hidden;
+       display: none;
 
       }
       body.busy .busy-wrapper {
-        visibility: visible;
+        display: block;
       }
 
 /* ============ INTRO ============ */
-      body.intro {
+      body{
+              display: block;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+      }
+      body.intro, body.busy {
         background-image:url(./assets/web_bg_3.png);
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 29%;
-        height: 50%;
+
       }
       .intro-wrapper {
         visibility: hidden;
@@ -93,7 +90,6 @@
   </head>
   <body class="boring">
     <div class="boring-wrapper"></div>
-    <div><img src="./assets/web_bg_4.png" alt=""></div>
     <div class="game-container"><script type="module" src="src/main.js"></script></div>
   </div>
 </div>
@@ -101,7 +97,6 @@
 
   <body class="busy">
     <div class="busy-wrapper"></div>
-      <div><img src="./assets/web_bg_4.png" alt=""></div>
         <div class="game-container"><script type="module" src="src/main.js"></script></div>
     </div>
   </body>
