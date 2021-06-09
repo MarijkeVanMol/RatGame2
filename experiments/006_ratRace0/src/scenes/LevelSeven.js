@@ -48,10 +48,10 @@ export default class LevelSeven extends Phaser.Scene {
     this.jump = this.sound.add("lvl7-jump");
 
     //  BACKGROUND
-    this.background = this.add
-      .image(gameWidth, gameHeight + 200, "lvl7-bg") // zoda ge geen zwarte balk krijgt v onder
-      .setOrigin(1) //origin is linksonder van afbeelding
-      .setScrollFactor(3);
+    // this.background = this.add
+    //   .image(gameWidth, gameHeight + 200, "lvl7-bg") // zoda ge geen zwarte balk krijgt v onder
+    //   .setOrigin(1) //origin is linksonder van afbeelding
+    //   .setScrollFactor(3);
 
     //  COLLAGE
     this.collage = this.add
@@ -59,15 +59,21 @@ export default class LevelSeven extends Phaser.Scene {
       .setOrigin(1) //origin is linksonder van afbeelding
       .setScrollFactor(5);
 
+    //  lBG
+    this.lbackground = this.add
+      .image(gameWidth, gameHeight, "lvl7-lbg") // zoda ge geen zwarte balk krijgt v onder
+      .setOrigin(1) //origin is linksonder van afbeelding
+      .setScrollFactor(2);
+
     //  PLATFORMS
     this.platforms = this.physics.add.staticGroup();
-    for (let i = 0; i < 10; ++i) {
+    for (let i = 0; i < 5; ++i) {
       const x = Phaser.Math.Between(0, 430);
-      const y = 60 * i;
+      const y = 120 * i;
 
       /** @type {Phaser.Physics.Arcade.Sprite} */
-      const platform = this.platforms.create(x, y, "lvl7-plat");
-      platform.scaleX = 1;
+      const platform = this.platforms.create(x, y, "lvl7-rat");
+      platform.scaleX = 4;
       platform.scaleY = 1;
 
       /** @type {Phaser.Physics.Arcade.StaticBody} */
@@ -77,8 +83,8 @@ export default class LevelSeven extends Phaser.Scene {
 
     //  PLAYER
     this.player = this.physics.add
-      .sprite(240, 320, "lvl7-cheese")
-      .setScale(0.2)
+      .sprite(240, 320, "lvl7-plat")
+      .setScale(1) //0.2
       .setGravityY(200); //300 = sweet jump, -300 tp make it go faster
 
     //  CHEESE
@@ -141,19 +147,15 @@ export default class LevelSeven extends Phaser.Scene {
     const touchingDown = this.player.body.touching.down;
     if (touchingDown) {
       this.player.setVelocityY(-800);
-      this.player.setTexture("lvl7-cheeses");
       this.jump.play();
-      this.player.setScale(0.2);
       //this.cameras.main.shake(500);
     }
     //      UNBOUNCE
     const vy = this.player.body.velocity.y; // naar beneden gaan
     if (vy > 0 && this.player.texture.key != "lvl7-cheeses") {
       // als player nr beneden ga en..
-      this.player.setTexture("lvl7-cheeseb");
       this.sound.play("gs2");
       this.cameras.main.shake(700);
-      this.player.setScale(0.2);
     }
 
     //  PLATFORMS
@@ -188,15 +190,20 @@ export default class LevelSeven extends Phaser.Scene {
 
     // LOOP
     // console.log(this.player.y);
-    if (this.player.y < this.n * -1000) {
-      this.collage.setY(this.n * -5000);
+    if (this.player.y < this.n * -320) {
+      this.collage.setY(this.n * -640);
       this.n += 1;
       this.collage.setX(480);
     }
-    if (this.player.y < this.n * -2000) {
-      this.background.setY(this.n * -4000);
+    // if (this.player.y < this.n * -1000) {
+    //   this.background.setY(this.n * -5000);
+    //   this.n += 1;
+    //   this.background.setX(480);
+    // }
+    if (this.player.y < this.n * -320) {
+      this.lbackground.setY(this.n * -640);
       this.n += 1;
-      this.background.setX(480);
+      this.lbackground.setX(480);
     }
 
     // MUSIC
@@ -248,8 +255,8 @@ export default class LevelSeven extends Phaser.Scene {
     const y = sprite.y - sprite.displayHeight;
 
     /** @type {Phaser.Physics.Arcade.Sprite} */
-    const cheese = this.cheeses.get(sprite.x, y, "lvl7-rat");
-    cheese.setScale(2);
+    const cheese = this.cheeses.get(sprite.x, y, "lvl7-cheeses");
+    cheese.setScale(1, 2);
 
     cheese.setActive(true); // set active
     cheese.setVisible(true); // set visible
@@ -268,15 +275,12 @@ export default class LevelSeven extends Phaser.Scene {
   handleCollectCheese(player, cheese) {
     this.cheeses.killAndHide(cheese); // hide from display
     this.physics.world.disableBody(cheese.body); // disable from physics world
-    this.cheesesCollected--;
+    this.cheesesCollected++;
     const value = `${this.cheesesCollected} Cheeses`;
     this.cheesesCollectedText.text = value;
     this.sound.play("caughtCheese");
-    this.cameras.main.shake(700);
+    this.cameras.main.shake(1000);
     this.music.play();
-    this.player.setTexture("lvl7-cheeseb");
-    this.player.setScale(4);
-    cheese.setScale(4);
   }
 
   //  PLATFORMS

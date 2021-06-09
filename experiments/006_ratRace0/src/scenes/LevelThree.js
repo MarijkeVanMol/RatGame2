@@ -36,9 +36,15 @@ export default class LevelThree extends Phaser.Scene {
 
     // COLLAGE
     this.collage = this.add
-      .image(gameWidth, gameHeight + 45, "lvl3-col") // zoda ge geen zwarte balk krijgt v onder
-      .setOrigin(1) //origin is linksonder van afbeelding
+      .image(gameWidth, gameHeight + 45, "lvl3-col")
+      .setOrigin(1)
       .setScrollFactor(0.5);
+
+    // L
+    this.lbackground = this.add
+      .image(gameWidth, gameHeight, "lvl3-lbg")
+      .setOrigin(1)
+      .setScrollFactor(2);
 
     //  PLATFORMSs
     this.platforms = this.physics.add.staticGroup({});
@@ -74,6 +80,8 @@ export default class LevelThree extends Phaser.Scene {
     this.player.body.checkCollision.up = false;
     this.player.body.checkCollision.left = true;
     this.player.body.checkCollision.right = true;
+
+    this.physics.add.collider(this.platforms, this.cheeses);
     //  OVERLAPS
     //      CARROT & PLATFORMS
     this.physics.add.overlap(
@@ -150,9 +158,9 @@ export default class LevelThree extends Phaser.Scene {
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown && !touchingDown) {
-      this.player.setVelocityX(-700);
+      this.player.setVelocityX(-1000);
     } else if (this.cursors.right.isDown && !touchingDown) {
-      this.player.setVelocityX(700);
+      this.player.setVelocityX(1000);
     } else {
       this.player.setVelocityX(0);
     }
@@ -163,26 +171,19 @@ export default class LevelThree extends Phaser.Scene {
     //   console.log(this.player.y);
     // }
     this.horizontalWrap(this.player);
+
     //      PLAYER LOOP
     // console.log(this.player.y);
+    if (this.player.y < this.n * -320) {
+      this.lbackground.setY(this.n * -640);
+      this.n += 1;
+      this.lbackground.setX(480);
+    }
     if (this.player.y < this.n * -3000) {
       this.background.setY(this.n * -9000);
       this.n += 1;
       this.background.setX(480);
     }
-
-    // EX-CODE
-    // if (this.player.y < -150) {
-    //   // console.log('resetbackground');
-    //   this.background.setY(-4000);
-    //   this.background.setX(480);
-    // } else if (this.player.y < -4000) {
-    //   this.background.setY(-7000);
-    //   this.background.setX(480);
-    // } else if (this.player.y < -5000) {
-    //   this.background.setY(-11000);
-    //   this.background.setX(480);
-    // }
 
     //  TO NEXT SCENE
     //    normal loser route

@@ -52,6 +52,7 @@ export default class Loading extends Phaser.Scene {
     // LEVEL 3 ==== lvl3- ====
     this.load.image("lvl3-bg", "assets/lvl3-bg.png");
     this.load.image("lvl3-col", "assets/lvl3-collage.png");
+    this.load.image("lvl3-lbg", "assets/lvl3-L.png");
     this.load.image("lvl3-plat", "assets/lvl3-plat1.png");
     this.load.image("lvl3-rat", "assets/rat_busy.png");
     this.load.image("lvl3-ratj", "assets/rat_jump_busy.png");
@@ -90,8 +91,9 @@ export default class Loading extends Phaser.Scene {
     // LEVEL 7 ==== lvl7- ====
     this.load.image("lvl7-bg", "assets/lvl7-bg.png"); // set back to BG_busy
     this.load.image("lvl7-col", "assets/lvl7-collage.png");
+    this.load.image("lvl7-lbg", "assets/lvl7-L.png");
     this.load.image("lvl7-plat", "assets/lvl7-plat.png");
-    this.load.image("lvl7-rat", "assets/rat_lvl7.png");
+    this.load.image("lvl7-rat", "assets/rat_busy.png");
     this.load.image("lvl7-cheeses", "assets/c_l7s.png");
     this.load.image("lvl7-cheeseb", "assets/c_l7b.png");
     // LEVEL 7 = SOUND
@@ -110,10 +112,11 @@ export default class Loading extends Phaser.Scene {
     this.load.image("lvl8-rat", "assets/rbo_2.png");
     this.load.image("lvl8-cheese", "assets/cbo_2.png");
 
-    // LEVEL 9 ==== lvl8-/lvl4- ====
+    // LEVEL 9 ==== lvl9-/lvl3- ====
     this.load.image("lvl9-bg", "assets/lvl3-bg.png");
     this.load.image("lvl9-col", "assets/lvl3-collage.png");
-    this.load.image("lvl9-plat", "assets/lvl3-plat1.png");
+    this.load.image("lvl9-pbg", "assets/lvl9-platBG.png");
+    this.load.image("lvl9-plat", "assets/lvl9-plat.png");
     this.load.image("lvl9-rat", "assets/rat_busy.png");
     this.load.image("lvl9-ratj", "assets/rat_jump_busy.png");
     this.load.image("lvl9-cheese", "assets/cheese_busy.png");
@@ -122,12 +125,31 @@ export default class Loading extends Phaser.Scene {
     this.load.audio("lvl9-restart", "assets/sfx/spielenTwo.mp3");
     this.load.audio("lvl3-song", "assets/sfx/longBeep_.mp3");
 
+    // LEVEL 10 ==== lvl10-/lvl2- ====
+    // see level 2?
+
+    // LEVEL 11 ==== lvl11-/lvl6- ====
+    this.load.image("lvl11-lbg", "assets/lvl11-L.png");
+    this.load.image("lvl11-plat", "assets/lvl11-plat.png");
+    this.load.image("lvl11-pbg", "assets/lvl11-platBG.png");
+
+    // LEVEL 12 ==== lvl12-/lvl6- ====
+    // see level 6?
+
+    // LEVEL 13 ==== lvl13-/lvl7- ====
+    this.load.image("lvl13-plat", "assets/lvl13-plat.png");
+    this.load.image("lvl13-pbg", "assets/lvl13-platBG.png");
+
+    this.load.image("lvl13-rat", "assets/rat_lvl7.png");
+    this.load.image("lvl13-cheeses", "assets/c_l7s.png");
+    this.load.image("lvl13-cheeseb", "assets/c_l7b.png");
+
     // LEVEL L ==== GAMEOVER/WIN LEVEL (substitute) ====
-    this.load.image("lvll-bg", "assets/lvl8-bg.png");
-    this.load.image("lvll-cheese", "assets/lvl8-cheese.png");
-    this.load.image("lvll-player", "assets/lvl8-player.png");
-    this.load.image("lvll-ground", "assets/lvl8-ground.png");
-    // LEVEL 8 = SOUND
+    this.load.image("lvll-bg", "assets/lvll-bg.png");
+    this.load.image("lvll-cheese", "assets/lvll-cheese.png");
+    this.load.image("lvll-player", "assets/lvll-player.png");
+    this.load.image("lvll-ground", "assets/lvll-ground.png");
+    // LEVEL L = SOUND
     this.load.audio("lvll-song", "assets/sfx/game-over_.mp3");
 
     // LOADING SCREEN

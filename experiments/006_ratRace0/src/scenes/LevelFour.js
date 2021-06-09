@@ -144,9 +144,9 @@ export default class LevelFour extends Phaser.Scene {
     //=================================================================================
     //  PLAYER
     //      CURSORS MOVEMENT
-    if (this.cursors.left.isDown) {
+    if (this.cursors.right.isDown) {
       this.player.setVelocityX(-8);
-    } else if (this.cursors.right.isDown) {
+    } else if (this.cursors.left.isDown) {
       this.player.setVelocityX(8);
     } else {
       this.player.setVelocityX(0);

@@ -36,21 +36,27 @@ export default class LevelNine extends Phaser.Scene {
 
     // COLLAGE
     this.collage = this.add
-      .image(gameWidth, gameHeight + 45, "lvl9-col") // zoda ge geen zwarte balk krijgt v onder
-      .setOrigin(1) //origin is linksonder van afbeelding
+      .image(gameWidth, gameHeight + 45, "lvl9-col")
+      .setOrigin(1)
       .setScrollFactor(0.5);
+
+    // PBG
+    this.pbackground = this.add
+      .image(gameWidth, gameHeight + 45, "lvl9-pbg")
+      .setOrigin(1)
+      .setScrollFactor(2);
 
     //  PLATFORMSs
     this.platforms = this.physics.add.staticGroup({});
 
-    for (let i = 0; i < 7; ++i) {
+    for (let i = 0; i < 10; ++i) {
       const x = Phaser.Math.Between(0, 400);
       const y = 100 * i;
 
       /** @type {Phaser.Physics.Arcade.Sprite} */
       const platform = this.platforms.create(x, y, "lvl9-plat");
       platform.scaleX = 1;
-      platform.scaleY = 0.5;
+      platform.scaleY = 1;
 
       /** @type {Phaser.Physics.Arcade.StaticBody} */
       const body = platform.body;
@@ -150,9 +156,9 @@ export default class LevelNine extends Phaser.Scene {
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown && !touchingDown) {
-      this.player.setVelocityX(-700);
+      this.player.setVelocityX(-2000);
     } else if (this.cursors.right.isDown && !touchingDown) {
-      this.player.setVelocityX(700);
+      this.player.setVelocityX(2000);
     } else {
       this.player.setVelocityX(0);
     }
@@ -169,6 +175,11 @@ export default class LevelNine extends Phaser.Scene {
       this.background.setY(this.n * -9000);
       this.n += 1;
       this.background.setX(480);
+    }
+    if (this.player.y < this.n * -320) {
+      this.pbackground.setY(this.n * -640);
+      this.n += 1;
+      this.pbackground.setX(480);
     }
 
     //  TO NEXT SCENE

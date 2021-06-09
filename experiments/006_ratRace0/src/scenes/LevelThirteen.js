@@ -57,7 +57,13 @@ export default class LevelThirteen extends Phaser.Scene {
     this.collage = this.add
       .image(gameWidth, gameHeight, "lvl7-col") // zoda ge geen zwarte balk krijgt v onder
       .setOrigin(1) //origin is linksonder van afbeelding
-      .setScrollFactor(5);
+      .setScrollFactor(4);
+
+    //  pbg
+    this.pbackground = this.add
+      .image(gameWidth, gameHeight, "lvl13-pbg")
+      .setOrigin(1)
+      .setScrollFactor(1);
 
     //  PLATFORMS
     this.platforms = this.physics.add.staticGroup();
@@ -66,7 +72,7 @@ export default class LevelThirteen extends Phaser.Scene {
       const y = 60 * i;
 
       /** @type {Phaser.Physics.Arcade.Sprite} */
-      const platform = this.platforms.create(x, y, "lvl7-plat");
+      const platform = this.platforms.create(x, y, "lvl13-plat");
       platform.scaleX = 1;
       platform.scaleY = 1;
 
@@ -77,7 +83,7 @@ export default class LevelThirteen extends Phaser.Scene {
 
     //  PLAYER
     this.player = this.physics.add
-      .sprite(240, 320, "lvl7-cheese")
+      .sprite(240, 320, "lvl13-cheeses")
       .setScale(0.2)
       .setGravityY(200); //300 = sweet jump, -300 tp make it go faster
 
@@ -173,10 +179,10 @@ export default class LevelThirteen extends Phaser.Scene {
     });
 
     //      CURSORS MOVEMENT
-    if (this.cursors.left.isDown && !touchingDown) {
+    if (this.cursors.right.isDown && !touchingDown) {
       this.player.setVelocityX(800);
       this.sound.play("lvl7-left");
-    } else if (this.cursors.right.isDown && !touchingDown) {
+    } else if (this.cursors.left.isDown && !touchingDown) {
       this.player.setVelocityX(-800);
       this.sound.play("lvl7-right");
     } else {
@@ -189,14 +195,19 @@ export default class LevelThirteen extends Phaser.Scene {
     // LOOP
     // console.log(this.player.y);
     if (this.player.y < this.n * -1000) {
-      this.collage.setY(this.n * -5000);
+      this.collage.setY(this.n * -2000);
       this.n += 1;
       this.collage.setX(480);
     }
     if (this.player.y < this.n * -2000) {
-      this.background.setY(this.n * -4000);
+      this.background.setY(this.n * -6000);
       this.n += 1;
       this.background.setX(480);
+    }
+    if (this.player.y < this.n * -1000) {
+      this.pbackground.setY(this.n * -4000);
+      this.n += 1;
+      this.pbackground.setX(480);
     }
 
     // MUSIC
@@ -248,7 +259,7 @@ export default class LevelThirteen extends Phaser.Scene {
     const y = sprite.y - sprite.displayHeight;
 
     /** @type {Phaser.Physics.Arcade.Sprite} */
-    const cheese = this.cheeses.get(sprite.x, y, "lvl7-rat");
+    const cheese = this.cheeses.get(sprite.x, y, "lvl13-rat");
     cheese.setScale(2);
 
     cheese.setActive(true); // set active

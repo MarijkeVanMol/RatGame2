@@ -55,16 +55,28 @@ export default class LevelEleven extends Phaser.Scene {
       .setOrigin(1) //origin is linksonder van afbeelding
       .setScrollFactor(0.25);
 
+    // lbg
+    this.lbackground = this.add
+      .image(gameWidth, gameHeight + 45, "lvl11-lbg") // zoda ge geen zwarte balk krijgt v onder
+      .setOrigin(1) //origin is linksonder van afbeelding
+      .setScrollFactor(2);
+
+    // pbg
+    this.pbackground = this.add
+      .image(gameWidth, gameHeight + 45, "lvl11-pbg") // zoda ge geen zwarte balk krijgt v onder
+      .setOrigin(1) //origin is linksonder van afbeelding
+      .setScrollFactor(2);
+
     // PLATFORMS
     this.platforms = this.physics.add.staticGroup();
-    for (let i = 0; i < 10; ++i) {
+    for (let i = 0; i < 5; ++i) {
       const x = Phaser.Math.Between(0, 480);
-      const y = 60 * i;
+      const y = 150 * i;
 
       /** @type {Phaser.Physics.Arcade.Sprite} */
-      const platform = this.platforms.create(x, y, "lvl5-plat");
+      const platform = this.platforms.create(x, y, "lvl11-plat");
       platform.scaleX = 1;
-      platform.scaleY = 2;
+      platform.scaleY = 1;
       // platform.flipY= true; doesn't work
 
       /** @type {Phaser.Physics.Arcade.StaticBody} */
@@ -90,6 +102,7 @@ export default class LevelEleven extends Phaser.Scene {
     this.player.body.checkCollision.left = true;
     this.player.body.checkCollision.right = true;
 
+    this.physics.add.collider(this.platforms, this.cheeses);
     //  OVERLAPS
     //      CARROT & PLAYER (handles overlap between carrot and player)
     this.physics.add.overlap(
@@ -186,6 +199,16 @@ export default class LevelEleven extends Phaser.Scene {
       this.collage.setY(this.n * -12000);
       this.n += 1;
       this.collage.setX(480);
+    }
+    if (this.player.y < this.n * -320) {
+      this.lbackground.setY(this.n * -640);
+      this.n += 1;
+      this.lbackground.setX(480);
+    }
+    if (this.player.y < this.n * -320) {
+      this.pbackground.setY(this.n * -6400);
+      this.n += 1;
+      this.pbackground.setX(480);
     }
 
     //  TO NEXT SCENE:
