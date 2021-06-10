@@ -55,7 +55,9 @@ export default class LevelTen extends Phaser.Scene {
     // }
 
     //  PLAYER
-    this.player = this.physics.add.sprite(240, 320, "lvl2-rat").setScale(2);
+    this.player = this.physics.add
+      .sprite(240, 320, "lvl2-cheese")
+      .setScale(0.3);
 
     //  CHEESES
     this.cheeses = this.physics.add.group({ classType: Cheese });
@@ -87,7 +89,7 @@ export default class LevelTen extends Phaser.Scene {
     //  FONT
     const style = { color: "black", font: "24px sans-serif" }; // color doesn't work
     this.cheesesCollectedText = this.add
-      .text(240, 10, "470 Cheeses", style)
+      .text(240, 10, "470 Rats", style)
       .setScrollFactor(0)
       .setOrigin(0.5, 0);
     //.setFont("Arial"); //sets font -> WERKT NOG NIET, NICE TO HAVE
@@ -141,9 +143,9 @@ export default class LevelTen extends Phaser.Scene {
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-20);
+      this.player.setVelocityX(-8);
     } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(20);
+      this.player.setVelocityX(8);
     } else {
       this.player.setVelocityX(0);
     }
@@ -200,7 +202,7 @@ export default class LevelTen extends Phaser.Scene {
     const cheeseX = Phaser.Math.Between(0, this.scale.width);
     const cheeseY = player.y - 300;
 
-    this.cheeses.create(cheeseX, cheeseY, "lvl2-cheese").setScale(2);
+    this.cheeses.create(cheeseX, cheeseY, "lvl2-rat").setScale(0.3);
   }
 
   //  CARROT
@@ -213,7 +215,7 @@ export default class LevelTen extends Phaser.Scene {
     this.cheeses.killAndHide(cheese); // hide from display
     this.physics.world.disableBody(cheese.body); // disable from physics world
     this.cheesesCollected++;
-    const value = `${this.cheesesCollected}`;
+    const value = `${this.cheesesCollected} Rats`;
     this.cheesesCollectedText.text = value;
   }
 

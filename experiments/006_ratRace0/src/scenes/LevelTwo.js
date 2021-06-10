@@ -148,8 +148,6 @@ export default class LevelTwo extends Phaser.Scene {
       this.player.setVelocityX(0);
     }
 
-    // console.log(this.CheeseCount);
-    // console.log(this.cheesesCollected);
     // DROP CARROT CODE
     if (this.CheeseCount == this.cheesesCollected) {
       this.addCheeseAbove(this.player);
@@ -159,13 +157,6 @@ export default class LevelTwo extends Phaser.Scene {
     //  CAMERAS
     //      SCREEN WRAP OF PLAYER
     this.horizontalWrap(this.player);
-
-    //  TO NEXT SCENE: BUSY GAME
-    //  bottomPLATFORM: normal loser route
-    // const bottomPlatform = this.findBottomMostPlatform();
-    // if (this.player.y > bottomPlatform.y + 200) {
-    //   this.scene.start("gameThree");
-    // }
 
     //  'reward'
     if (this.cheesesCollected >= 75) {
@@ -213,7 +204,7 @@ export default class LevelTwo extends Phaser.Scene {
     this.cheeses.killAndHide(cheese); // hide from display
     this.physics.world.disableBody(cheese.body); // disable from physics world
     this.cheesesCollected++;
-    const value = `${this.cheesesCollected}`;
+    const value = `${this.cheesesCollected} Cheeses`;
     this.cheesesCollectedText.text = value;
   }
 

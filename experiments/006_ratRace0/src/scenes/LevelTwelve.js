@@ -59,7 +59,7 @@ export default class LevelTwelve extends Phaser.Scene {
     // }
 
     //  PLAYER
-    this.player = this.physics.add.sprite(240, 320, "lvl6-rat").setScale(0.3);
+    this.player = this.physics.add.sprite(240, 320, "lvl6-rat").setScale(0.1);
 
     //  CHEESES
     this.cheeses = this.physics.add.group({ classType: Cheese });
@@ -202,7 +202,7 @@ export default class LevelTwelve extends Phaser.Scene {
   addCheeseAbove(player) {
     const cheeseX = Phaser.Math.Between(0, this.scale.width);
     const cheeseY = player.y - 300;
-    this.cheeses.create(cheeseX, cheeseY, "lvl6-cheese");
+    this.cheeses.create(cheeseX, cheeseY, "lvl6-cheese").setScale(0.1);
   }
 
   //  CARROT
@@ -215,7 +215,7 @@ export default class LevelTwelve extends Phaser.Scene {
     this.cheeses.killAndHide(cheese); // hide from display
     this.physics.world.disableBody(cheese.body); // disable from physics world
     this.cheesesCollected++;
-    const value = `${this.cheesesCollected}`;
+    const value = `${this.cheesesCollected} Cheeses`;
     this.cheesesCollectedText.text = value;
   }
 

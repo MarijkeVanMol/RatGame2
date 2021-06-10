@@ -53,7 +53,7 @@ export default class LevelEight extends Phaser.Scene {
     // }
 
     //  PLAYER
-    this.player = this.physics.add.sprite(240, 320, "lvl8-rat").setScale(0.3);
+    this.player = this.physics.add.sprite(240, 320, "lvl8-rat").setScale(0.5);
 
     //  CHEESES
     this.cheeses = this.physics.add.group({ classType: Cheese });
@@ -101,9 +101,9 @@ export default class LevelEight extends Phaser.Scene {
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-8);
+      this.player.setVelocityX(-10);
     } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(8);
+      this.player.setVelocityX(10);
     } else {
       this.player.setVelocityX(0);
     }
@@ -148,7 +148,7 @@ export default class LevelEight extends Phaser.Scene {
   addCheeseAbove(player) {
     const cheeseX = Phaser.Math.Between(0, this.scale.width);
     const cheeseY = player.y - 300;
-    this.cheeses.create(cheeseX, cheeseY, "lvl8-cheese");
+    this.cheeses.create(cheeseX, cheeseY, "lvl8-cheese").setScale(0.5);
   }
 
   //  CARROT
@@ -161,7 +161,7 @@ export default class LevelEight extends Phaser.Scene {
     this.cheeses.killAndHide(cheese); // hide from display
     this.physics.world.disableBody(cheese.body); // disable from physics world
     this.cheesesCollected++;
-    const value = `${this.cheesesCollected}`;
+    const value = `${this.cheesesCollected} Cheeses`;
     this.cheesesCollectedText.text = value;
   }
 }
