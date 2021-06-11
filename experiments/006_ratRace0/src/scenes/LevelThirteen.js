@@ -148,7 +148,7 @@ export default class LevelThirteen extends Phaser.Scene {
     if (touchingDown) {
       this.player.setVelocityY(-800);
       this.player.setTexture("lvl7-cheeses");
-      this.jump.play();
+      // this.jump.play();
       this.player.setScale(0.2);
       //this.cameras.main.shake(500);
     }
@@ -284,7 +284,7 @@ export default class LevelThirteen extends Phaser.Scene {
     this.cheesesCollectedText.text = value;
     // this.sound.play("caughtCheese");
     this.cameras.main.shake(700);
-    this.music.play();
+    // this.music.play();
     this.player.setTexture("lvl7-cheeseb");
     this.player.setScale(4);
     cheese.setScale(4);
