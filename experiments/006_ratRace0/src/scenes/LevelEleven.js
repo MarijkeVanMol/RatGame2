@@ -154,7 +154,7 @@ export default class LevelEleven extends Phaser.Scene {
     if (vy > 0 && this.player.texture.key != "lvl5-ratj") {
       // als player nr beneden ga en..
       this.player.setTexture("lvl5-ratj");
-      this.sound.play("gs1");
+      // this.sound.play("gs1");
       //this.cameras.main.shake(500);
     }
 
