@@ -25,8 +25,8 @@ export default class LevelThree extends Phaser.Scene {
     this.music = this.sound.add("lvl3-song");
     this.music.play();
     this.music.loop = true;
-    this.lvl1sound = this.sound.add("lvl1-song");
-    this.lvl1sound.play();
+    this.lvl1music = this.sound.add("lvl1-song");
+    this.lvl1music.play();
 
     // BACKGROUND
     this.background = this.add
@@ -110,17 +110,17 @@ export default class LevelThree extends Phaser.Scene {
     this.input.keyboard.once("keydown-L", () => {
       this.scene.start("levelLoser");
       this.music.stop("lvl3-song");
-      this.lvl1sound.stop("lvl1-song");
+      this.lvl1music.stop("lvl1-song");
     });
     this.input.keyboard.once("keydown-N", () => {
       this.scene.start("levelFour");
       this.music.stop("lvl3-song");
-      this.lvl1sound.stop("lvl1-song");
+      this.lvl1music.stop("lvl1-song");
     });
   }
 
   update() {
-    document.body.className = "busy";
+    document.body.className = "bu3";
     //         // find out from Arcade physics if the player's physics body is touching something below it
     //  PLAYER
     //      BOUNCE
@@ -190,10 +190,10 @@ export default class LevelThree extends Phaser.Scene {
     const bottomPlatform = this.findBottomMostPlatform();
     if (this.player.y > bottomPlatform.y + 200) {
       this.scene.start("levelTwo");
-      this.sound.play("lvl3-restart");
       this.sound.play("global-down");
+      this.sound.play("lvl3-restart");
       this.music.stop("lvl3-song");
-      this.lvl1sound.stop("lvl1-song");
+      this.lvl1music.stop("lvl1-song");
       this.cameras.main.shake(1000);
     }
 
@@ -202,7 +202,7 @@ export default class LevelThree extends Phaser.Scene {
       this.scene.start("levelFour");
       this.sound.play("caughtCheese");
       this.music.stop("lvl3-song");
-      this.lvl1sound.stop("lvl1-song");
+      this.lvl1music.stop("lvl1-song");
       // this.sound.play("tttwo");
     }
 

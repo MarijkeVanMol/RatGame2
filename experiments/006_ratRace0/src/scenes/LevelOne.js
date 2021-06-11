@@ -1,6 +1,3 @@
-// goal: parallax on everything but player
-//
-
 import Phaser from "../lib/phaser.js";
 
 import Cheese from "../game/Cheese.js";
@@ -191,22 +188,20 @@ export default class LevelOne extends Phaser.Scene {
       this.collage.setX(480);
     }
 
-    //  TO NEXT SCENE: BORING GAME
-    //  bottomPLATFORM: normal loser route
     const bottomPlatform = this.findBottomMostPlatform();
     if (this.player.y > bottomPlatform.y + 200) {
       this.scene.restart("levelOne"); //scene.scene.restart(data);
       this.sound.play("global-down");
     }
 
-    if (this.cheesesCollected == 15) {
+    if (this.cheesesCollected >= 15) {
       this.music.play();
     }
     //  'reward'
-    if (this.cheesesCollected == 50) {
+    if (this.cheesesCollected >= 50) {
       this.scene.start("levelTwo");
       this.sound.play("caughtCheese");
-      this.music.stop("songBusy");
+      this.music.stop("lvl1-song");
     }
   }
   // ======================= END OF UPDATE =======================(hier starten alle aparte functies)

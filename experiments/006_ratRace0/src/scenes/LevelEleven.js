@@ -139,7 +139,7 @@ export default class LevelEleven extends Phaser.Scene {
   }
 
   update() {
-    document.body.className = "busy";
+    document.body.className = "bu11";
     //  PLAYER
     //      BOUNCE
     const touchingDown = this.player.body.touching.down;

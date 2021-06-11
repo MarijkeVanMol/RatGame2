@@ -1,130 +1,237 @@
 <html>
-  <head>
-    <title>Welcome to the Rat Race</title>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.50.1/dist/phaser.js"></script>
 
-    <style type="text/css">
-* {
-        padding: 0;
-  }
+<head>
+  <title>Welcome to the Rat Race</title>
+  <script src="//cdn.jsdelivr.net/npm/phaser@3.50.1/dist/phaser.js"></script>
 
-/* ============ BORING ============ */
-    body.boring {
-          background-color: black;
+  <style type="text/css">
+    * {
+      padding: 0;
+      font-family: "Roboto", sans-serif;
+    }
+
+    /* ============ BODY ============ */
+
+    body {
+      display: block;
+      display: flex;
+    }
+   
+/* ============ INTRO ============ */
+    body.intro {
+      background-image: url(./assets/web_bg_3.png);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column-reverse;
+      height: 100vh;
+    }
+    a {
+  text-decoration: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 29px;
+  color: #41b1f6;
+  background-color: black;
+  align-self: flex-end;
+}
+a:hover {
+  text-decoration: none;
+  font-style: italic;
+}
+    .intro-wrapper {
+      display: none;
+    }
+    body.intro .intro-wrapper {
+      display: block;
       
     }
-    .boring-wrapper {
-          display: none;
-    }
-    body.boring .boring-wrapper {
-          display: block;
-    }
+/* INTRO-BACK */
+
 
 /* ============ BUSY ============ */
-      body.busy {
-        background-image:url(./assets/web_bg_3.png);
-        display: block;
-  
-      }
-      .busy-wrapper {
-       display: none;
+ body.busy {
+  background-image: url(./assets/web_bg_3.png);
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+ }
+  .busy-wrapper {
+      display: none;
 
-      }
-      body.busy .busy-wrapper {
-        display: block;
-      }
+    }
+    body.busy .busy-wrapper {
+      display: block;
+    }
 
-/* ============ INTRO ============ */
-      body{
-              display: block;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              height: 100vh;
-      }
-      body.intro, body.busy {
-        background-image:url(./assets/web_bg_3.png);
+    /* ============ BORING ============ */
+    body.boring {
+      background-color: black;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
 
-      }
-      .intro-wrapper {
-        visibility: hidden;
-      }
-      body.intro .intro-wrapper {
-        visibility: visible;
-      }
+    }
 
+    .boring-wrapper {
+      display: none;
+    }
 
-      
-
-
-      
-      /*  */
+    body.boring .boring-wrapper {
+      display: block;
+    }
 
 
 
+/* ============ BUSY LVL 3 ============ */
+body.bu3 {
+      background-image: url(./assets/web_bg_3.png);
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+.bu3-wrapper {
+    display: none;
 
+    }
+body.bu3 .bu3-wrapper {
+      display: block; 
+    }
+/* ============ BUSY LVL 5 ============ */
+    body.bu5 {
+      background-image: url(./assets/web_bg_3.png);
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+.bu5-wrapper {
+    display: none;
 
+    }
+body.bu5 .bu5-wrapper {
+      display: block; 
+    }
+/* ============ BUSY LVL 7 ============ */
+body.bu7 {
+      background-image: url(./assets/web_bg_3.png);
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+    }
+.bu7-wrapper {
+    display: none;
 
+    }
+body.bu7 .bu7-wrapper {
+      display: block; 
+    }
+/* ============ BUSY LVL 9 ============ */
+body.bu9 {
+      background-image: url(./assets/web_bg_3.png);
+      justify-content: flex-start;
+      align-items: flex-end;
+    }
+.bu9-wrapper {
+    display: none;
+    }
+body.bu9 .bu9-wrapper {
+      display: block; 
+    }
 
+/* ============ BUSY LVL 11 ============ */
+body.bu11 {
+      background-image: url(./assets/web_bg_3.png);
+      justify-content: flex-start;
+      align-items: center;
+    }
+.bu11-wrapper {
+    display: none;
+    }
+body.bu11 .bu11-wrapper {
+      display: block; 
+    }
+/* ============ BUSY LVL 13 ============ */
+body.bu13 {
+      background-image: url(./assets/web_bg_3.png);
+      justify-content: flex-end;
+      align-items: center;
+    }
+.bu13-wrapper {
+    display: none;
+    }
+body.bu13 .bu13-wrapper {
+      display: block; 
+    }
 
-
-
-            /* extra opmaak (ex code)
-      
-
-      .wrapper{
-        display:grid;
-        grid-template-columns: 30% 40% 30%;
-        grid-column-gap: 1em;
-      }
-        .wrapper>div{
-          background: yellow;
-          padding:1em;
-        }
-        .wrapper>div:nth-child(odd){
-          background: pink;
-          visibility: visible;
-        } 
-      */
-    </style>
-  </head>
-  <body class="boring">
-    <div class="boring-wrapper"></div>
-    <div class="game-container"><script type="module" src="src/main.js"></script></div>
+  </style>
+</head>
+<!-- INTRO BODY -->
+<body class="intro">
+  <div class="intro-wrapper">
+    
+    <div class="game-container">
+      <script type="module" src="src/main.js"></script>
+    </div>
+    <div class="back"><a href="/index.html">back</a></div>
   </div>
-</div>
+</body>
+<!-- BORING BODY -->
+<body class="boring">
+  <div class="boring-wrapper"></div>
+  <div class="game-container">
+    <script type="module" src="src/main.js"></script>
+  </div>
+  </div>
+  </div>
+</body>
+<!-- BUSY BODIES -->
+<body class="busy">
+  <div class="busy-wrapper"></div>
+  <div class="game-container">
+    <script type="module" src="src/main.js"></script>
+  </div>
+  </div>
+</body>
+<body class="bu3">
+  <div class="bu53-wrapper"></div>
+  <div class="game-container">
+    <script type="module" src="src/main.js"></script>
+  </div>
+  </div>
+</body>
+<body class="bu5">
+  <div class="bu5-wrapper"></div>
+  <div class="game-container">
+    <script type="module" src="src/main.js"></script>
+  </div>
+  </div>
+</body>
+<body class="bu7">
+  <div class="bu7-wrapper"></div>
+  <div class="game-container">
+    <script type="module" src="src/main.js"></script>
+  </div>
+  </div>
+</body>
+<body class="bu9">
+  <div class="bu9-wrapper"></div>
+  <div class="game-container">
+    <script type="module" src="src/main.js"></script>
+  </div>
+  </div>
+</body>
+<body class="bu11">
+  <div class="bu11-wrapper"></div>
+  <div class="game-container">
+    <script type="module" src="src/main.js"></script>
+  </div>
+  </div>
+</body>
+<body class="bu13">
+  <div class="bu13-wrapper"></div>
+  <div class="game-container">
+    <script type="module" src="src/main.js"></script>
+  </div>
+  </div>
 </body>
 
-  <body class="busy">
-    <div class="busy-wrapper"></div>
-        <div class="game-container"><script type="module" src="src/main.js"></script></div>
-    </div>
-  </body>
 
-  <body class="intro">
-    <div class="intro-wrapper">
-      
-      <div class="link"><a href="/index.html">back</a></div>
-        <div class="game-container"><script type="module" src="src/main.js"></script></div>
-    </div>
-  </body>
-
-    <!-- <body class="start">
-      <div class="busy-wrapper">
-        <div class="left">
-          LEVEL odd
-        </div>
-  
-        <div class="middle">
-          <div class="game-container"><script type="module" src="src/main.js"></script></div>
-        </div>
-  
-        
-      </div> -->
-      
-    
-
-    
-  
-  
 </html>

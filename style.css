@@ -1,7 +1,7 @@
 * {
   padding: 0;
   margin: 0;
-  background-image: url(/experiments/006_ratRace0/assets/web_bg_3.png);
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -9,6 +9,7 @@ body {
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  background-image: url(/experiments/006_ratRace0/assets/web_bg_3.png);
 }
 
 li.game {

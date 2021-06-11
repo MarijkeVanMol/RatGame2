@@ -118,7 +118,7 @@ export default class LevelNine extends Phaser.Scene {
   }
 
   update() {
-    document.body.className = "busy";
+    document.body.className = "bu9";
     //         // find out from Arcade physics if the player's physics body is touching something below it
     //  PLAYER
     //      BOUNCE

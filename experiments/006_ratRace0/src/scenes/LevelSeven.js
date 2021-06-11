@@ -140,7 +140,7 @@ export default class LevelSeven extends Phaser.Scene {
 
   update() {
     // CSS
-    document.body.className = "busy";
+    document.body.className = "bu7";
 
     //  PLAYER
     //      BOUNCE
