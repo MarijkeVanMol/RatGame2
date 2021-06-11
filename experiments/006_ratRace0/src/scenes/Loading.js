@@ -115,16 +115,20 @@ export default class Loading extends Phaser.Scene {
     this.load.image("lvl7-rat", "assets/rat_busy.png");
     this.load.image("lvl7-cheeses", "assets/c_l7s.png");
     this.load.image("lvl7-cheeseb", "assets/c_l7b.png");
-    // LEVEL 7 = SOUND
-    this.load.audio("lvl7-song", "assets/sfx/lvl7-songScreamandCalling.mp3");
-    this.load.audio("lvl1-song", "assets/sfx/busy.mp3");
-    this.load.audio("lvl3-song", "assets/sfx/longBeep_.mp3");
-
+    // ============ Sound ====
+    this.load.audio("lvl7-aca", "assets/sfx/lvl7-addCheeseAbove.mp3");
+    this.load.audio("lvl7-bounce", "assets/sfx/lvl7-bounce.mp3");
     this.load.audio("lvl7-jump", "assets/sfx/lvl7-jump_.mp3");
-    this.load.audio("lvl7-left", "assets/sfx/call2_.mp3");
-    this.load.audio("lvl7-right", "assets/sfx/taserGun_.mp3");
-    this.load.audio("lvl7-call", "assets/sfx/call1_.mp3");
-    this.load.audio("lvl7-restart", "assets/sfx/spielenFour_.mp3");
+    this.load.audio("lvl7-left", "assets/sfx/lvl7-left.mp3");
+    this.load.audio("lvl7-loop", "assets/sfx/lvl7-loop.mp3");
+    this.load.audio("lvl7-hcc", "assets/sfx/lvl7-handlecollectcheese.mp3");
+    this.load.audio("lvl7-unbounce", "assets/sfx/lvl7-unbounce.mp3");
+    this.load.audio("lvl7-restart", "assets/sfx/lvl7-restart.mp3");
+    // ============ Music ====
+    //this.load.audio("lvl7-1song", "assets/sfx/busy.mp3");
+    this.load.audio("lvl7-3song", "assets/sfx/longBeep_.mp3");
+    //this.load.audio("lvl7-5song", "assets/sfx/lvl5-songNotifications.mp3");
+    this.load.audio("lvl7-song", "assets/sfx/lvl7-songScreamandCalling.mp3");
 
     // LEVEL 8 ==== lvl8-/lvl4- ====
     this.load.image("lvl8-rat", "assets/rbo_2.png");
@@ -140,7 +144,7 @@ export default class Loading extends Phaser.Scene {
     this.load.image("lvl9-cheese", "assets/cheese_busy.png");
     this.load.image("lvl9-hitCheese", "assets/rat_r_jump.png");
     // LEVEL 9 = SOUND
-    this.load.audio("lvl9-restart", "assets/sfx/spielenTwo.mp3");
+    this.load.audio("lvl9-restart", "assets/sfx/lvl9-restart.mp3");
     this.load.audio("lvl3-song", "assets/sfx/longBeep_.mp3");
 
     // LEVEL 10 ==== lvl10-/lvl2- ====
