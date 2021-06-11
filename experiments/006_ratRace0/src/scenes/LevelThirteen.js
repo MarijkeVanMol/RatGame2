@@ -157,7 +157,7 @@ export default class LevelThirteen extends Phaser.Scene {
     if (vy > 0 && this.player.texture.key != "lvl7-cheeses") {
       // als player nr beneden ga en..
       this.player.setTexture("lvl7-cheeseb");
-      this.sound.play("gs2");
+      //this.sound.play("gs2");
       this.cameras.main.shake(700);
       this.player.setScale(0.2);
     }

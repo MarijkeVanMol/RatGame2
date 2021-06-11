@@ -134,8 +134,8 @@ export default class LevelFive extends Phaser.Scene {
     const touchingDown = this.player.body.touching.down;
     if (touchingDown) {
       this.player.setVelocityY(-500);
-      this.player.setTexture("l  vl5-rat");
-      this.load.audio("lvl5-bounce");
+      this.player.setTexture("lvl5-rat");
+      this.sound.play("lvl5-bounce");
       this.cameras.main.shake(500);
     }
     //      UNBOUNCE
@@ -143,7 +143,7 @@ export default class LevelFive extends Phaser.Scene {
     if (vy > 0 && this.player.texture.key != "lvl5-ratj") {
       // als player nr beneden ga en..
       this.player.setTexture("lvl5-ratj");
-      this.sound.play("lvl(-unbounce");
+      this.sound.play("lvl5-unbounce");
       //this.cameras.main.shake(500);
     }
 
@@ -160,7 +160,7 @@ export default class LevelFive extends Phaser.Scene {
         platform.body.updateFromGameObject();
 
         this.addCheeseAbove(platform);
-        this.sound.play("aca");
+        this.sound.play("lvl5-aca");
         this.music.play();
       }
     });
@@ -254,7 +254,7 @@ export default class LevelFive extends Phaser.Scene {
     this.cheesesCollected++;
     const value = `${this.cheesesCollected} Cheeses`;
     this.cheesesCollectedText.text = value;
-    this.sound.play("handcolcheese");
+    this.sound.play("lvl5-handcolcheese");
     this.cameras.main.shake(1000);
     this.player.setTexture("lvl5-cheese");
     this.player.setScale(1, 3);

@@ -39,10 +39,10 @@ export default class LevelSeven extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     //  MUSIC
-    this.music = this.sound.add("lvl1-song");
+    this.music = this.sound.add("lvl7-song");
     this.music.loop = true;
     this.music.play();
-    this.beep = this.sound.add("lvl3-song");
+    this.beep = this.sound.add("lvl7-3song");
     this.beep.loop = true;
     this.beep.play();
     this.jump = this.sound.add("lvl7-jump");
@@ -126,14 +126,14 @@ export default class LevelSeven extends Phaser.Scene {
     //  CHEAT CODE
     this.input.keyboard.once("keydown-L", () => {
       this.scene.start("levelLoser");
-      this.music.stop("lvl1-song");
-      this.beep.stop("lvl3-song");
+      this.music.stop("lvl7-song");
+      this.beep.stop("lvl7-3song");
       this.jump.stop("lvl7-jump");
     });
     this.input.keyboard.once("keydown-N", () => {
       this.scene.start("levelEight");
-      this.music.stop("lvl1-song");
-      this.beep.stop("lvl3-song");
+      this.music.stop("lvl7-song");
+      this.beep.stop("lvl7-3song");
       this.jump.stop("lvl7-jump");
     });
   }
@@ -148,13 +148,15 @@ export default class LevelSeven extends Phaser.Scene {
     if (touchingDown) {
       this.player.setVelocityY(-800);
       this.jump.play();
+      this.sound.play("lvl7-bounce");
       //this.cameras.main.shake(500);
     }
     //      UNBOUNCE
     const vy = this.player.body.velocity.y; // naar beneden gaan
     if (vy > 0 && this.player.texture.key != "lvl7-cheeses") {
       // als player nr beneden ga en..
-      this.sound.play("gs2");
+      this.sound.play("lvl7-unbounce");
+
       this.cameras.main.shake(700);
     }
 
@@ -169,8 +171,9 @@ export default class LevelSeven extends Phaser.Scene {
       if (platform.y >= scrollY + 700) {
         platform.y = scrollY - Phaser.Math.Between(0, 100);
         platform.body.updateFromGameObject();
-        //      create a carrot above the platform being
+
         this.addCheeseAbove(platform);
+        this.sound.play("lvl7-aca");
       }
     });
 
@@ -180,7 +183,6 @@ export default class LevelSeven extends Phaser.Scene {
       this.sound.play("lvl7-left");
     } else if (this.cursors.right.isDown && !touchingDown) {
       this.player.setVelocityX(-800);
-      this.sound.play("lvl7-right");
     } else {
       this.player.setVelocityX(0);
     }
@@ -194,6 +196,7 @@ export default class LevelSeven extends Phaser.Scene {
       this.collage.setY(this.n * -640);
       this.n += 1;
       this.collage.setX(480);
+      this.sound.play("lvl7-loop");
     }
     // if (this.player.y < this.n * -1000) {
     //   this.background.setY(this.n * -5000);
@@ -208,25 +211,24 @@ export default class LevelSeven extends Phaser.Scene {
 
     // MUSIC
     if (this.cheesesCollected <= 370) {
-      this.beep.play();
+      this.beep.play("lvl7-3song");
     }
 
     //  RESTART 1
     const bottomPlatform = this.findBottomMostPlatform();
     if (this.player.y > bottomPlatform.y + 600) {
-      this.scene.start("levelSix"); //scene.scene.restart(data);
+      this.scene.start("levelSix");
       this.sound.play("lvl7-restart");
-      this.music.stop("lvl1-song");
-      this.beep.stop("lvl3-song");
+      this.music.stop("lvl7-song");
+      this.beep.stop("lvl7-3song");
       this.jump.stop("lvl7-jump");
     }
     //  RESTART 2
     if (this.cheesesCollected >= 370) {
       this.scene.start("levelEight");
       this.sound.play("lvl7-restart");
-      this.music.stop("songBusy");
-      this.beep.stop("lvl7-songBeep");
-      // this.sound.play("tttwo");
+      this.music.stop("lvl7-song");
+      this.beep.stop("lvl7-3song");
     }
   }
   //      END OF UPDATE (============== hier starten alle aparte functies ==============)
@@ -280,7 +282,8 @@ export default class LevelSeven extends Phaser.Scene {
     this.cheesesCollectedText.text = value;
     this.sound.play("caughtCheese");
     this.cameras.main.shake(1000);
-    this.music.play();
+    this.music.play("lvl7-song");
+    this.sound.play("lvl7-hcc");
   }
 
   //  PLATFORMS
