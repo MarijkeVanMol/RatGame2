@@ -39,13 +39,13 @@ export default class LevelThirteen extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
 
     //  MUSIC
-    this.music = this.sound.add("lvl1-song");
-    this.music.loop = true;
-    this.music.play();
-    this.beep = this.sound.add("lvl3-song");
-    this.beep.loop = true;
-    this.beep.play();
-    this.jump = this.sound.add("lvl7-jump");
+    // this.music = this.sound.add("lvl1-song");
+    // this.music.loop = true;
+    // this.music.play();
+    // this.beep = this.sound.add("lvl3-song");
+    // this.beep.loop = true;
+    // this.beep.play();
+    // this.jump = this.sound.add("lvl7-jump");
 
     //  BACKGROUND
     this.background = this.add
@@ -126,15 +126,15 @@ export default class LevelThirteen extends Phaser.Scene {
     //  CHEAT CODE
     this.input.keyboard.once("keydown-L", () => {
       this.scene.start("levelLoser");
-      this.music.stop("lvl1-song");
-      this.beep.stop("lvl3-song");
-      this.jump.stop("lvl7-jump");
+      // this.music.stop("lvl1-song");
+      // this.beep.stop("lvl3-song");
+      // this.jump.stop("lvl7-jump");
     });
     this.input.keyboard.once("keydown-N", () => {
       this.scene.start("levelLoser");
-      this.music.stop("lvl1-song");
-      this.beep.stop("lvl3-song");
-      this.jump.stop("lvl7-jump");
+      // this.music.stop("lvl1-song");
+      // this.beep.stop("lvl3-song");
+      // this.jump.stop("lvl7-jump");
     });
   }
 
@@ -181,10 +181,10 @@ export default class LevelThirteen extends Phaser.Scene {
     //      CURSORS MOVEMENT
     if (this.cursors.right.isDown && !touchingDown) {
       this.player.setVelocityX(800);
-      this.sound.play("lvl7-left");
+      // this.sound.play("lvl7-left");
     } else if (this.cursors.left.isDown && !touchingDown) {
       this.player.setVelocityX(-800);
-      this.sound.play("lvl7-right");
+      // this.sound.play("lvl7-right");
     } else {
       this.player.setVelocityX(0);
     }
@@ -212,24 +212,24 @@ export default class LevelThirteen extends Phaser.Scene {
 
     // MUSIC
     if (this.cheesesCollected <= 370) {
-      this.beep.play();
+      // this.beep.play();
     }
 
     //  RESTART 1
     const bottomPlatform = this.findBottomMostPlatform();
     if (this.player.y > bottomPlatform.y + 600) {
       this.scene.start("levelTwelve"); //scene.scene.restart(data);
-      this.sound.play("lvl7-restart");
-      this.music.stop("lvl1-song");
-      this.beep.stop("lvl3-song");
-      this.jump.stop("lvl7-jump");
+      // this.sound.play("lvl7-restart");
+      // this.music.stop("lvl1-song");
+      // this.beep.stop("lvl3-song");
+      // this.jump.stop("lvl7-jump");
     }
     //  RESTART 2
     if (this.cheesesCollected <= 0) {
       this.scene.start("levelOne");
-      this.sound.play("lvl7-restart");
-      this.music.stop("songBusy");
-      this.beep.stop("lvl7-songBeep");
+      // this.sound.play("lvl7-restart");
+      // this.music.stop("songBusy");
+      // this.beep.stop("lvl7-songBeep");
       // this.sound.play("tttwo");
     }
   }
@@ -282,7 +282,7 @@ export default class LevelThirteen extends Phaser.Scene {
     this.cheesesCollected--;
     const value = `${this.cheesesCollected} Cheeses`;
     this.cheesesCollectedText.text = value;
-    this.sound.play("caughtCheese");
+    // this.sound.play("caughtCheese");
     this.cameras.main.shake(700);
     this.music.play();
     this.player.setTexture("lvl7-cheeseb");
