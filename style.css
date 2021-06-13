@@ -6,18 +6,25 @@
 
 body {
   display: block;
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  background-image: url(/experiments/006_ratRace0/assets/web_bg_3.png);
+  display: flex;
+
+  background-image: url(/branch/rat-race-game/assets/web_bg_3.png);
 }
 
+ul {
+  list-style-type: none;
+  justify-content: center;
+  align-self: center;
+}
 li.game {
   position: absolute;
   width: 1280px;
   height: 102px;
   left: calc(50% - 1280px / 2);
-  top: 250px;
+  top: calc(50% - 102px / 2 - 102px);
+  /* display: flex;
+  justify-content: center;
+  align-self: center; */
 
   font-family: Roboto;
   font-weight: 900;
@@ -31,16 +38,13 @@ li.game {
 a {
   text-decoration: none;
 }
-ul {
-  list-style-type: none;
-}
 
 li.processfolio {
   position: absolute;
   width: 1280px;
   height: 102px;
   left: calc(50% - 1280px / 2);
-  top: 500px;
+  top: calc(50% - 102px / 2 + 102px);
 
   font-family: Roboto;
   font-weight: 900;
@@ -52,31 +56,12 @@ li.processfolio {
 }
 
 li.game a:hover {
-  text-decoration: none;
-  font-style: italic;
+  text-decoration: underline;
   color: #ffff00;
 }
 li.processfolio a:hover {
-  text-decoration: none;
-  font-style: italic;
+  text-decoration: underline;
   color: #f46b17;
-}
-
-div.footer {
-  position: absolute;
-  width: 169px;
-  height: 23px;
-  left: 556px;
-  top: 682px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 23px;
-  text-align: center;
-
-  color: #41b1f6;
 }
 
 canvas {

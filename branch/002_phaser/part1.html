@@ -1,0 +1,218 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Making your first Phaser 3 Game - Part 1</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+function random(min,max){
+    return min + Math.random() * (max-min);
+}
+
+    var config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: {y:300},
+                debug: false
+            }
+        },
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    };
+
+    var player;
+    var stars;
+    var platforms;
+    var cursors;   
+    var score = 0;
+    var gameOver = false;
+    var scoreText;
+    var bombs;
+    const newStars= [];
+
+    var game = new Phaser.Game(config);
+
+    function preload ()
+    {
+        this.load.image('sky', 'asssets/sky.png');
+        this.load.image('ground', 'asssets/platform.png');
+        this.load.image('star', 'asssets/star.png');
+        this.load.image('bomb', 'asssets/bomb.png', {frameWidth: 32,frameHeight:32});
+        this.load.spritesheet('dude','asssets/dude.png',{frameWidth:64,frameHeight:52});
+    }
+
+    function create ()
+    {
+// CREATE BG
+        this.add.image(900,900, 'sky');
+
+// CREATE GROUP: PLATFORMS
+        platforms = this.physics.add.staticGroup();
+
+        platforms.create(360,568, 'ground').setScale(2).refreshBody();
+
+          platforms.create(750, 400, 'ground').setScale(0.7).refreshBody();
+          platforms.create(30, 300, 'ground').setScale(1).refreshBody();
+          platforms.create(750, 220, 'ground').setScale(0.6).refreshBody();
+        //  for (let i =0; i< 3; i++){
+        //      platforms.create(random(0,800), random(100,550), 'ground');
+        //  }
+        //  this.physics.add.overlap(platforms, platforms, deletePlatform, null, this);
+    
+// INPUT
+    cursors = this.input.keyboard.createCursorKeys();
+
+//CREATE PLAYER
+        player=this.physics.add.sprite(100,450, 'dude');
+        
+        player.setBounce(0.2);
+        player.setCollideWorldBounds(true);
+
+        this.anims.create({
+            key: 'left',
+            frames: this.anims.generateFrameNumbers('dude', {start:1, end: 4}),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'turn',
+            frames: this.anims.generateFrameNumbers('dude', {start:0,end:7}),
+            frameRate:20
+        });
+        this.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('dude', {start:5, end:7}),
+            frameRate: 10,
+            repeat: -1
+        });
+        
+    
+// CREATE GROUP: STARS
+         stars = this.physics.add.group({
+             key: 'star',
+             repeat: 0,
+             setXY: {x // to space out!!
+          });
+
+        // stars.children.iterate(function(child)
+        //     {
+        //     child.setBounceY(Phaser.Math.FloatBetween(0.4,0.8));
+        //     }
+        // )
+
+
+// CREATE SCORE
+        scoreText = this.add.text(16, 16, 'cheese: 0', { fontSize: '32px', fill: '#000' });
+
+// CREATE GROUP: BOMBS
+        bombs = this.physics.add.group({
+            key: 'bomb',
+            repeat: 2,
+            setXY: {x:12, y:0, stepX: 200}
+        });
+        
+    
+// COLLIDERS & OVERLAP
+    this.physics.add.collider(player, platforms);
+
+    this.physics.add.collider(bombs,platforms);
+    this.physics.add.collider(player, bombs, hitBomb, null, this);
+
+    // this.physics.add.collider(stars, platforms);
+    // this.physics.add.overlap(player, stars, collectStar, null, this);
+
+    }
+
+
+    function update ()
+    {
+        if (gameOver){
+            return;
+        }
+
+        if(cursors.right.isDown)
+            {
+                player.setVelocityX(-160);
+                player.anims.play('right', true);
+            }    
+        else if (cursors.left.isDown)
+            {
+                player.setVelocityX(160);
+                player.anims.play('left', true);
+            }
+        else
+            {
+                player.setVelocityX(0);
+                player.anims.play('turn');
+            }
+        //  if (cursors.up.isDown && player.body.touching.down)
+        if (cursors.up.isDown)
+            {
+                player.setVelocityY(-300);
+
+                const newStar = this.physics.add.sprite(random(0,800), random(0,600), 'star');
+                this.physics.add.collider(newStar, platforms);
+                this.physics.add.overlap(player, stars, collectStar, null, this);
+                newStars.push(newStar);
+            }
+    }
+
+//  function deletePlatform (platform, platform){
+//      platform.disableBody(true, false);}
+
+// STAR
+function collectStar (player, star)
+            {
+                star.disableBody(true, true);
+
+//  Add and update the SCORE
+    score += 1;
+    scoreText.setText('Cheese: '  + score);
+
+                if (stars.countActive(true)===0)
+                {
+                    stars.children.iterate(function(child){
+                        child.enableBody(true, child.x, 0, true, true);
+                    });
+
+                    var x = (player.x < 400) ? Phaser.Math.Between(400,800):Phaser.Math.Between(0,400);
+
+                    var bomb = bombs.create(x,16,'bomb');
+                    bomb.setBounce(1);
+                    bomb.setCollideWorldBounds(true);
+                    bomb.setVelocity(Phaser.Math.Between(-200,200),20);
+                    bomb.allowGravity = false;
+                }
+            }
+          
+
+// BOMB
+function hitBomb(player, bombs)
+            {
+                this.physics.pause();
+                player.setTint(0xff0000);
+                player.anims.play('turn');
+                gameOver = true;
+                bomb=this.physics.add.sprite(Math.random(800,600),Math.random(800,600), 'bomb');
+            }
+
+</script>
+
+</body>
+</html>  
