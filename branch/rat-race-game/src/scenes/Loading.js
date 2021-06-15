@@ -131,8 +131,8 @@ export default class Loading extends Phaser.Scene {
     this.load.audio("lvl7-song", "assets/sfx/lvl7-songScreamandCalling.mp3");
 
     // LEVEL 8 ==== lvl8-/lvl4- ====
-    this.load.image("lvl8-rat", "assets/rbo_2.png");
-    this.load.image("lvl8-cheese", "assets/cbo_2.png");
+    this.load.image("lvl8-rat", "assets/rbo_3.png");
+    this.load.image("lvl8-cheese", "assets/cbo_3.png");
 
     // LEVEL 9 ==== lvl9-/lvl3- ====
     this.load.image("lvl9-bg", "assets/lvl3-bg.png");
@@ -158,7 +158,8 @@ export default class Loading extends Phaser.Scene {
     this.load.audio("lvl9-traffic", "assets/sfx/trafficSong.mp3");
 
     // LEVEL 10 ==== lvl10-/lvl2- ====
-    // see level 2?
+    this.load.image("lvl10-rat", "assets/rbo_3.png");
+    this.load.image("lvl10-cheese", "assets/cbo_3.png");
 
     // LEVEL 11 ==== lvl11-/lvl5- ====
     this.load.image("lvl11-lbg", "assets/lvl11-L.png");
@@ -180,7 +181,8 @@ export default class Loading extends Phaser.Scene {
     this.load.audio("lvl11-traffic", "assets/sfx/trafficSong.mp3");
 
     // LEVEL 12 ==== lvl12-/lvl6- ====
-    // see level 6?
+    this.load.image("lvl12-rat", "assets/rbo_3.png");
+    this.load.image("lvl12-cheese", "assets/cbo_3.png");
 
     // LEVEL 13 ==== lvl13-/lvl7- ====
     this.load.image("lvl13-plat", "assets/lvl13-plat.png");
