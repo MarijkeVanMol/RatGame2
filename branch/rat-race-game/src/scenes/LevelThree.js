@@ -66,7 +66,7 @@ export default class LevelThree extends Phaser.Scene {
     //  PLAYER
     this.player = this.physics.add
       .sprite(240, 320, "lvl3-rat")
-      .setScale(0.5)
+      .setScale(0.7)
       .setGravityY(400);
 
     // //  CARROTS
@@ -158,9 +158,9 @@ export default class LevelThree extends Phaser.Scene {
     //  PLAYER
     //      CURSORS MOVEMENT
     if (this.cursors.left.isDown && !touchingDown) {
-      this.player.setVelocityX(-1000);
+      this.player.setVelocityX(-900);
     } else if (this.cursors.right.isDown && !touchingDown) {
-      this.player.setVelocityX(1000);
+      this.player.setVelocityX(900);
     } else {
       this.player.setVelocityX(0);
     }
