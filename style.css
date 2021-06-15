@@ -8,7 +8,7 @@ body {
   display: block;
   display: flex;
 
-  background-image: url(/branch/rat-race-game/assets/web_bg_3.png);
+  background-image: url(/branch/rat-race-processfolio/img/landing-page.gif);
 }
 
 ul {
@@ -37,6 +37,7 @@ li.game {
 
 a {
   text-decoration: none;
+  color: #ffff00;
 }
 
 li.processfolio {
@@ -54,12 +55,7 @@ li.processfolio {
 
   color: #f46b17;
 }
-
-li.game a:hover {
-  text-decoration: underline;
-  color: #ffff00;
-}
-li.processfolio a:hover {
+a:hover {
   text-decoration: underline;
   color: #f46b17;
 }

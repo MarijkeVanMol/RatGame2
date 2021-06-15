@@ -4,14 +4,15 @@
   font-family: "Roboto", sans-serif;
 }
 body {
-  /* background-image: url(img/web_bg_5.png); */
   background-color: black;
+
+  /* background-image: url(img/bg-gif.gif); */
 }
 main {
   /* iMac - 1 */
   position: relative;
   width: 1280px;
-  height: 13511px;
+  height: 19500px;
   /* background: #000000; */
   display: block;
   position: relative;
@@ -62,7 +63,7 @@ img {
 .intro {
   position: absolute;
   width: 1190px;
-  height: 702px;
+  height: 725px;
   left: calc(50% - 1190px / 2);
   top: 322px;
 
@@ -279,9 +280,11 @@ img {
 .nPhotoVideo {
   position: absolute;
   width: 1100px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 1100px / 2);
   top: 4739px;
+
+  background-color: black;
 }
 
 /**************************************** BLENDER ****************************************/
@@ -296,7 +299,7 @@ img {
 .exText {
   position: absolute;
   width: 535px;
-  height: 578px;
+  height: 320px;
   left: calc(50% - 535px / 2 + 282.5px);
   top: 4807px;
 
@@ -304,10 +307,11 @@ img {
 }
 .nBlendOne {
   position: absolute;
-  width: 1100px;
-  height: 23px;
+  width: 535px;
+  height: 25px;
   left: calc(50% - 1100px / 2);
   top: 5385px;
+  background-color: black;
 }
 .imgExBlendTwo {
   position: absolute;
@@ -319,9 +323,10 @@ img {
 .nBlendTwo {
   position: absolute;
   width: 1100px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 1100px / 2);
   top: 6310px;
+  background-color: black;
 }
 .BlendVideoOne {
   position: absolute;
@@ -332,10 +337,11 @@ img {
 }
 .nBlendVideoOne {
   position: absolute;
-  width: 535px;
-  height: 23px;
+  width: 1100px;
+  height: 25px;
   left: calc(50% - 535px / 2 - 282.5px);
   top: 6997px;
+  background-color: black;
 }
 .BlendVideoTwo {
   position: absolute;
@@ -346,10 +352,11 @@ img {
 }
 .nBlendVideoTwo {
   position: absolute;
-  width: 535px;
-  height: 23px;
+  width: 1100px;
+  height: 25px;
   left: calc(50% - 535px / 2 - 282.5px);
   top: 7684px;
+  background-color: black;
 }
 .BlendVideoThree {
   position: absolute;
@@ -361,9 +368,10 @@ img {
 .nBlendVideoThree {
   position: absolute;
   width: 535px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 535px / 2 - 282.5px);
   top: 8053px;
+  background-color: black;
 }
 .BlendVideoFour {
   width: 535px;
@@ -375,9 +383,10 @@ img {
 .nBlendVideoFour {
   position: absolute;
   width: 535px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 535px / 2 + 282.5px);
   top: 8053px;
+  background-color: black;
 }
 
 /************** INTERNAL STIMULI ************/
@@ -466,14 +475,15 @@ img {
 .n-in-two {
   position: absolute;
   width: 1100px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 1100px / 2);
   top: 10167px;
+  background-color: black;
 }
 .in-text {
   position: absolute;
   width: 1100px;
-  height: 327px;
+  height: 320px;
   left: calc(50% - 1100px / 2);
   top: 10235px;
 
@@ -567,9 +577,11 @@ img {
 .ngfive {
   position: absolute;
   width: 1100px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 1100px / 2);
   top: 13528px;
+
+  background-color: black;
 }
 
 .img-g-four {
@@ -581,15 +593,17 @@ img {
 }
 .ngfour {
   position: absolute;
-  width: 519px;
-  height: 23px;
+  width: 535px;
+  height: 25px;
   left: calc(50% - 519px / 2 - 291.5px);
   top: 14174px;
+
+  background-color: black;
 }
 .g-text-one {
   position: absolute;
   width: 535px;
-  height: 578px;
+  height: 200px;
   left: calc(50% - 535px / 2 + 282.5px);
   top: 13596px;
 
@@ -608,14 +622,16 @@ img {
 .ngseven {
   position: absolute;
   width: 1100px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 1100px / 2);
   top: 15342px;
+
+  background-color: black;
 }
 .g-text-two {
   position: absolute;
   width: 535px;
-  height: 713px;
+  height: 435px;
   left: calc(50% - 535px / 2 - 282.5px);
   top: 15410px;
 
@@ -631,9 +647,11 @@ img {
 .ngsix {
   position: absolute;
   width: 535px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 535px / 2 + 282.5px);
   top: 16123px;
+
+  background-color: black;
 }
 
 /******************** g-part3 (text3) ****************************************/
@@ -648,14 +666,16 @@ img {
 .ngeight {
   position: absolute;
   width: 535px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 535px / 2 - 282.5px);
   top: 16903px;
+
+  background-color: black;
 }
 .g-text-three {
   position: absolute;
   width: 535px;
-  height: 713px;
+  height: 692px;
   left: calc(50% - 535px / 2 + 282.5px);
   top: 16191px;
 
@@ -672,9 +692,11 @@ img {
 .ngnine {
   position: absolute;
   width: 535px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 535px / 2 - 282.5px);
   top: 17684px;
+
+  background-color: black;
 }
 .img-g-ten {
   position: absolute;
@@ -686,9 +708,11 @@ img {
 .ngten {
   position: absolute;
   width: 535px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 535px / 2 + 282.5px);
   top: 17684px;
+
+  background-color: black;
 }
 .img-g-eleven {
   position: absolute;
@@ -700,9 +724,11 @@ img {
 .ngeleven {
   position: absolute;
   width: 535px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 535px / 2 - 282.5px);
   top: 18466px;
+
+  background-color: black;
 }
 .img-g-twelve {
   position: absolute;
@@ -714,9 +740,11 @@ img {
 .ngtwelve {
   position: absolute;
   width: 535px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 535px / 2 + 282.5px);
   top: 18466px;
+
+  background-color: black;
 }
 .img-g-thirteen {
   position: absolute;
@@ -728,9 +756,11 @@ img {
 .ngthirteen {
   position: absolute;
   width: 1100px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 1100px / 2);
   top: 19114px;
+
+  background-color: black;
 }
 
 /************** FOOTER ************/
@@ -745,24 +775,27 @@ a:hover {
 .link-b {
   position: absolute;
   width: 43px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 43px / 2 - 573.5px);
-  top: 19431px;
+  top: 19443px;
+  background-color: black;
 }
 
 .f-text {
   position: absolute;
   width: 1099px;
-  height: 208px;
+  height: 170px;
   left: calc(50% - 1099px / 2 - 0.5px);
   top: 19298px;
 
   text-align: center;
+  background-color: black;
 }
 .link-t {
   position: absolute;
   width: 29px;
-  height: 23px;
+  height: 25px;
   left: calc(50% - 29px / 2 + 580.5px);
-  top: 19431px;
+  top: 19443px;
+  background-color: black;
 }

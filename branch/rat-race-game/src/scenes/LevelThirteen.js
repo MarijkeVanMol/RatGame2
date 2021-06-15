@@ -206,9 +206,8 @@ export default class LevelThirteen extends Phaser.Scene {
     this.horizontalWrap(this.player);
 
     // LOOP
-    console.log(this.player.y);
+    // console.log(this.player.y);
     if (this.player.y <= this.n * -300) {
-      debugger;
       this.collage.setY(this.n * -6000);
       this.n += 1;
       this.collage.setX(480);
